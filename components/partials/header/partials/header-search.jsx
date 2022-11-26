@@ -7,33 +7,33 @@ import ALink from '~/components/features/alink';
 import { safeContent } from '~/utils';
 
 function HeaderSearch () {
-    const router = useRouter( "" );
-    const [ cat, setCat ] = useState( "" );
-    const [ searchTerm, setSearchTerm ] = useState( "" );
-    const [ products, setProducts ] = useState( [] );
+    const router = useRouter("");
+    const [cat, setCat] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
+    const [products, setProducts] = useState([]);
     // const [ searchProducts, { data } ] = useLazyQuery( GET_PRODUCTS );
     const result = [];
-    const [ timer, setTimer ] = useState( null );
+    const [timer, setTimer] = useState(null);
 
-    useEffect( () => {
-        document.querySelector( "body" ).addEventListener( 'click', closeSearchForm );
+    useEffect(() => {
+        document.querySelector("body").addEventListener('click', closeSearchForm);
 
-        return ( () => {
-            document.querySelector( "body" ).removeEventListener( 'click', closeSearchForm );
-        } )
-    }, [] );
+        return (() => {
+            document.querySelector("body").removeEventListener('click', closeSearchForm);
+        })
+    }, []);
 
-    useEffect( () => {
-        if ( result && searchTerm.length > 2 )
-            setProducts( result.reduce( ( acc, product ) => {
+    useEffect(() => {
+        if (result && searchTerm.length > 2)
+            setProducts(result.reduce((acc, product) => {
                 let max = 0;
                 let min = 999999;
-                product.variants.map( item => {
-                    if ( min > item.price ) min = item.price;
-                    if ( max < item.price ) max = item.price;
-                }, [] );
+                product.variants.map(item => {
+                    if (min > item.price) min = item.price;
+                    if (max < item.price) max = item.price;
+                }, []);
 
-                if ( product.variants.length == 0 ) {
+                if (product.variants.length == 0) {
                     min = product.sale_price
                         ? product.sale_price
                         : product.price;
@@ -48,110 +48,110 @@ function HeaderSearch () {
                         maxPrice: max
                     }
                 ];
-            }, [] ) )
-    }, [ result, searchTerm ] )
+            }, []))
+    }, [result, searchTerm])
 
-    useEffect( () => {
-        if ( searchTerm.length > 2 ) {
-            if ( timer ) clearTimeout( timer );
-            let timerId = setTimeout( () => {
-                searchProducts( {
+    useEffect(() => {
+        if (searchTerm.length > 2) {
+            if (timer) clearTimeout(timer);
+            let timerId = setTimeout(() => {
+                searchProducts({
                     variables: {
                         searchTerm: searchTerm,
                         category: cat
                     }
-                } );
-                setTimer( timerId );
-            }, 500 );
+                });
+                setTimer(timerId);
+            }, 500);
         }
-    }, [ searchTerm, cat ] );
+    }, [searchTerm, cat]);
 
-    useEffect( () => {
-        document.querySelector( '.header-search.show-results' ) && document.querySelector( '.header-search.show-results' ).classList.remove( 'show-results' );
-    }, [ router.pathname ] );
+    useEffect(() => {
+        document.querySelector('.header-search.show-results') && document.querySelector('.header-search.show-results').classList.remove('show-results');
+    }, [router.pathname]);
 
-    function matchEmphasize ( name ) {
-        let regExp = new RegExp( searchTerm, "i" );
+    function matchEmphasize (name) {
+        let regExp = new RegExp(searchTerm, "i");
         return name.replace(
             regExp,
-            ( match ) => "<strong>" + match + "</strong>"
+            (match) => "<strong>" + match + "</strong>"
         );
     }
 
-    function closeSearchForm ( e ) {
+    function closeSearchForm (e) {
         document
-            .querySelector( '.header .header-search' )
-            .classList.remove( 'show' );
+            .querySelector('.header .header-search')
+            .classList.remove('show');
     }
 
-    function onCatSelect ( e ) {
-        setCat( e.target.value );
+    function onCatSelect (e) {
+        setCat(e.target.value);
     }
 
-    function onSearchChange ( e ) {
-        setSearchTerm( e.target.value );
+    function onSearchChange (e) {
+        setSearchTerm(e.target.value);
     }
 
-    function showSearchForm ( e ) {
+    function showSearchForm (e) {
         document
-            .querySelector( '.header .header-search' )
-            .classList.add( 'show' );
+            .querySelector('.header .header-search')
+            .classList.add('show');
     }
 
-    function onSubmitSearchForm ( e ) {
+    function onSubmitSearchForm (e) {
         e.preventDefault();
-        router.push( {
+        router.push({
             pathname: '/shop/sidebar/list',
             query: {
                 searchTerm: searchTerm,
                 category: cat
             }
-        } );
+        });
     }
 
     function goProductPage () {
-        setSearchTerm( '' );
-        setProducts( [] );
+        setSearchTerm('');
+        setProducts([]);
     }
 
     return (
         <div className="header-search header-search-extended header-search-visible">
             <button className="search-toggle"><i className="icon-search"></i></button>
 
-            <form action="#" method="get" onSubmit={ onSubmitSearchForm } onClick={ showSearchForm }>
+            <form action="#" method="get" onSubmit={onSubmitSearchForm} onClick={showSearchForm}>
                 <div className="header-search-wrapper">
-                    <label htmlFor="q" className="sr-only" value={ searchTerm }
+                    <label htmlFor="q" className="sr-only" value={searchTerm}
                         required>Search</label>
-                    <input type="text" onChange={ onSearchChange } value={ searchTerm } className="form-control" name="q" placeholder="Search product ..." required />
+                    <input type="text" onChange={onSearchChange} value={searchTerm} className="form-control" name="q" placeholder="Search product ..." required />
                     <button className="btn btn-primary" type="submit"><i className="icon-search"></i></button>
                 </div>
-                <div className="live-search-list" onClick={ goProductPage }>
+                <div className="live-search-list" onClick={goProductPage}>
                     {
-                        searchTerm.length > 2 && products.map( ( product, index ) => (
-                            <ALink href={ `/product/default/${product.slug}` } className="autocomplete-suggestion" key={ `search-result-${index}` }>
-                                <LazyLoadImage src={ process.env.NEXT_PUBLIC_ASSET_URI + product.sm_pictures[ 0 ].url } width={ 40 } height={ 40 } alt="product" />
-                                <div className="search-name" dangerouslySetInnerHTML={ safeContent( matchEmphasize( product.name ) ) }></div>
+                        searchTerm.length > 2 && products.map((product, index) => (
+                            <ALink href={`/product/default/${product.slug}`} className="autocomplete-suggestion" key={`search-result-${index}`}>
+                                <LazyLoadImage src={process.env.NEXT_PUBLIC_ASSET_URI + product.sm_pictures[0].url} width={40} height={40} alt="product" />
+                                <div className="search-name" dangerouslySetInnerHTML={safeContent(matchEmphasize(product.name))}></div>
                                 <span className="search-price">
                                     {
                                         product.stock == 0 ?
                                             <div className="product-price mb-0">
-                                                <span className="out-price">${ product.price.toFixed( 2 ) }</span>
+                                                <span className="out-price">${product.price.toFixed(2)}</span>
                                             </div>
                                             :
                                             product.minPrice == product.maxPrice ?
-                                                <div className="product-price mb-0">${ product.minPrice.toFixed( 2 ) }</div>
+                                                <div className="product-price mb-0">${product.minPrice.toFixed(2)}</div>
                                                 :
                                                 product.variants.length == 0 ?
                                                     <div className="product-price mb-0">
-                                                        <span className="new-price">${ product.minPrice.toFixed( 2 ) }</span>
-                                                        <span className="old-price">${ product.maxPrice.toFixed( 2 ) }</span>
+                                                        <span className="new-price">${product.minPrice.toFixed(2)}</span>
+                                                        <span className="old-price">${product.maxPrice.toFixed(2)}</span>
                                                     </div>
                                                     :
-                                                    <div className="product-price mb-0">${ product.minPrice.toFixed( 2 ) }&ndash;${ product.maxPrice.toFixed( 2 ) }</div>
+                                                    <div className="product-price mb-0">${product.minPrice.toFixed(2)}&ndash;${product.maxPrice.toFixed(2)}</div>
                                     }
                                 </span>
                             </ALink>
-                        ) )
+                        ))
                     }
                 </div>
             </form>

@@ -4,43 +4,30 @@ import PageHeader from "~/components/features/page-header";
 
 const MapComponent = ( { text } ) => <div>{ text }</div>;
 
-function Contact2 () {
+function ContactUs () {
     return (
         <div className="main">
-            <PageHeader title="Contact us 2" subTitle="Pages" />
+            <PageHeader title="Contact Us " subTitle="" />
             <nav className="breadcrumb-nav border-0 mb-0">
                 <div className="container">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
                             <ALink href="/">Home</ALink>
                         </li>
-                        <li className="breadcrumb-item">
-                            <ALink href="#">Pages</ALink>
-                        </li>
-                        <li className="breadcrumb-item active">Contact Us 2</li>
+                        <li className="breadcrumb-item active">Contact Us</li>
                     </ol>
                 </div>
             </nav>
-            <div className="page-content">
-                <div id="map" className="w-100 mb-5">
-                    <GoogleMapReact
-                        bootstrapURLKeys={ { key: 'AIzaSyBgVsModMpsR59_OIK-2sEcmhBBkW4xUuw' } }
-                        defaultCenter={ { lat: 59.95, lng: 30.33 } }
-                        defaultZoom={ 11 }
-                    >
-                        <MapComponent
-                            lat={ 59.955413 }
-                            lng={ 30.337844 }
-                            text="My Marker"
-                        />
-                    </GoogleMapReact>
-                </div>
+            <hr className="mt-3 mb-5 mt-md-1" />
 
+            <div className="page-content">
                 <div className="container">
+
+                   
                     <div className="row">
                         <div className="col-md-4">
                             <div className="contact-box text-center">
-                                <h3>Office</h3>
+                                <h3>Main branch</h3>
                                 <address>1 New York Plaza, New York, <br />NY 10004, USA</address>
                             </div>
                         </div>
@@ -60,23 +47,20 @@ function Contact2 () {
 
                                 <div className="social-icons social-icons-color justify-content-center">
                                     <ALink href="#" className="social-icon social-facebook" title="Facebook"><i className="icon-facebook-f"></i></ALink>
-                                    <ALink href="#" className="social-icon social-twitter" title="Twitter"><i className="icon-twitter"></i></ALink>
                                     <ALink href="#" className="social-icon social-instagram" title="Instagram"><i className="icon-instagram"></i></ALink>
-                                    <ALink href="#" className="social-icon social-youtube" title="Youtube"><i className="icon-youtube"></i></ALink>
-                                    <ALink href="#" className="social-icon social-pinterest" title="Pinterest"><i className="icon-pinterest"></i></ALink>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <hr className="mt-3 mb-5 mt-md-1" />
+
                     <div className="touch-container row justify-content-center">
                         <div className="col-md-9 col-lg-7">
                             <div className="text-center">
                                 <h2 className="title mb-1">Get In Touch</h2>
                                 <p className="lead text-primary">
                                     We collaborate with ambitious brands and people; we’d love to build something great together.
-							    </p>
+                                </p>
                                 <p className="mb-3">Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna.</p>
                             </div>
 
@@ -113,10 +97,11 @@ function Contact2 () {
                             </form>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     )
 }
 
-export default Contact2;
+export default ContactUs;

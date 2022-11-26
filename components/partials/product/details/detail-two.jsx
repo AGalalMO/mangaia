@@ -17,7 +17,7 @@ function DetailTwo ( props ) {
     const [ qty, setQty ] = useState( 1 );
     const [ colorArray, setColorArray ] = useState( [] );
     const [ sizeArray, setSizeArray ] = useState( [] );
-    const [ variationGroup, setVariationGroup ] = useState( [] );
+    const [ variationGroup, setVariationGroup ] = useState( []);
     const [ selectedVariant, setSelectedVariant ] = useState( { color: null, colorName: null, price: null, size: "" } );
     const [ showClear, setShowClear ] = useState( false );
     const [ showVariationPrice, setShowVariationPrice ] = useState( false );
@@ -28,8 +28,8 @@ function DetailTwo ( props ) {
         let min = 99999;
         let max = 0;
 
-        setVariationGroup( product.variants.reduce( ( acc, cur ) => {
-            cur.size.map( item => {
+        setVariationGroup( product?.variants?.reduce( ( acc, cur ) => {
+            cur.size?.map( item => {
                 acc.push( {
                     color: cur.color,
                     colorName: cur.color_name,
@@ -42,11 +42,11 @@ function DetailTwo ( props ) {
             return acc;
         }, [] ) );
 
-        if ( product.variants.length == 0 ) {
-            min = product.sale_price
-                ? product.sale_price
-                : product.price;
-            max = product.price;
+        if ( product?.variants?.length == 0 ) {
+            min = product?.sale_price
+                ? product?.sale_price
+                : product?.price;
+            max = product?.price;
         }
 
         setMinPrice( min );
@@ -88,7 +88,7 @@ function DetailTwo ( props ) {
     }
 
     function refreshSelectableGroup () {
-        let tempArray = [ ...variationGroup ];
+        let tempArray=[]
         if ( selectedVariant.color ) {
             tempArray = variationGroup.reduce( ( acc, cur ) => {
                 if ( selectedVariant.color !== cur.color ) {
@@ -98,13 +98,12 @@ function DetailTwo ( props ) {
             }, [] );
         }
 
-        setSizeArray( tempArray.reduce( ( acc, cur ) => {
+        setSizeArray( tempArray?.reduce( ( acc, cur ) => {
             if ( acc.findIndex( item => item.size == cur.size ) !== -1 )
                 return acc;
             return [ ...acc, cur ];
-        }, [] ) );
+        }, [] )??[] );
 
-        tempArray = [ ...variationGroup ];
         if ( selectedVariant.size ) {
             tempArray = variationGroup.reduce( ( acc, cur ) => {
                 if ( selectedVariant.size !== cur.size ) {
@@ -114,7 +113,7 @@ function DetailTwo ( props ) {
             }, [] );
         }
 
-        setColorArray( product.variants.reduce( ( acc, cur ) => {
+        setColorArray( product?.variants?.reduce( ( acc, cur ) => {
             if (
                 tempArray.findIndex( item => item.color == cur.color ) == -1
             ) {
@@ -187,11 +186,11 @@ function DetailTwo ( props ) {
         if ( e.currentTarget.classList.contains( 'btn-disabled' ) ) return;
 
         let newProduct = { ...product };
-        if ( product.variants.length > 0 ) {
+        if ( product?.variants?.length > 0 ) {
             newProduct = {
                 ...product,
                 name:
-                    product.name +
+                    product?.name +
                     ' - ' +
                     selectedVariant.colorName +
                     ', ' +
@@ -210,23 +209,23 @@ function DetailTwo ( props ) {
 
     return (
         <div className="product-details product-details-centered">
-            <h1 className="product-title">{ product.name }</h1>
+            <h1 className="product-title">{ product?.name }</h1>
 
             <div className="ratings-container">
                 <div className="ratings">
-                    <div className="ratings-val" style={ { width: product.ratings * 20 + '%' } }></div>
-                    <span className="tooltip-text">{ product.ratings.toFixed( 2 ) }</span>
+                    <div className="ratings-val" style={ { width: product?.ratings * 20 + '%' } }></div>
+                    <span className="tooltip-text">{ product?.ratings?.toFixed( 2 ) }</span>
                 </div>
-                <span className="ratings-text">( { product.review } Reviews )</span>
+                <span className="ratings-text">( { product?.review } Reviews )</span>
             </div>
 
             {
-                product.stock == 0 ?
+                product?.stock == 0 ?
                     <div className="product-price">
                         <span className="out-price">
                             {
                                 minPrice == maxPrice ?
-                                    <span>${ product.price.toFixed( 2 ) }</span>
+                                    <span>${ product?.price.toFixed( 2 ) }</span>
                                     :
                                     <span>${ minPrice.toFixed( 2 ) }&ndash;${ maxPrice.toFixed( 2 ) }</span>
                             }
@@ -236,7 +235,7 @@ function DetailTwo ( props ) {
                     minPrice == maxPrice ?
                         <div className="product-price">${ minPrice.toFixed( 2 ) }</div>
                         :
-                        product.variants.length == 0 ?
+                        product?.variants?.length == 0 ?
                             <div className="product-price">
                                 <span className="new-price">${ minPrice.toFixed( 2 ) }</span>
                                 <span className="old-price">${ maxPrice.toFixed( 2 ) }</span>
@@ -246,18 +245,18 @@ function DetailTwo ( props ) {
             }
 
             <div className="product-content">
-                <p>{ product.short_desc }</p>
+                <p>{ product?.short_desc }</p>
             </div>
 
             {
-                product.variants.length > 0 ?
+                product?.variants?.length > 0 ?
                     <>
                         <div className="details-filter-row details-row-size">
                             <label>Color:</label>
 
                             <div className="product-nav product-nav-dots">
                                 {
-                                    colorArray.map( ( item, index ) => (
+                                    colorArray?.map( ( item, index ) => (
                                         <a
                                             href="#"
                                             className={ `${( item.color == selectedVariant.color ? 'active ' : '' ) + ( item.disabled ? 'disabled' : '' )}` }
@@ -281,7 +280,7 @@ function DetailTwo ( props ) {
                                 >
                                     <option value="">Select a size</option>
                                     {
-                                        sizeArray.map( ( item, index ) => (
+                                        sizeArray?.map( ( item, index ) => (
                                             <option
                                                 value={ item.size }
                                                 key={ index }
@@ -318,10 +317,10 @@ function DetailTwo ( props ) {
 
             <div className="product-details-action">
                 <div className="details-action-col">
-                    <Qty changeQty={ onChangeQty } max={ product.stock } adClass="mr-3 mr-sm-4"></Qty>
+                    <Qty changeQty={ onChangeQty } max={ product?.stock } adClass="mr-3 mr-sm-4"></Qty>
                     <a
                         href="#"
-                        className={ `btn-product btn-cart ${( !canAddToCart( props.cartlist, product, qty ) || ( product.variants.length > 0 && !showVariationPrice ) ) ? 'btn-disabled' : ''}` }
+                        className={ `btn-product btn-cart ${( !canAddToCart( props.cartlist, product, qty ) || ( product?.variants?.length > 0 && !showVariationPrice ) ) ? 'btn-disabled' : ''}` }
                         onClick={ onCartClick }
                     >
                         <span>add to cart</span>
@@ -342,12 +341,12 @@ function DetailTwo ( props ) {
                 <div className="product-cat">
                     <span>Category:</span>
                     {
-                        product.category.map( ( cat, index ) => (
+                        product?.category?.map( ( cat, index ) => (
                             <span key={ index }>
                                 <ALink
                                     href={ { pathname: '/shop/sidebar/list', query: { category: cat.slug } } }
                                 >{ cat.name }</ALink>
-                                { index < product.category.length - 1 ? ',' : '' }
+                                { index < product?.category.length - 1 ? ',' : '' }
                             </span>
                         ) )
                     }

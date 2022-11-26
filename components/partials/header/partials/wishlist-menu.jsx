@@ -3,21 +3,16 @@ import { connect } from 'react-redux';
 
 import ALink from '~/components/features/alink';
 
-function WishlistMenu ( props ) {
+function User ( props ) {
     const { wishlist } = props;
 
     return (
-        <ALink href="/shop/wishlist" className="wishlist-link" title="Wishlist">
-            <i className="icon-heart-o"></i>
-            <span className="wishlist-count">{ wishlist.length }</span>
+        <ALink href="/auth/signin" className="wishlist-link" title="Login">
+            <i className="icon-user"></i>
         </ALink>
     );
 }
 
-function mapStateToProps ( state ) {
-    return {
-        wishlist: state.wishlist.data
-    }
-}
 
-export default connect( mapStateToProps, {} )( WishlistMenu );
+
+export default User

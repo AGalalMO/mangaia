@@ -14,30 +14,30 @@ function GalleryExtended ( props ) {
     return (
         <div className="product-lg position-relative">
             {
-                product.new ?
+                product?.new ?
                     <span className="product-label label-new">New</span>
                     : ""
             }
 
             {
-                product.sale_price ?
+                product?.sale_price ?
                     <span className="product-label label-sale">Sale</span>
                     : ""
             }
 
             {
-                product.top ?
+                product?.top ?
                     <span className="product-label label-top">Top</span>
                     : ""
             }
 
             {
-                product.stock == 0 ?
+                product?.stock == 0 ?
                     <span className="product-label label-out">Out of Stock</span>
                     : ""
             }
             <OwlCarousel adClass="product-gallery-carousel owl-full owl-nav-dark cols-1 cols-md-2 cols-lg-3" options={ mainSlider9 }>
-                { product.pictures.map( ( item, index ) =>
+                { product?.pictures?.map( ( item, index ) =>
                     <Magnifier
                         imageSrc={ process.env.NEXT_PUBLIC_ASSET_URI + item.url }
                         imageAlt="product"
@@ -46,7 +46,7 @@ function GalleryExtended ( props ) {
                         mouseActivation="hover"
                         cursorStyleActive="crosshair"
                         className="product-gallery-image"
-                        style={ { paddingTop: `${product.pictures[ 0 ].height / product.pictures[ 0 ].width * 100}%` } }
+                        style={ { paddingTop: `${product?.pictures[ 0 ].height / product?.pictures[ 0 ].width * 100}%` } }
                         key={ "gallery-" + index }
                     />
                 ) }

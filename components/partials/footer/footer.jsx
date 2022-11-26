@@ -85,7 +85,7 @@ function Footer () {
             <div className="footer-middle">
                 <div className={ containerClass }>
                     <div className="row">
-                        <div className="col-sm-6 col-lg-3">
+                        <div className="col-sm-6 col-lg-4" style={{display:'flex',justifyContent:'center'}}>
                             <div className="widget widget-about">
                                 <ALink href="/">
                                     <img src="images/home/logo-footer.png" className="footer-logo" alt="Footer Logo" width="82" height="25" />
@@ -95,66 +95,46 @@ function Footer () {
 
                                 <div className="social-icons">
                                     <a href="#" className="social-icon" title="Facebook" onClick={ e => { e.preventDefault(); } }><i className="icon-facebook-f"></i></a>
-                                    <a href="#" className="social-icon" title="Twitter" onClick={ e => { e.preventDefault(); } }><i className="icon-twitter"></i></a>
                                     <a href="#" className="social-icon" title="Instagram" onClick={ e => { e.preventDefault(); } }><i className="icon-instagram"></i></a>
-                                    <a href="#" className="social-icon" title="Youtube" onClick={ e => { e.preventDefault(); } }><i className="icon-youtube"></i></a>
-                                    <a href="#" className="social-icon" title="Pinterest" onClick={ e => { e.preventDefault(); } }><i className="icon-pinterest"></i></a>
                                 </div>
                             </div>
                         </div>
-
-                        <div className="col-sm-6 col-lg-3">
-                            <div className="widget">
-                                <h4 className="widget-title">Useful Links</h4>
-
-                                <ul className="widget-list">
-                                    <li><ALink href="/pages/about">About Molla</ALink></li>
-                                    <li><a href="#" onClick={ e => { e.preventDefault(); } }>How to shop on Molla</a></li>
-                                    <li><a href="#" onClick={ e => { e.preventDefault(); } }>FAQ</a></li>
-                                    <li><ALink href="/pages/contact">Contact us</ALink></li>
-                                    <li><ALink href="/pages/login">Log in</ALink></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div className="col-sm-6 col-lg-3">
+                        <div className="col-sm-6 col-lg-4" style={{ display: 'flex', justifyContent: 'center' }}>
                             <div className="widget">
                                 <h4 className="widget-title">Customer Service</h4>
 
                                 <ul className="widget-list">
-                                    <li><a href="#" onClick={ e => { e.preventDefault(); } }>Payment Methods</a></li>
-                                    <li><a href="#" onClick={ e => { e.preventDefault(); } }>Money-back guarantee!</a></li>
-                                    <li><a href="#" onClick={ e => { e.preventDefault(); } }>Returns</a></li>
-                                    <li><a href="#" onClick={ e => { e.preventDefault(); } }>Shipping</a></li>
-                                    <li><a href="#" onClick={ e => { e.preventDefault(); } }>Terms and conditions</a></li>
-                                    <li><a href="#" onClick={ e => { e.preventDefault(); } }>Privacy Policy</a></li>
+                                    <li><a href="#" onClick={e => { e.preventDefault(); }}>Payment Methods</a></li>
+                                    <li><a href="#" onClick={e => { e.preventDefault(); }}>Money-back guarantee!</a></li>
+                                    <li><a href="#" onClick={e => { e.preventDefault(); }}>Returns</a></li>
+                                    <li><a href="#" onClick={e => { e.preventDefault(); }}>Terms and conditions</a></li>
+                                    <li><a href="#" onClick={e => { e.preventDefault(); }}>Privacy Policy</a></li>
                                 </ul>
                             </div>
                         </div>
 
-                        <div className="col-sm-6 col-lg-3">
+                        <div className="col-sm-6 col-lg-4" style={{ display: 'flex', justifyContent: 'center' }}>
                             <div className="widget">
-                                <h4 className="widget-title">My Account</h4>
+                                <h4 className="widget-title" >Useful Links</h4>
 
                                 <ul className="widget-list">
-                                    <li><a href="#" onClick={ e => { e.preventDefault(); } }>Sign In</a></li>
-                                    <li><ALink href="/shop/cart">View Cart</ALink></li>
-                                    <li><ALink href="/shop/wishlist">My Wishlist</ALink></li>
-                                    <li><a href="#" onClick={ e => { e.preventDefault(); } }>Track My Order</a></li>
-                                    <li><a href="#" onClick={ e => { e.preventDefault(); } }>Help</a></li>
+                                    <li><ALink href="/about">About UNEX</ALink></li>
+                                    <li><ALink href="/contact">Contact us</ALink></li>
                                 </ul>
                             </div>
                         </div>
+
+                       
+
+                
                     </div>
                 </div>
             </div>
 
             <div className="footer-bottom">
                 <div className={ containerClass }>
-                    <p className="footer-copyright">Copyright © { ( new Date() ).getFullYear() } Molla Store. All Rights Reserved.</p>
-                    <figure className="footer-payments">
-                        <img src="images/payments.png" alt="Payment methods" width="272" height="20" />
-                    </figure>
+                    <p className="footer-copyright">Copyright © { ( new Date() ).getFullYear() } UNEX. All Rights Reserved.</p>
+                  
                 </div>
             </div>
             {
