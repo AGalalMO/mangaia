@@ -221,7 +221,7 @@ function HomeScreen () {
                     </OwlCarousel>
 
                     <div className="more-container text-center">
-                        <a href="https://www.instagram.com/unex_city_active/" className="btn btn-outline-primary-2 btn-more" >@UNEX Instagram</a>
+                        <a href="https://www.instagram.com/unex_city_active/" className="btn btn-outline-primary-2 btn-more" >@ UNEX Instagram</a>
                     </div>
                 </div>
             </div>
