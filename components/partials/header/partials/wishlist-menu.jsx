@@ -1,18 +1,22 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import ALink from '~/components/features/alink';
+import ALink from "~/components/features/alink";
 
-function User ( props ) {
-    const { wishlist } = props;
+function WishlistMenu(props) {
+  const { wishlist } = props;
 
-    return (
-        <ALink href="/auth/signin" className="wishlist-link" title="Login">
-            <i className="icon-user"></i>
-        </ALink>
-    );
+  return (
+    <ALink href="/shop/wishlist" className="wishlist-link" title="Wishlist">
+      <i className="icon-heart-o"></i>
+    </ALink>
+  );
 }
 
+function mapStateToProps(state) {
+  return {
+    wishlist: [],
+  };
+}
 
-
-export default User
+export default connect(mapStateToProps, {})(WishlistMenu);

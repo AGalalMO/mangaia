@@ -1,10 +1,14 @@
-import HomeScreen from '~/components/HomeScreen';
+import HomeScreen from "~/components/HomeScreen";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-function Home () {
-
-    return (
-        <HomeScreen />
-    )
+function Home() {
+  return <HomeScreen />;
 }
 
-export default Home
+export const getStaticProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ["home"])),
+  },
+});
+
+export default Home;
