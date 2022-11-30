@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import ALink from '~/components/features/alink';
-import Qty from '~/components/features/qty';
-import PageHeader from '~/components/features/page-header';
+import ALink from '~/src/components/features/alink';
+import Qty from '~/src/components/features/qty';
+import PageHeader from '~/src/components/features/page-header';
 
 import { actions as cartAction } from '~/store/cart';
-import { cartPriceTotal } from '~/utils/index';
+import { cartPriceTotal } from '~/src/utils/shared/index';
 
 function Cart ( props ) {
     const [ cartList, setCartList ] = useState( [] );

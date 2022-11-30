@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 
-import ALink from '~/components/features/alink';
-import PageHeader from "~/components/features/page-header";
-import { countTo } from '~/utils';
-import { homeData } from '~/utils/data';
+import ALink from '~/src/components/features/alink';
+import PageHeader from "~/src/components/features/page-header";
+import { countTo } from '~/src/utils/shared';
+import { homeData } from '~/src/utils/shared/data';
 
 function AboutUs () {
     useEffect( () => {

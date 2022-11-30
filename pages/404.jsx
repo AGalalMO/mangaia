@@ -1,5 +1,5 @@
 import React from 'react';
-import ALink from '~/components/features/alink';
+import ALink from '~/src/components/features/alink';
 
 function ErrorPage () {
     return (

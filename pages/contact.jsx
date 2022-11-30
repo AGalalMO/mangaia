@@ -1,6 +1,6 @@
 import GoogleMapReact from 'google-map-react';
-import ALink from '~/components/features/alink';
-import PageHeader from "~/components/features/page-header";
+import ALink from '~/src/components/features/alink';
+import PageHeader from "~/src/components/features/page-header";
 
 const MapComponent = ( { text } ) => <div>{ text }</div>;
 

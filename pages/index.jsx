@@ -1,4 +1,4 @@
-import HomeScreen from "~/components/HomeScreen";
+import HomeScreen from "~/src/components/HomeScreen";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 function Home() {

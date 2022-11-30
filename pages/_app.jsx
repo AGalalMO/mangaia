@@ -1,6 +1,6 @@
 import Helmet from "react-helmet";
 import { Provider, useSelector } from "react-redux";
-import Layout from "../components/layout";
+import Layout from "../src/components/layout";
 import { appWithTranslation } from "next-i18next";
 import { store } from "~/src/store/store.js";
 

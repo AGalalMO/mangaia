@@ -1,7 +1,7 @@
 import Countdown from 'react-countdown';
 
-import { rendererOne } from '~/components/features/count-down';
-import ALink from '~/components/features/alink';
+import { rendererOne } from '~/src/components/features/count-down';
+import ALink from '~/src/components/features/alink';
 
 function ComingSoon () {
     return (

@@ -1,9 +1,9 @@
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import ALink from '~/components/features/alink';
-import OwlCarousel from '~/components/features/owl-carousel';
+import ALink from '~/src/components/features/alink';
+import OwlCarousel from '~/src/components/features/owl-carousel';
 
-import { homeData, mainSlider5, mainSlider9 } from '~/utils/data';
+import { homeData, mainSlider5, mainSlider9 } from '~/src/utils/shared/data';
 
 function About () {
     return (

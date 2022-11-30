@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import ALink from '~/components/features/alink';
-import PageHeader from "~/components/features/page-header";
-import ElementList from '~/components/partials/elements/element-list';
+import ALink from '~/src/components/features/alink';
+import PageHeader from "~/src/components/features/page-header";
+import ElementList from '~/src/components/partials/elements/element-list';
 
 import { actions } from '~/store/demo';
 

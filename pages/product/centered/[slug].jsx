@@ -2,11 +2,11 @@ import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/react-hooks';
 
 
-import Breadcrumb from '~/components/partials/product/breadcrumb';
-import GalleryDefault from '~/components/partials/product/gallery/gallery-default';
-import DetailTwo from '~/components/partials/product/details/detail-two';
-import InfoOne from '~/components/partials/product/info-tabs/info-one';
-import RelatedProductsOne from '~/components/partials/product/related/related-one';
+import Breadcrumb from '~/src/components/partials/product/breadcrumb';
+import GalleryDefault from '~/src/components/partials/product/gallery/gallery-default';
+import DetailTwo from '~/src/components/partials/product/details/detail-two';
+import InfoOne from '~/src/components/partials/product/info-tabs/info-one';
+import RelatedProductsOne from '~/src/components/partials/product/related/related-one';
 
 function ProductCentered () {
     const slug = useRouter().query.slug;

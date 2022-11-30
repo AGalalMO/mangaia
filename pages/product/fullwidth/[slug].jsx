@@ -2,11 +2,11 @@ import { useRouter } from 'next/router';
 import StickyBox from 'react-sticky-box';
 
 
-import Breadcrumb from '~/components/partials/product/breadcrumb';
-import GalleryDefault from '~/components/partials/product/gallery/gallery-default';
-import DetailOne from '~/components/partials/product/details/detail-one';
-import InfoThree from '~/components/partials/product/info-tabs/info-three';
-import Sidebar from '~/components/partials/product/sidebar/product-sidebar';
+import Breadcrumb from '~/src/components/partials/product/breadcrumb';
+import GalleryDefault from '~/src/components/partials/product/gallery/gallery-default';
+import DetailOne from '~/src/components/partials/product/details/detail-one';
+import InfoThree from '~/src/components/partials/product/info-tabs/info-three';
+import Sidebar from '~/src/components/partials/product/sidebar/product-sidebar';
 
 function ProductFullwidth () {
     const slug = useRouter().query.slug;

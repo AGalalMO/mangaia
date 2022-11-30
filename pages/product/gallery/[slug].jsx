@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 
 
-import Breadcrumb from '~/components/partials/product/breadcrumb';
-import GalleryExtended from '~/components/partials/product/gallery/gallery-extended';
-import DetailThree from '~/components/partials/product/details/detail-three';
-import InfoOne from '~/components/partials/product/info-tabs/info-one';
-import RelatedProductsOne from '~/components/partials/product/related/related-one';
+import Breadcrumb from '~/src/components/partials/product/breadcrumb';
+import GalleryExtended from '~/src/components/partials/product/gallery/gallery-extended';
+import DetailThree from '~/src/components/partials/product/details/detail-three';
+import InfoOne from '~/src/components/partials/product/info-tabs/info-one';
+import RelatedProductsOne from '~/src/components/partials/product/related/related-one';
 
 function ProductDefault () {
     const slug = useRouter().query.slug;

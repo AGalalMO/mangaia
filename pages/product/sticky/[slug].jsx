@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/react-hooks';
 import StickyBox from 'react-sticky-box';
-import Breadcrumb from '~/components/partials/product/breadcrumb';
-import GallerySticky from '~/components/partials/product/gallery/gallery-sticky';
-import DetailOne from '~/components/partials/product/details/detail-one';
-import InfoThree from '~/components/partials/product/info-tabs/info-three';
-import RelatedProductsOne from '~/components/partials/product/related/related-one';
+import Breadcrumb from '~/src/components/partials/product/breadcrumb';
+import GallerySticky from '~/src/components/partials/product/gallery/gallery-sticky';
+import DetailOne from '~/src/components/partials/product/details/detail-one';
+import InfoThree from '~/src/components/partials/product/info-tabs/info-three';
+import RelatedProductsOne from '~/src/components/partials/product/related/related-one';
 
 function ProductSticky () {
     const slug = useRouter().query.slug;

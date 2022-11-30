@@ -2,9 +2,9 @@ import { useQuery } from '@apollo/react-hooks';
 import { useEffect, useRef } from 'react';
 import imagesLoaded from 'imagesloaded';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import PostThree from '~/components/features/posts/post-three';
+import ALink from '~/src/components/features/alink';
+import PageHeader from '~/src/components/features/page-header';
+import PostThree from '~/src/components/features/posts/post-three';
 
 
 function BlogMaskMasonry () {

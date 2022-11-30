@@ -1,5 +1,5 @@
 import GoogleMapReact from 'google-map-react';
-import ALink from '~/components/features/alink';
+import ALink from '~/src/components/features/alink';
 
 const MapComponent = ( { text } ) => <div>{ text }</div>;
 

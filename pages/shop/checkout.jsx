@@ -2,12 +2,12 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import SlideToggle from 'react-slide-toggle';
 
-import ALink from '~/components/features/alink';
-import Accordion from '~/components/features/accordion/accordion';
-import Card from '~/components/features/accordion/card';
-import PageHeader from '~/components/features/page-header';
+import ALink from '~/src/components/features/alink';
+import Accordion from '~/src/components/features/accordion/accordion';
+import Card from '~/src/components/features/accordion/card';
+import PageHeader from '~/src/components/features/page-header';
 
-import { cartPriceTotal } from '~/utils/index';
+import { cartPriceTotal } from '~/src/utils/shared/index';
 
 function Checkout ( props ) {
     const { cartlist } = props;
