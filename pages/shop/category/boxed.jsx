@@ -1,8 +1,8 @@
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import ShopSidebarTwo from '~/components/partials/shop/sidebar/shop-sidebar-two';
+import ALink from '~/src/components/features/alink';
+import PageHeader from '~/src/components/features/page-header';
+import ShopSidebarTwo from '~/src/components/partials/shop/sidebar/shop-sidebar-two';
 
 function CategoryBoxed() {
     function openSidebar() {

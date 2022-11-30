@@ -5,10 +5,10 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { connect } from 'react-redux';
 import StickyBox from 'react-sticky-box';
 
-import ALink from '~/components/features/alink';
-import BlogSidebar from '~/components/partials/blog/sidebar/blog-sidebar';
-import OwlCarousel from '~/components/features/owl-carousel';
-import RelatedPosts from '~/components/partials/blog/related/related-posts';
+import ALink from '~/src/components/features/alink';
+import BlogSidebar from '~/src/components/partials/blog/sidebar/blog-sidebar';
+import OwlCarousel from '~/src/components/features/owl-carousel';
+import RelatedPosts from '~/src/components/partials/blog/related/related-posts';
 
 import { actions as demoAction } from '~/store/demo';
 

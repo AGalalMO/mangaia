@@ -2,12 +2,12 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import StickyBox from 'react-sticky-box';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import PostTwo from '~/components/features/posts/post-two';
-import BlogSidebar from '~/components/partials/blog/sidebar/blog-sidebar';
+import ALink from '~/src/components/features/alink';
+import PageHeader from '~/src/components/features/page-header';
+import PostTwo from '~/src/components/features/posts/post-two';
+import BlogSidebar from '~/src/components/partials/blog/sidebar/blog-sidebar';
 
-import { scrollToPageContent } from '~/utils';
+import { scrollToPageContent } from '~/src/utils/shared';
 
 function BlogListing () {
     const router = useRouter();

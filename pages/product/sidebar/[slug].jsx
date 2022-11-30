@@ -2,12 +2,12 @@ import { useRouter } from 'next/router';
 import StickyBox from 'react-sticky-box';
 
 
-import Breadcrumb from '~/components/partials/product/breadcrumb';
-import GalleryDefault from '~/components/partials/product/gallery/gallery-default';
-import DetailOne from '~/components/partials/product/details/detail-one';
-import InfoOne from '~/components/partials/product/info-tabs/info-one';
-import Sidebar from '~/components/partials/product/sidebar/product-sidebar';
-import RelatedProductsOne from '~/components/partials/product/related/related-one';
+import Breadcrumb from '~/src/components/partials/product/breadcrumb';
+import GalleryDefault from '~/src/components/partials/product/gallery/gallery-default';
+import DetailOne from '~/src/components/partials/product/details/detail-one';
+import InfoOne from '~/src/components/partials/product/info-tabs/info-one';
+import Sidebar from '~/src/components/partials/product/sidebar/product-sidebar';
+import RelatedProductsOne from '~/src/components/partials/product/related/related-one';
 
 function ProductSidebar () {
     const slug = useRouter().query.slug;

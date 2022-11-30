@@ -4,14 +4,14 @@ import React, { useState, useEffect } from 'react';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import OwlCarousel from '~/components/features/owl-carousel';
-import ShopListTwo from '~/components/partials/shop/list/shop-list-two';
-import Pagination from '~/components/features/pagination';
-import ShopSidebarThree from '~/components/partials/shop/sidebar/shop-sidebar-three';
+import ALink from '~/src/components/features/alink';
+import PageHeader from '~/src/components/features/page-header';
+import OwlCarousel from '~/src/components/features/owl-carousel';
+import ShopListTwo from '~/src/components/partials/shop/list/shop-list-two';
+import Pagination from '~/src/components/features/pagination';
+import ShopSidebarThree from '~/src/components/partials/shop/sidebar/shop-sidebar-three';
 
-import { homeData, mainSlider11, mainSlider10 } from '~/utils/data';
+import { homeData, mainSlider11, mainSlider10 } from '~/src/utils/shared/data';
 
 function ShopMarket () {
     const router = useRouter();

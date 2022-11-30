@@ -2,9 +2,9 @@ import { useLazyQuery } from '@apollo/react-hooks';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import PostOne from '~/components/features/posts/post-one';
+import ALink from '~/src/components/features/alink';
+import PageHeader from '~/src/components/features/page-header';
+import PostOne from '~/src/components/features/posts/post-one';
 
 
 function BlogGrid4Cols () {

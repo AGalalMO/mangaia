@@ -1,18 +1,18 @@
 import { useQuery } from '@apollo/react-hooks';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import ElementList from '~/components/partials/elements/element-list';
-import OwlCarousel from '~/components/features/owl-carousel';
-import ProductOne from '~/components/features/products/product-one';
-import ProductTwo from '~/components/features/products/product-two';
-import ProductThree from '~/components/features/products/product-three';
-import ProductFour from '~/components/features/products/product-four';
-import ProductFive from '~/components/features/products/product-five';
-import ProductSix from '~/components/features/products/product-six';
-import ProductSeven from '~/components/features/products/product-seven';
+import ALink from '~/src/components/features/alink';
+import PageHeader from '~/src/components/features/page-header';
+import ElementList from '~/src/components/partials/elements/element-list';
+import OwlCarousel from '~/src/components/features/owl-carousel';
+import ProductOne from '~/src/components/features/products/product-one';
+import ProductTwo from '~/src/components/features/products/product-two';
+import ProductThree from '~/src/components/features/products/product-three';
+import ProductFour from '~/src/components/features/products/product-four';
+import ProductFive from '~/src/components/features/products/product-five';
+import ProductSix from '~/src/components/features/products/product-six';
+import ProductSeven from '~/src/components/features/products/product-seven';
 
-import { mainSlider2, mainSlider4 } from '~/utils/data';
+import { mainSlider2, mainSlider4 } from '~/src/utils/shared/data';
 
 function Products () {
     const data = [];

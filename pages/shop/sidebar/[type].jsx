@@ -2,11 +2,11 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import StickyBox from 'react-sticky-box';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import ShopListOne from '~/components/partials/shop/list/shop-list-one';
-import Pagination from '~/components/features/pagination';
-import ShopSidebarOne from '~/components/partials/shop/sidebar/shop-sidebar-one';
+import ALink from '~/src/components/features/alink';
+import PageHeader from '~/src/components/features/page-header';
+import ShopListOne from '~/src/components/partials/shop/list/shop-list-one';
+import Pagination from '~/src/components/features/pagination';
+import ShopSidebarOne from '~/src/components/partials/shop/sidebar/shop-sidebar-one';
 
 
 function ShopGrid() {

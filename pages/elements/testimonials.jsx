@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 
-import ALink from '~/components/features/alink';
-import PageHeader from "~/components/features/page-header";
-import ElementList from '~/components/partials/elements/element-list';
-import { parallax } from '~/utils';
-import OwlCarousel from '~/components/features/owl-carousel';
+import ALink from '~/src/components/features/alink';
+import PageHeader from "~/src/components/features/page-header";
+import ElementList from '~/src/components/partials/elements/element-list';
+import { parallax } from '~/src/utils/shared';
+import OwlCarousel from '~/src/components/features/owl-carousel';
 
-import { mainSlider5, mainSlider6, mainSlider7 } from '~/utils/data';
+import { mainSlider5, mainSlider6, mainSlider7 } from '~/src/utils/shared/data';
 
 function Testimonials () {
     useEffect( () => {

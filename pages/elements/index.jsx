@@ -1,4 +1,4 @@
-import ElementList from "~/components/partials/elements/element-list"
+import ElementList from "~/src/components/partials/elements/element-list"
 
 function Elements () {
     return (

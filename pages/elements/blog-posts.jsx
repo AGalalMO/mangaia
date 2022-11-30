@@ -1,11 +1,11 @@
 import { useQuery } from '@apollo/react-hooks';
 
-import ALink from '~/components/features/alink';
-import PageHeader from "~/components/features/page-header";
-import ElementList from '~/components/partials/elements/element-list';
-import PostOne from '~/components/features/posts/post-one';
-import PostTwo from '~/components/features/posts/post-two';
-import PostThree from '~/components/features/posts/post-three';
+import ALink from '~/src/components/features/alink';
+import PageHeader from "~/src/components/features/page-header";
+import ElementList from '~/src/components/partials/elements/element-list';
+import PostOne from '~/src/components/features/posts/post-one';
+import PostTwo from '~/src/components/features/posts/post-two';
+import PostThree from '~/src/components/features/posts/post-three';
 
 
 function BlogPosts () {

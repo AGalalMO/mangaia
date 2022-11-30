@@ -2,12 +2,12 @@ import { useRouter } from 'next/router';
 import { useState, useEffect, useLayoutEffect } from 'react';
 import { useLazyQuery } from '@apollo/react-hooks';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import ShopListThree from '~/components/partials/shop/list/shop-list-three';
-import ShopSidebarOne from '~/components/partials/shop/sidebar/shop-sidebar-one';
+import ALink from '~/src/components/features/alink';
+import PageHeader from '~/src/components/features/page-header';
+import ShopListThree from '~/src/components/partials/shop/list/shop-list-three';
+import ShopSidebarOne from '~/src/components/partials/shop/sidebar/shop-sidebar-one';
 
-import { scrollToPageContent } from '~/utils';
+import { scrollToPageContent } from '~/src/utils/shared';
 
 function ShopNoSidebar() {
     const router = useRouter();

@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from 'react';
 import imagesLoaded from 'imagesloaded';
 import StickyBox from 'react-sticky-box';
 
-import ALink from '~/components/features/alink';
-import PageHeader from '~/components/features/page-header';
-import PostOne from '~/components/features/posts/post-one';
-import BlogSidebar from '~/components/partials/blog/sidebar/blog-sidebar';
+import ALink from '~/src/components/features/alink';
+import PageHeader from '~/src/components/features/page-header';
+import PostOne from '~/src/components/features/posts/post-one';
+import BlogSidebar from '~/src/components/partials/blog/sidebar/blog-sidebar';
 
 
 function BlogMasonrySidebar () {
