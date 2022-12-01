@@ -1,13 +1,18 @@
 import Helmet from "react-helmet";
 import { Provider, useSelector } from "react-redux";
 import Layout from "../src/components/layout";
-import { appWithTranslation } from "next-i18next";
+import { appWithTranslation, useTranslation } from "next-i18next";
 import { store } from "~/src/store/store.js";
+import { useEffect } from "react";
 
 import "~/public/scss/plugins/owl-carousel/owl.carousel.scss";
 import "~/public/scss/style.scss";
 
 const WrappedApp = ({ Component, pageProps }) => {
+  const { i18n } = useTranslation();
+  useEffect(() => {
+    document.body.dir = i18n.dir();
+  }, [i18n]);
   return (
     <Provider store={store}>
       <Helmet>
