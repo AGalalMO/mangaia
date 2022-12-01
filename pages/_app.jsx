@@ -11,7 +11,7 @@ import "~/public/scss/style.scss";
 const WrappedApp = ({ Component, pageProps }) => {
   const { i18n } = useTranslation();
   useEffect(() => {
-    document.body.dir = i18n.dir();
+    document.body.dir = i18n?.dir?.()??'en';
   }, [i18n]);
   return (
     <Provider store={store}>
