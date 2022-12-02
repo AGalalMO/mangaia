@@ -3,8 +3,10 @@ import axiosInstance from "~/src/utils/axios/axiosInstance";
 import { APIS } from "~/src/utils/ServiceUrls";
 import * as yup from "yup";
 import useAuth from "~/src/hooks/useAuth";
+import { useRouter } from "next/router";
 export const useAuthForms = () => {
   const { login, register } = useAuth();
+  const router = useRouter();
 
   const loginForm = useFormik({
     initialValues: {
@@ -21,7 +23,12 @@ export const useAuthForms = () => {
         .min(8, "Password should be of minimum 8 characters length")
         .required("Password is required"),
     }),
-    onSubmit: async (values) => await login(values),
+    onSubmit: async (values) => {
+      try {
+        await login(values);
+        router.route("/");
+      } catch (error) {}
+    },
   });
   const registerForm = useFormik({
     initialValues: {
@@ -60,7 +67,11 @@ export const useAuthForms = () => {
         .required("phoneNumber is required"),
       city: yup.string("Select your City").required("City is required"),
     }),
-    onSubmit: async (values) => await register(values),
+    onSubmit: async (values) => {
+      try {
+        await register(values), router.route("/");
+      } catch (error) {}
+    },
   });
 
   return {
