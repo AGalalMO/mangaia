@@ -22,13 +22,14 @@ const JWTReducer = (state, action) => {
       return {
         isAuthenticated: action.payload.isAuthenticated,
         isInitialized: true,
-        user: null,
+        user: action.payload.user
+,
       };
     case 'LOGIN':
       return {
         ...state,
         isAuthenticated: true,
-        user: null
+        user: action.payload.user
       };
     case 'LOGOUT':
       return {
@@ -41,7 +42,7 @@ const JWTReducer = (state, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        user:null,
+        user: action.payload.user
       };
 
     default:
@@ -95,27 +96,26 @@ function AuthProvider ({ children }) {
 
   const login = async (values) => {
     const response = await axiosInstance.post(APIS.AUTH.SIGNIN, values);
-    const { access_token } = response.data;
+    const { access_token, user } = response.data;
+    console.log("usserr",user)
     setSession(access_token);
     dispatch({
       type: 'LOGIN',
       payload: {
-        user: {
-
-        },
+        user: user,
       },
     });
   };
 
   const register = async (values) => {
     const response = await axiosInstance.post(APIS.AUTH.REGISTER, values);
-    const { access_token } = response.data;
+    const { access_token, user } = response.data;
 
     localStorage.setItem('accessToken', access_token);
 
     dispatch({
       type: 'REGISTER',
-      payload: null,
+      payload: user,
     });
   };
 

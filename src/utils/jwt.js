@@ -9,7 +9,7 @@ const isValidToken = (accessToken) => {
   if (!accessToken) {
     return false;
   }
-  const decoded = jwtDecode<{ exp: number }>(accessToken);
+  const decoded = jwtDecode<{ exp }>(accessToken);
 
   const currentTime = Date.now() / 1000;
 
