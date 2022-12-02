@@ -1,11 +1,11 @@
 import { TabPanel, Tabs, Tab, TabList } from 'react-tabs';
 import Login from './components/login';
 import Register from './components/register';
-import { useAuth } from './components/useAuth';
+import { useAuthForms } from './components/useAuthForms';
 
 function Authentication () {
     const { loginForm,
-        registerForm } = useAuth()
+        registerForm } = useAuthForms()
     return (
         <div className="main">
             <div className="login-page bg-image pt-8 pb-8 pt-md-12 pb-md-12 pt-lg-17 pb-lg-17" style={{ backgroundImage: `url(images/backgrounds/login-bg.jpg)` }}>

@@ -52,7 +52,7 @@ function Register ({ registerForm }) {
                     country={'Egypt'}
                     defaultOptionLabel={'Cairo'}
                     value={registerForm.values.city}
-                    onChange={registerForm.handleChange}
+                    onChange={(value) => registerForm.setFieldValue('city',value)}
 
                 />
                 <StyledTextFiled

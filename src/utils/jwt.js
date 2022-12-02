@@ -5,7 +5,7 @@ import axiosInstance from "./axios/axiosInstance";
 
 // ----------------------------------------------------------------------
 
-const isValidToken = (accessToken: string) => {
+const isValidToken = (accessToken) => {
   if (!accessToken) {
     return false;
   }
@@ -16,7 +16,7 @@ const isValidToken = (accessToken: string) => {
   return decoded.exp > currentTime;
 };
 
-const setSession = (accessToken: string | null) => {
+const setSession = (accessToken) => {
   if (accessToken) {
     localStorage.setItem("accessToken", accessToken);
     axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;

@@ -2,11 +2,9 @@ import { APIS } from '../utils/ServiceUrls';
 import { createContext, ReactNode, useEffect, useReducer } from 'react';
 // utils
 // @types
-import { ActionMap, AuthState, AuthUser, JWTContextType } from '../@types/auth';
 import axiosInstance from '../utils/axios/axiosInstance';
 import { isValidToken, setSession } from '../utils/jwt'
 // ----------------------------------------------------------------------
-
 
 
 
@@ -24,13 +22,13 @@ const JWTReducer = (state, action) => {
       return {
         isAuthenticated: action.payload.isAuthenticated,
         isInitialized: true,
-        user: action.payload.user,
+        user: null,
       };
     case 'LOGIN':
       return {
         ...state,
         isAuthenticated: true,
-        user: action.payload.user,
+        user: null
       };
     case 'LOGOUT':
       return {
@@ -43,7 +41,7 @@ const JWTReducer = (state, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        user: action.payload.user,
+        user:null,
       };
 
     default:
@@ -51,7 +49,7 @@ const JWTReducer = (state, action) => {
   }
 };
 
-const AuthContext = createContext < JWTContextType | null > (null);
+const AuthContext = createContext  (null);
 
 // ----------------------------------------------------------------------
 
@@ -65,7 +63,7 @@ function AuthProvider ({ children }) {
         if (accessToken && isValidToken(accessToken)) {
           setSession(accessToken);
           dispatch({
-            type: Types.Initial,
+            type: 'INITIALIZE',
             payload: {
               isAuthenticated: true,
               user: null
@@ -73,7 +71,7 @@ function AuthProvider ({ children }) {
           });
         } else {
           dispatch({
-            type: Types.Initial,
+            type: 'INITIALIZE',
             payload: {
               isAuthenticated: false,
               user: null,
@@ -83,7 +81,7 @@ function AuthProvider ({ children }) {
       } catch (err) {
         console.error(err);
         dispatch({
-          type: Types.Initial,
+          type: 'INITIALIZE',
           payload: {
             isAuthenticated: false,
             user: null,
@@ -95,15 +93,12 @@ function AuthProvider ({ children }) {
     initialize();
   }, []);
 
-  const login = async (email, password) => {
-    const response = await axiosInstance.post(APIS.AUTH.SIGNIN, {
-      email,
-      password,
-    });
-    const { accessToken } = response.data.data;
-    setSession(accessToken);
+  const login = async (values) => {
+    const response = await axiosInstance.post(APIS.AUTH.SIGNIN, values);
+    const { access_token } = response.data;
+    setSession(access_token);
     dispatch({
-      type: Types.Login,
+      type: 'LOGIN',
       payload: {
         user: {
 
@@ -112,28 +107,21 @@ function AuthProvider ({ children }) {
     });
   };
 
-  const register = async (email, password, firstName, lastName) => {
-    const response = await axiosInstance.post(APIS.AUTH.SIGNIN, {
-      email,
-      password,
-      firstName,
-      lastName,
-    });
-    const { accessToken, user } = response.data;
+  const register = async (values) => {
+    const response = await axiosInstance.post(APIS.AUTH.REGISTER, values);
+    const { access_token } = response.data;
 
-    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('accessToken', access_token);
 
     dispatch({
-      type: Types.Register,
-      payload: {
-        user,
-      },
+      type: 'REGISTER',
+      payload: null,
     });
   };
 
   const logout = async () => {
     setSession(null);
-    dispatch({ type: Types.Logout });
+    dispatch({ type: 'LOGOUT' });
   };
 
   return (

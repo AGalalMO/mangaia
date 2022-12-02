@@ -7,64 +7,67 @@ import { useEffect } from "react";
 
 import "~/public/scss/plugins/owl-carousel/owl.carousel.scss";
 import "~/public/scss/style.scss";
+import { AuthContext, AuthProvider } from "~/src/contexts/JWTContext";
 
 const WrappedApp = ({ Component, pageProps }) => {
   const { i18n } = useTranslation();
   useEffect(() => {
-    document.body.dir = i18n?.dir?.()??'en';
+    document.body.dir = i18n?.dir?.() ?? 'en';
   }, [i18n]);
   return (
-    <Provider store={store}>
-      <Helmet>
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="keywords" content="Molla React Template" />
-        <meta
-          name="description"
-          content="Molla –  eCommerce React Template is a multi-use React template. It is designed to go well with multi-purpose websites."
-        />
-        <meta name="author" content="d-themes" />
-        <meta name="apple-mobile-web-app-title" content="Molla" />
-        <meta
-          name="application-name"
-          content="Molla React eCommerce Template"
-        />
-        <meta name="msapplication-TileColor" content="#cc9966" />
-        <meta
-          name="msapplication-config"
-          content="images/icons/browserconfig.xml"
-        />
-        <meta name="theme-color" content="#ffffff" />
-        <title>Molla - React eCommerce Template</title>
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="images/icons/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="images/icons/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="images/icons/favicon-16x16.png"
-        />
-        <link rel="manifest" href="images/icons/site.webmanifest" />
-        <link
-          rel="mask-icon"
-          href="images/icons/safari-pinned-tab.svg"
-          color="#666666"
-        />
-        <link rel="shortcut icon" href="images/icons/favicon.ico" />
-      </Helmet>
+    <AuthProvider>
+      <Provider store={store}>
+        <Helmet>
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="keywords" content="Molla React Template" />
+          <meta
+            name="description"
+            content="Molla –  eCommerce React Template is a multi-use React template. It is designed to go well with multi-purpose websites."
+          />
+          <meta name="author" content="d-themes" />
+          <meta name="apple-mobile-web-app-title" content="Molla" />
+          <meta
+            name="application-name"
+            content="Molla React eCommerce Template"
+          />
+          <meta name="msapplication-TileColor" content="#cc9966" />
+          <meta
+            name="msapplication-config"
+            content="images/icons/browserconfig.xml"
+          />
+          <meta name="theme-color" content="#ffffff" />
+          <title>Molla - React eCommerce Template</title>
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="images/icons/apple-touch-icon.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="images/icons/favicon-32x32.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="images/icons/favicon-16x16.png"
+          />
+          <link rel="manifest" href="images/icons/site.webmanifest" />
+          <link
+            rel="mask-icon"
+            href="images/icons/safari-pinned-tab.svg"
+            color="#666666"
+          />
+          <link rel="shortcut icon" href="images/icons/favicon.ico" />
+        </Helmet>
 
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </Provider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </Provider>
+    </AuthProvider>
   );
 };
 

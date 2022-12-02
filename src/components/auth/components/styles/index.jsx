@@ -12,7 +12,7 @@ export const StyledButton = styled(Button)({
 })
 export const StyledRegionSelect = styled(RegionDropdown)({
     height: '50px',
-    background: '##f0f0f0',
+    background: '#f0f0f0',
     border: '0px',
     fontSize: '14px',
     padding: '6px',
