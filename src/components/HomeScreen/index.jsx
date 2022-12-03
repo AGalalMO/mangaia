@@ -33,7 +33,6 @@ function HomeScreen() {
     >
       <ImageBanner />
 
-      {t("HELLO")}
 
       <div className="container banners">
         <div className="row">

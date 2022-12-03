@@ -1,42 +1,56 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import ALink from '~/src/components/features/alink';
 import axiosInstance from '~/src/utils/axios/axiosInstance';
 import { APIS } from '~/src/utils/ServiceUrls';
 
-function MainMenu() {
+function MainMenu () {
     const router = useRouter();
     let path = router.asPath;
-    let query = router.query;
+    const { i18n } = useTranslation('home')
+    const [categories,setCategories]=useState([])
+    useEffect(() => {
+        getCategories()
+    }, [i18n])
+
+    const getCategories = async () => {
+        let response = await axiosInstance.get(APIS.CATEGORIES.LIST, {
+            headers: {
+                'common': {
+                    'accept-language': i18n.language
+                }
+            }
+        })
+        setCategories(response.data)
+    }
 
     return (
         <nav className="main-nav">
             <ul className="menu sf-arrows">
-                <li className={ `megamenu-container ${ path === '/' ? 'active' : '' }` } id="menu-home">
+                <li className={`megamenu-container ${path === '/' ? 'active' : ''}`} id="menu-home">
                     <ALink href="/" >Home</ALink>
                 </li>
-                <li className={ path.indexOf( "/shop" ) > -1 ? 'active' : '' }>
+                <li className={path.indexOf("/shop") > -1 ? 'active' : ''}>
                     <ALink href="/shop/list"  >Shop</ALink>
                 </li>
-                <li className={ path.indexOf( "product/" ) > -1 ? 'active' : '' }>
+                <li className={path.indexOf("product/") > -1 ? 'active' : ''}>
                     <ALink href="/product/default/dark-yellow-lace-cut-out-swing-dress" className="sf-with-ul">Product</ALink>
 
                     <div className="megamenu megamenu-sm">
                         <div className="row no-gutters">
                             <div className="col-md-6">
                                 <div className="menu-col">
-                                    <div className="menu-title">Product Details</div>
+                                    {/* className={path.indexOf("product/default") > -1 ? 'active' : ''} */}
                                     <ul>
-                                        <li className={ path.indexOf( "product/default" ) > -1 ? 'active' : '' }><ALink href="/product/default/dark-yellow-lace-cut-out-swing-dress">Default</ALink></li>
-                                        <li className={ path.indexOf( "product/centered" ) > -1 ? 'active' : '' }><ALink href="/product/centered/beige-ring-handle-circle-cross-body-bag">Centered</ALink></li>
-                                        <li className={ path.indexOf( "product/extended" ) > -1 ? 'active' : '' }><ALink href="/product/extended/yellow-tie-strap-block-heel-sandals"><span>Extended Info<span className="tip tip-new">New</span></span></ALink></li>
-                                        <li className={ path.indexOf( "product/gallery" ) > -1 ? 'active' : '' }><ALink href="/product/gallery/beige-metal-hoop-tote-bag">Gallery</ALink></li>
-                                        <li className={ path.indexOf( "product/sticky" ) > -1 ? 'active' : '' }><ALink href="/product/sticky/brown-faux-fur-longline-coat">Sticky Info</ALink></li>
-                                        <li className={ path.indexOf( "product/sidebar" ) > -1 ? 'active' : '' }><ALink href="/product/sidebar/beige-v-neck-button-cardigan">Boxed With Sidebar</ALink></li>
-                                        <li className={ path.indexOf( "product/fullwidth" ) > -1 ? 'active' : '' }><ALink href="/product/fullwidth/black-faux-leather-chain-trim-sandals">Full Width</ALink></li>
-                                        <li className={ path.indexOf( "product/masonry" ) > -1 ? 'active' : '' }><ALink href="/product/masonry/black-denim-dungaree-dress">Masonry Sticky Info</ALink></li>
-                                    </ul>
+                                        {categories.map((item) => {
+                                            return <li key={item?.id} ><ALink href="/shop/category">{item?.name}</ALink></li>
+
+                                     
+                                        })
+                                            
+                                      }                                    </ul>
                                 </div>
                             </div>
 
@@ -46,7 +60,7 @@ function MainMenu() {
                                         <img src="images/menu/banner-2.jpg" alt="Banner" />
 
                                         <div className="banner-content banner-content-bottom">
-                                            <div className="banner-title text-white">New Trends<br /><span><strong>spring { ( new Date() ).getFullYear() }</strong></span></div>
+                                            <div className="banner-title text-white">New Trends<br /><span><strong> {(new Date()).getFullYear()}</strong></span></div>
                                         </div>
                                     </ALink>
                                 </div>
@@ -55,13 +69,21 @@ function MainMenu() {
                     </div>
                 </li>
 
-                <li className={ path.indexOf( "About/" ) > -1 ? 'active' : '' }>
+                <li className={path.indexOf("About/") > -1 ? 'active' : ''}>
                     <ALink href="/about">About</ALink>
                 </li>
                 <li className={path.indexOf("About/") > -1 ? 'active' : ''}>
                     <ALink href="/contact">Contact</ALink>
                 </li>
-                {/* <li className={ path.indexOf( "element" ) > -1 ? 'active' : '' }>
+              
+            </ul>
+        </nav>
+    );
+}
+
+export default MainMenu;
+
+{/* <li className={ path.indexOf( "element" ) > -1 ? 'active' : '' }>
                     <ALink href="/elements" className="sf-with-ul">Elements</ALink>
 
                     <ul>
@@ -80,9 +102,3 @@ function MainMenu() {
                         <li className={ path.indexOf( "elements/icon-boxes" ) > -1 ? "active" : '' }><ALink href="/elements/icon-boxes">Icon Boxes</ALink></li>
                     </ul>
                 </li> */}
-            </ul>
-        </nav>
-    );
-}
-
-export default MainMenu;

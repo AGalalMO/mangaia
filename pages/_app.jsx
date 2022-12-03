@@ -12,11 +12,12 @@ import axiosInstance from "~/src/utils/axios/axiosInstance";
 import { useRouter } from "next/router";
 
 const WrappedApp = ({ Component, pageProps }) => {
-  const router=useRouter()
-  const { i18n } = useTranslation();
+  const router = useRouter()
+  const { i18n, }=useTranslation()
   useEffect(() => {
     document.body.dir = i18n?.dir?.() ?? 'en';
-    axiosInstance.defaults.headers.common["accept-language"] = i18n.language;
+    
+    axiosInstance.defaults.headers.common["accept-language"] = router.locale;
 
   }, [i18n]);
   
@@ -31,10 +32,10 @@ const WrappedApp = ({ Component, pageProps }) => {
             content="Molla –  eCommerce React Template is a multi-use React template. It is designed to go well with multi-purpose websites."
           />
           <meta name="author" content="d-themes" />
-          <meta name="apple-mobile-web-app-title" content="Molla" />
+          <meta name="apple-mobile-web-app-title" content="UNEX" />
           <meta
-            name="application-name"
-            content="Molla React eCommerce Template"
+            name="UNEX"
+            content="Unex City Active"
           />
           <meta name="msapplication-TileColor" content="#cc9966" />
           <meta
@@ -46,19 +47,19 @@ const WrappedApp = ({ Component, pageProps }) => {
           <link
             rel="apple-touch-icon"
             sizes="180x180"
-            href="images/icons/apple-touch-icon.png"
+            href="images/icons/Logo.png"
           />
           <link
             rel="icon"
             type="image/png"
             sizes="32x32"
-            href="images/icons/favicon-32x32.png"
+            href="images/icons/Logo.png"
           />
           <link
             rel="icon"
             type="image/png"
             sizes="16x16"
-            href="images/icons/favicon-16x16.png"
+            href="images/icons/Logo.png"
           />
           <link rel="manifest" href="images/icons/site.webmanifest" />
           <link

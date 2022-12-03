@@ -62,7 +62,6 @@ function AuthProvider ({ children }) {
       try {
         const accessToken = localStorage.getItem('accessToken');
         const user = localStorage.getItem('user');
-
         if (accessToken && isValidToken(accessToken)) {
           setSession(accessToken);
           dispatch({
@@ -70,6 +69,7 @@ function AuthProvider ({ children }) {
             payload: {
               isAuthenticated: true,
               user: JSON.parse(user)
+
             },
           });
         } else {
