@@ -7,7 +7,7 @@ import WishlistMenu from '~/src/components/partials/header/partials/wishlist-men
 import CartMenu from '~/src/components/partials/header/partials/cart-menu';
 import MainMenu from '~/src/components/partials/header/partials/main-menu';
 import StickyHeader from '~/src/components/features/sticky-header';
-
+import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 function Header ( props ) {
     const router = useRouter();
     const [ containerClass, setContainerClass ] = useState( 'container' );

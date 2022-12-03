@@ -118,7 +118,7 @@ function ShopGrid() {
                 <div className="container">
                     <div className="row skeleton-body">
                         <div
-                            className={ `col-lg-9 skel-shop-products ${ !loading ? 'loaded' : '' }` }
+                            className={`col-lg-9 skel-shop-products ${ 'loaded' }` }
                         >
                             <div className="toolbox">
                                 <div className="toolbox-left">
@@ -212,7 +212,7 @@ function ShopGrid() {
                                 </div>
                             </div >
 
-                            <ShopListOne products={ [] } perPage={ perPage } loading={ loading }></ShopListOne>
+                            <ShopListOne products={ [] } perPage={ perPage } loading={ false }></ShopListOne>
 
                             {
                                 totalCount > perPage ?
@@ -221,7 +221,7 @@ function ShopGrid() {
                             }
                         </div >
 
-                        <aside className={ `col-lg-3 skel-shop-sidebar order-lg-first skeleton-body ${ ( !loading || firstLoading ) ? 'loaded' : '' }` }>
+                        <aside className={ `col-lg-3 skel-shop-sidebar order-lg-first skeleton-body loaded` }>
                             <div className="skel-widget"></div>
                             <div className="skel-widget"></div>
                             <div className="skel-widget"></div>

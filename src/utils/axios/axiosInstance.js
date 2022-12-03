@@ -3,6 +3,8 @@ import axios from "axios";
 // ----------------------------------------------------------------------
 const axiosInstance = axios.create();
 axiosInstance.defaults.headers.common["Content-Type"] = "application/json";
+axiosInstance.defaults.headers.common["accept-language"] = "en";
+
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) =>

@@ -4,9 +4,16 @@ export const APIS = {
     SIGNIN: `${baseUrl}account/login`,
     REGISTER: `${baseUrl}account/register`,
   },
-  PRODUCTS: {},
-  CATEGORIES: {
-    LIST: `${baseUrl}category/getall?lang=en`,
+  PRODUCTS: {
+    
   },
-  SUBCATEGORIES: {},
+  CATEGORIES: {
+    LIST: `${baseUrl}category/getall`,
+  },
+  SUBCATEGORIES: {
+    LIST: `${baseUrl}subcategory/getall`,
+  },
+  UTILS: {
+    LINKS: `${baseUrl}redirections/get`,
+  },
 };

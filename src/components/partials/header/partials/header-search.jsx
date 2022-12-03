@@ -11,7 +11,6 @@ function HeaderSearch () {
     const [cat, setCat] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
     const [products, setProducts] = useState([]);
-    // const [ searchProducts, { data } ] = useLazyQuery( GET_PRODUCTS );
     const result = [];
     const [timer, setTimer] = useState(null);
 

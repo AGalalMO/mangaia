@@ -23,7 +23,7 @@ const JWTReducer = (state, action) => {
         isAuthenticated: action.payload.isAuthenticated,
         isInitialized: true,
         user: action.payload.user
-,
+        ,
       };
     case 'LOGIN':
       return {
@@ -50,7 +50,7 @@ const JWTReducer = (state, action) => {
   }
 };
 
-const AuthContext = createContext  (null);
+const AuthContext = createContext(null);
 
 // ----------------------------------------------------------------------
 
@@ -61,13 +61,15 @@ function AuthProvider ({ children }) {
     const initialize = async () => {
       try {
         const accessToken = localStorage.getItem('accessToken');
+        const user = localStorage.getItem('user');
+
         if (accessToken && isValidToken(accessToken)) {
           setSession(accessToken);
           dispatch({
             type: 'INITIALIZE',
             payload: {
               isAuthenticated: true,
-              user: null
+              user: JSON.parse(user)
             },
           });
         } else {
@@ -97,8 +99,8 @@ function AuthProvider ({ children }) {
   const login = async (values) => {
     const response = await axiosInstance.post(APIS.AUTH.SIGNIN, values);
     const { access_token, user } = response.data;
-    console.log("usserr",user)
     setSession(access_token);
+    localStorage.setItem('user', JSON.stringify(user));
     dispatch({
       type: 'LOGIN',
       payload: {
@@ -112,6 +114,7 @@ function AuthProvider ({ children }) {
     const { access_token, user } = response.data;
 
     localStorage.setItem('accessToken', access_token);
+    localStorage.setItem('user', JSON.stringify(user));
 
     dispatch({
       type: 'REGISTER',

@@ -8,12 +8,18 @@ import { useEffect } from "react";
 import "~/public/scss/plugins/owl-carousel/owl.carousel.scss";
 import "~/public/scss/style.scss";
 import { AuthContext, AuthProvider } from "~/src/contexts/JWTContext";
+import axiosInstance from "~/src/utils/axios/axiosInstance";
+import { useRouter } from "next/router";
 
 const WrappedApp = ({ Component, pageProps }) => {
+  const router=useRouter()
   const { i18n } = useTranslation();
   useEffect(() => {
     document.body.dir = i18n?.dir?.() ?? 'en';
+    axiosInstance.defaults.headers.common["accept-language"] = i18n.language;
+
   }, [i18n]);
+  
   return (
     <AuthProvider>
       <Provider store={store}>
@@ -36,7 +42,7 @@ const WrappedApp = ({ Component, pageProps }) => {
             content="images/icons/browserconfig.xml"
           />
           <meta name="theme-color" content="#ffffff" />
-          <title>Molla - React eCommerce Template</title>
+          <title>UNEX City Active</title>
           <link
             rel="apple-touch-icon"
             sizes="180x180"

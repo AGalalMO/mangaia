@@ -1,13 +1,10 @@
 import { useFormik } from "formik";
-import axiosInstance from "~/src/utils/axios/axiosInstance";
-import { APIS } from "~/src/utils/ServiceUrls";
 import * as yup from "yup";
 import useAuth from "~/src/hooks/useAuth";
 import { useRouter } from "next/router";
 export const useAuthForms = () => {
   const { login, register } = useAuth();
   const router = useRouter();
-
   const loginForm = useFormik({
     initialValues: {
       email: "",
@@ -26,7 +23,7 @@ export const useAuthForms = () => {
     onSubmit: async (values) => {
       try {
         await login(values);
-        router.route("/");
+        router.replace("/");
       } catch (error) {}
     },
   });
@@ -69,7 +66,8 @@ export const useAuthForms = () => {
     }),
     onSubmit: async (values) => {
       try {
-        await register(values), router.route("/");
+        await register(values);
+        router.replace("/");
       } catch (error) {}
     },
   });
