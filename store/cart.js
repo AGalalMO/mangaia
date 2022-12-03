@@ -19,7 +19,7 @@ const cartReducer = ( state = initialState, action ) => {
         case actionTypes.addToCart:
             var findIndex = state.data.findIndex( item => item.id == action.payload.product.id );
             let qty = action.payload.qty ? action.payload.qty : 1;
-            if ( findIndex !== -1 && action.payload.product.variants.length > 0 ) {
+            if ( findIndex !== -1 && action.payload.product?.variants?.length > 0 ) {
                 findIndex = state.data.findIndex( item => item.name == action.payload.product.name );
             }
 

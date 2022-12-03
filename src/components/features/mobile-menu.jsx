@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import { Tabs, TabList, Tab, TabPanel } from 'react-tabs';
 import SlideToggle from 'react-slide-toggle';
 
 import ALink from '~/src/components/features/alink';

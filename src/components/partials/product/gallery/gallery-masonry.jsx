@@ -1,25 +1,31 @@
 import { Magnifier } from 'react-image-magnifiers';
 import React, { useState, useEffect } from 'react';
 import LightBox from 'react-image-lightbox';
+import axiosInstance from '~/src/utils/axios/axiosInstance';
 
 function GalleryMasonry ( props ) {
-    const { product } = props;
     const [ isOpen, setIsOpen ] = useState( false );
     const [ photoIndex, setPhotoIndex ] = useState( 0 );
-
+const [product,setProduct]=useState({})
     useEffect( () => {
         if ( product ) {
             setIsOpen( false );
             setPhotoIndex( 0 );
         }
-    }, [ product ] )
-
+    }, [product])
+    useEffect(() => {
+        getProduct()
+    },[])
+    const getProduct = async () => {
+        const rsponse=await axiosInstance.get('https://dummyjson.com/products/1')
+        setProduct(rsponse.data)
+}
     function moveNextPhoto () {
-        setPhotoIndex( ( photoIndex + 1 ) % product.pictures.length );
+        setPhotoIndex( ( photoIndex + 1 ) % product?.images?.length );
     }
 
     function movePrevPhoto () {
-        setPhotoIndex( ( photoIndex + product.pictures.length - 1 ) % product.pictures.length );
+        setPhotoIndex( ( photoIndex + product?.images?.length - 1 ) % product?.images?.length );
     }
 
     function openLightBox () {
@@ -57,40 +63,40 @@ function GalleryMasonry ( props ) {
                 <div className="row m-0">
                     <figure className="product-main-image" index="0">
                         {
-                            product.new ?
+                            product?.new ?
                                 <span className="product-label label-new">New</span>
                                 : ""
                         }
 
                         {
-                            product.sale_price ?
+                            product?.sale_price ?
                                 <span className="product-label label-sale">Sale</span>
                                 : ""
                         }
 
                         {
-                            product.top ?
+                            product?.top ?
                                 <span className="product-label label-top">Top</span>
                                 : ""
                         }
 
                         {
-                            !product.stock || product.stock == 0 ?
+                            !product?.stock || product?.stock == 0 ?
                                 <span className="product-label label-out">Out of Stock</span>
                                 : ""
                         }
 
                         <Magnifier
-                            imageSrc={ process.env.NEXT_PUBLIC_ASSET_URI + product.pictures[ 0 ].url }
+                            imageSrc={ product?.images?.[ 0 ] }
                             imageAlt="product"
-                            largeImageSrc={ process.env.NEXT_PUBLIC_ASSET_URI + product.pictures[ 0 ].url } // Optional
+                            largeImageSrc={ product?.images?.[ 0 ] } // Optional
                             dragToMove={ false }
                             mouseActivation="hover"
                             cursorStyleActive="crosshair"
                             className="zoom-image overflow-hidden p-relative"
-                            width={ product.pictures[ 0 ].width }
+                            width={ product?.images?.[ 0 ].width }
                             height={ '100%' }
-                            style={ { paddingTop: `${product.pictures[ 0 ].height / product.pictures[ 0 ].width * 100}%` } }
+                            style={ { paddingTop: `${product?.images?.[ 0 ].height / product?.images?.[ 0 ].width * 100}%` } }
                         />
 
                         <button id="btn-product-gallery" className="btn-product-gallery" onClick={ openLightBox }>
@@ -101,33 +107,33 @@ function GalleryMasonry ( props ) {
                     <div id="product-zoom-gallery" className="product-image-gallery mr-0 ml-0">
                         <div className="row">
                             <div className="col-5 d-flex mb-1">
-                                <button className="active product-masonry-item p-0 w-100" onClick={ e => changeBgImage( e, `${process.env.NEXT_PUBLIC_ASSET_URI + product.sm_pictures[ 0 ].url}`, 0 ) }>
-                                    <img src={ process.env.NEXT_PUBLIC_ASSET_URI + product.sm_pictures[ 0 ].url } alt="product back" className="w-100" />
+                                <button className="active product-masonry-item p-0 w-100" onClick={ e => changeBgImage( e, `${product?.images?.[0]}`, 0 ) }>
+                                    <img src={ product?.images?.[0] } alt="product back" className="w-100" />
                                 </button>
                             </div>
                             {
-                                product.sm_pictures.length > 1 ?
+                                product?.images?.length > 1 ?
                                     <div className="col-7 d-flex mb-1">
-                                        <button className="product-masonry-item p-0 w-100" onClick={ e => changeBgImage( e, `${process.env.NEXT_PUBLIC_ASSET_URI + product.sm_pictures[ 1 ].url}`, 1 ) }>
-                                            <img src={ process.env.NEXT_PUBLIC_ASSET_URI + product.sm_pictures[ 1 ].url } alt="product back" className="w-100" />
+                                        <button className="product-masonry-item p-0 w-100" onClick={ e => changeBgImage( e, `${product?.images?.[0]}`, 1 ) }>
+                                            <img src={ product?.images?.[0] } alt="product back" className="w-100" />
                                         </button>
                                     </div>
                                     : ""
                             }
                             {
-                                product.sm_pictures.length > 2 ?
+                                product?.images?.length > 2 ?
                                     <div className="col-7 d-flex mb-1">
-                                        <button className="product-masonry-item p-0 w-100" onClick={ e => changeBgImage( e, `${process.env.NEXT_PUBLIC_ASSET_URI + product.sm_pictures[ 2 ].url}`, 2 ) }>
-                                            <img src={ process.env.NEXT_PUBLIC_ASSET_URI + product.sm_pictures[ 2 ].url } alt="product back" className="w-100" />
+                                        <button className="product-masonry-item p-0 w-100" onClick={ e => changeBgImage( e, `${product?.images?.[0]}`, 2 ) }>
+                                            <img src={ product?.images?.[0] } alt="product back" className="w-100" />
                                         </button>
                                     </div>
                                     : ""
                             }
                             {
-                                product.sm_pictures.length > 3 ?
+                                product?.images?.length > 3 ?
                                     <div className="col-5 d-flex mb-1">
-                                        <button className="product-masonry-item p-0 w-100" onClick={ e => changeBgImage( e, `${process.env.NEXT_PUBLIC_ASSET_URI + product.sm_pictures[ 3 ].url}`, 3 ) }>
-                                            <img src={ process.env.NEXT_PUBLIC_ASSET_URI + product.sm_pictures[ 3 ].url } alt="product back" className="w-100" />
+                                        <button className="product-masonry-item p-0 w-100" onClick={ e => changeBgImage( e, `${product?.images?.[0]}`, 3 ) }>
+                                            <img src={ product?.images?.[0] } alt="product back" className="w-100" />
                                         </button>
                                     </div>
                                     : ""
@@ -140,9 +146,9 @@ function GalleryMasonry ( props ) {
             {
                 isOpen ?
                     <LightBox
-                        mainSrc={ process.env.NEXT_PUBLIC_ASSET_URI + product.pictures[ photoIndex ].url }
-                        nextSrc={ process.env.NEXT_PUBLIC_ASSET_URI + product.pictures[ ( photoIndex + 1 ) % product.pictures.length ].url }
-                        prevSrc={ process.env.NEXT_PUBLIC_ASSET_URI + product.pictures[ ( photoIndex + product.pictures.length - 1 ) % product.pictures.length ].url }
+                        mainSrc={ product?.images?.[ photoIndex ] }
+                        nextSrc={ product?.images?.[ ( photoIndex + 1 ) % product?.images?.length ] }
+                        prevSrc={ product?.images?.[ ( photoIndex + product?.images?.length - 1 ) % product?.images?.length ] }
                         onCloseRequest={ closeLightBox }
                         onMovePrevRequest={ moveNextPhoto }
                         onMoveNextRequest={ movePrevPhoto }

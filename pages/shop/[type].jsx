@@ -7,6 +7,7 @@ import PageHeader from '~/src/components/features/page-header';
 import ShopListOne from '~/src/components/partials/shop/list/shop-list-one';
 import Pagination from '~/src/components/features/pagination';
 import ShopSidebarOne from '~/src/components/partials/shop/sidebar/shop-sidebar-one';
+import axiosInstance from '~/src/utils/axios/axiosInstance';
 
 
 function ShopGrid() {
@@ -18,7 +19,14 @@ function ShopGrid() {
     const [ perPage, setPerPage ] = useState( 5 );
     const [ pageTitle, setPageTitle ] = useState( 'List' );
     const [ toggle, setToggle ] = useState( false );
- const products = []
+    const [products, setProducts] = useState([])
+    useEffect(() => {
+        getProducts()
+     }, [])
+    const getProducts = async() => {
+        let response = await axiosInstance.get('https://dummyjson.com/products')
+        setProducts(response.data.products)
+    }
     const totalCount = []
 
     useEffect( () => {
@@ -100,7 +108,7 @@ function ShopGrid() {
                             <ALink href="/">Home</ALink>
                         </li>
                         <li className="breadcrumb-item">
-                            <ALink href="/shop/sidebar/list">Shop</ALink>
+                            <ALink href="/shop/list">Shop</ALink>
                         </li>
                         <li className="breadcrumb-item active">{ pageTitle }</li>
                         {
@@ -152,7 +160,7 @@ function ShopGrid() {
                                     </div>
                                     <div className="toolbox-layout">
                                         <ALink
-                                            href="/shop/sidebar/list"
+                                            href="/shop/list"
                                             className={ `btn-layout ${ type == 'list' ? 'active' : '' }` }
                                             scroll={ false }
                                         >
@@ -165,7 +173,7 @@ function ShopGrid() {
                                         </ALink>
 
                                         <ALink
-                                            href="/shop/sidebar/2cols"
+                                            href="/shop/2cols"
                                             className={ `btn-layout ${ type == '2cols' ? 'active' : '' }` }
                                             scroll={ false }
                                         >
@@ -178,7 +186,7 @@ function ShopGrid() {
                                         </ALink>
 
                                         <ALink
-                                            href="/shop/sidebar/3cols"
+                                            href="/shop/3cols"
                                             className={ `btn-layout ${ type == '3cols' ? 'active' : '' }` }
                                             scroll={ false }
                                         >
@@ -193,7 +201,7 @@ function ShopGrid() {
                                         </ALink>
 
                                         <ALink
-                                            href="/shop/sidebar/4cols"
+                                            href="/shop/4cols"
                                             className={ `btn-layout ${ type == '4cols' ? 'active' : '' }` }
                                             scroll={ false }
                                         >
@@ -212,7 +220,7 @@ function ShopGrid() {
                                 </div>
                             </div >
 
-                            <ShopListOne products={ [] } perPage={ perPage } loading={ false }></ShopListOne>
+                            <ShopListOne products={ products } perPage={ perPage } loading={ false }></ShopListOne>
 
                             {
                                 totalCount > perPage ?

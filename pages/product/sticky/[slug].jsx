@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import StickyBox from 'react-sticky-box';
 import Breadcrumb from '~/src/components/partials/product/breadcrumb';
 import GallerySticky from '~/src/components/partials/product/gallery/gallery-sticky';
-import DetailOne from '~/src/components/partials/product/details/detail-one';
+import DetailOne from '~/src/components/partials/product/details/Draft';
 import InfoThree from '~/src/components/partials/product/info-tabs/info-three';
 import RelatedProductsOne from '~/src/components/partials/product/related/related-one';
 

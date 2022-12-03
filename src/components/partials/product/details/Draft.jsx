@@ -379,7 +379,7 @@ function DetailOne ( props ) {
                 <div className="product-cat w-100 text-truncate">
                     <span>Category:</span>
                     {
-                        product?.category?.map( ( cat, index ) => (
+                        product?.category?.map?.( ( cat, index ) => (
                             <span key={ index }>
                                 <ALink
                                     href={ { pathname: '/shop/sidebar/list', query: { category: cat.slug } } }
@@ -469,8 +469,8 @@ function DetailOne ( props ) {
 
 const mapStateToProps = ( state ) => {
     return {
-        cartlist: state.cartlist.data,
-        wishlist: state.wishlist.data,
+        cartlist: state?.cartlist?.data??[],
+        wishlist: state?.wishlist?.data??[],
     }
 }
 

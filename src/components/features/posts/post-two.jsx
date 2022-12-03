@@ -29,7 +29,7 @@ function PostTwo ( props ) {
 
                                             <LazyLoadImage
                                                 alt="Post"
-                                                src={ process.env.NEXT_PUBLIC_ASSET_URI + post.image[ 0 ].url }
+                                                src={ process.env.NEXT_PUBLIC_ASSET_URI + post.image[ 0 ] }
                                                 threshold={ 500 }
                                                 effect="blur"
                                             />
@@ -41,7 +41,7 @@ function PostTwo ( props ) {
 
                                                 <LazyLoadImage
                                                     alt="Post"
-                                                    src={ process.env.NEXT_PUBLIC_ASSET_URI + post.image[ 0 ].url }
+                                                    src={ process.env.NEXT_PUBLIC_ASSET_URI + post.image[ 0 ] }
                                                     threshold={ 500 }
                                                     effect="blur"
                                                 />

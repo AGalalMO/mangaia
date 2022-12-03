@@ -58,7 +58,7 @@ function CartMenu(props) {
                       <img
                         src={
                           process.env.NEXT_PUBLIC_ASSET_URI +
-                          item.sm_pictures[0].url
+                          item.sm_pictures[0]
                         }
                         alt="product"
                       />

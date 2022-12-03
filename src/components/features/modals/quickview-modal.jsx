@@ -5,7 +5,7 @@ import { Magnifier } from 'react-image-magnifiers';
 import { useRouter } from 'next/router';
 
 import OwlCarousel from '~/src/components/features/owl-carousel';
-import DetailOne from '~/src/components/partials/product/details/detail-one';
+import DetailOne from '~/src/components/partials/product/details/Draft';
 
 
 import { actions as demoAction } from '~/store/demo';
@@ -145,7 +145,7 @@ function QuickViewModal ( props ) {
                                                                     <div className="lazy-overlay"></div>
                                                                     <LazyLoadImage
                                                                         alt="Thumbnail"
-                                                                        src={ process.env.NEXT_PUBLIC_ASSET_URI + product.sm_pictures[ index ].url }
+                                                                        src={ product?.images[ index ] }
                                                                         width="100%"
                                                                         height="auto"
                                                                         className="d-block"

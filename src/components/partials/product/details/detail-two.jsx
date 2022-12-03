@@ -374,8 +374,8 @@ function DetailTwo ( props ) {
 
 const mapStateToProps = ( state ) => {
     return {
-        cartlist: state.cartlist.data,
-        wishlist: state.wishlist.data,
+        cartlist: state?.cartlist?.data??[],
+        wishlist: state?.wishlist?.data??[],
     }
 }
 

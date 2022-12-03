@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import OwlCarousel from '~/src/components/features/owl-carousel';
-import DetailOne from '~/src/components/partials/product/details/detail-one';
+import DetailOne from '~/src/components/partials/product/details/Draft';
 
 
 import { actions as demoAction } from '~/store/demo';
@@ -102,7 +102,7 @@ const product = [];
                                                             <figure className="mb-0">
                                                                 <LazyLoadImage
                                                                     alt="Thumbnail"
-                                                                    src={ process.env.NEXT_PUBLIC_ASSET_URI + product.sm_pictures[ index ].url }
+                                                                    src={ product?.images?.[ index ] }
                                                                     width="100%"
                                                                     height={ 100 }
                                                                     className="d-block"
@@ -138,11 +138,11 @@ const product = [];
                                                         : ""
                                                 }
                                                 <OwlCarousel adClass="product-gallery-carousel owl-full owl-nav-dark cols-1 cols-md-2 cols-lg-3" onChangeRef={ setCarouselRef } events={ events } options={ { 'dots': false, 'nav': false } }>
-                                                    { product.pictures.map( ( item, index ) =>
+                                                    { product?.images?.map( ( item, index ) =>
                                                         <Magnifier
-                                                            imageSrc={ process.env.NEXT_PUBLIC_ASSET_URI + item.url }
+                                                            imageSrc={  item }
                                                             imageAlt="product"
-                                                            largeImageSrc={ process.env.NEXT_PUBLIC_ASSET_URI + item.url } // Optional
+                                                            largeImageSrc={  item } // Optional
                                                             dragToMove={ false }
                                                             mouseActivation="hover"
                                                             cursorStyleActive="crosshair"

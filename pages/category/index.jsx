@@ -19,7 +19,7 @@ function CategoryBoxed() {
 
     return (
         <div className="main shop">
-            <PageHeader title="Product Category Boxed" subTitle="Shop" />
+            <PageHeader title="Product Category " subTitle="Shop" />
 
             <nav aria-label="breadcrumb" className="breadcrumb-nav breadcrumb-with-filter">
                 <div className="container">
