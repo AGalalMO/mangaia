@@ -1,10 +1,7 @@
 import axios from "axios";
-import useAuth from "src/hooks/useAuth";
 // config
-
 // ----------------------------------------------------------------------
-
-const axiosInstance = axios.create();
+let axiosInstance = axios.create();
 axiosInstance.defaults.headers.common["Content-Type"] = "application/json";
 
 axiosInstance.interceptors.response.use(

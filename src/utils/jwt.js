@@ -5,18 +5,18 @@ import axiosInstance from "./axios/axiosInstance";
 
 // ----------------------------------------------------------------------
 
-const isValidToken = (accessToken: string) => {
+const isValidToken = (accessToken) => {
   if (!accessToken) {
     return false;
   }
-  const decoded = jwtDecode<{ exp: number }>(accessToken);
+  const decoded = jwtDecode(accessToken);
 
   const currentTime = Date.now() / 1000;
 
   return decoded.exp > currentTime;
 };
 
-const setSession = (accessToken: string | null) => {
+const setSession = (accessToken) => {
   if (accessToken) {
     localStorage.setItem("accessToken", accessToken);
     axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
@@ -25,5 +25,6 @@ const setSession = (accessToken: string | null) => {
     delete axiosInstance.defaults.headers.common.Authorization;
   }
 };
+
 
 export { isValidToken, setSession };

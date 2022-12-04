@@ -2,18 +2,21 @@ import React from "react";
 import { connect } from "react-redux";
 
 import ALink from "~/src/components/features/alink";
+import PersonOutlineIcon from '@mui/icons-material/Person2Outlined';
+import useAuth from "~/src/hooks/useAuth";
 
-function WishlistMenu(props) {
+function WishlistMenu (props) {
   const { wishlist } = props;
+  const { isAuthenticated } = useAuth()
 
   return (
-    <ALink href="/shop/wishlist" className="wishlist-link" title="Wishlist">
-      <i className="icon-heart-o"></i>
+    <ALink href={isAuthenticated ? '/shop/wishlist' : "/auth/signin"} className="wishlist-link" title="Auth">
+      <PersonOutlineIcon style={{ width: '24px', height: '24px' }} />
     </ALink>
   );
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
     wishlist: [],
   };

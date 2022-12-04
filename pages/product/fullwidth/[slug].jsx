@@ -4,21 +4,32 @@ import StickyBox from 'react-sticky-box';
 
 import Breadcrumb from '~/src/components/partials/product/breadcrumb';
 import GalleryDefault from '~/src/components/partials/product/gallery/gallery-default';
-import DetailOne from '~/src/components/partials/product/details/detail-one';
+import DetailOne from '~/src/components/partials/product/details/Draft';
 import InfoThree from '~/src/components/partials/product/info-tabs/info-three';
 import Sidebar from '~/src/components/partials/product/sidebar/product-sidebar';
+import { useEffect, useState } from 'react';
+import axiosInstance from '~/src/utils/axios/axiosInstance';
 
 function ProductFullwidth () {
     const slug = useRouter().query.slug;
     if ( !slug ) return <div></div>;
 
-    const product = {};
     const related = {};
     const prev = {}
     const next = {};
     const data = [];
     const loading = false;
     const error = false
+    const [product, setProduct] = useState({
+        
+    })
+    useEffect(() => {
+        getProduct()
+    }, [])
+    const getProduct = async () => {
+        const rsponse = await axiosInstance.get('https://dummyjson.com/products/1')
+        setProduct(rsponse.data)
+    }
 
     if ( error ) {
         return <div></div>

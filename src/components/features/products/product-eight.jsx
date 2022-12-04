@@ -9,12 +9,12 @@ function ProductEight ( props ) {
     useEffect( () => {
         let min = minPrice;
         let max = maxPrice;
-        product.variants.map( item => {
+        product?.variants?.map( item => {
             if ( min > item.price ) min = item.price;
             if ( max < item.price ) max = item.price;
         }, [] );
 
-        if ( product.variants.length == 0 ) {
+        if ( product?.variants?.length == 0 ) {
             min = product.sale_price
                 ? product.sale_price
                 : product.price;
@@ -30,7 +30,7 @@ function ProductEight ( props ) {
             <figure className="product-media">
                 <ALink href={ `/product/default/${product.slug}` }>
                     <img
-                        src={ process.env.NEXT_PUBLIC_ASSET_URI + product.sm_pictures[ 0 ].url }
+                        src={ product?.images[ 0 ].url }
                         alt="Product"
                         className="product-image"
                     />
@@ -50,7 +50,7 @@ function ProductEight ( props ) {
                         minPrice == maxPrice ?
                             <div className="product-price">${ minPrice.toFixed( 2 ) }</div>
                             :
-                            product.variants.length == 0 ?
+                            product?.variants?.length == 0 ?
                                 <div className="product-price">
                                     <span className="new-price">${ minPrice.toFixed( 2 ) }</span>
                                     <span className="old-price">${ maxPrice.toFixed( 2 ) }</span>

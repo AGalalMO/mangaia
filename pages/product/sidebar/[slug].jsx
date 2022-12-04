@@ -4,7 +4,7 @@ import StickyBox from 'react-sticky-box';
 
 import Breadcrumb from '~/src/components/partials/product/breadcrumb';
 import GalleryDefault from '~/src/components/partials/product/gallery/gallery-default';
-import DetailOne from '~/src/components/partials/product/details/detail-one';
+import DetailOne from '~/src/components/partials/product/details/Draft';
 import InfoOne from '~/src/components/partials/product/info-tabs/info-one';
 import Sidebar from '~/src/components/partials/product/sidebar/product-sidebar';
 import RelatedProductsOne from '~/src/components/partials/product/related/related-one';

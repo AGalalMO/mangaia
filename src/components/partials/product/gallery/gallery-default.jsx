@@ -15,11 +15,11 @@ function GalleryDefault ( props ) {
     }, [ product ] )
 
     function moveNextPhoto () {
-        setPhotoIndex( ( photoIndex + 1 ) % product.pictures.length );
+        setPhotoIndex( ( photoIndex + 1 ) % product.images.length );
     }
 
     function movePrevPhoto () {
-        setPhotoIndex( ( photoIndex + product.pictures.length - 1 ) % product.pictures.length );
+        setPhotoIndex( ( photoIndex + product.images.length - 1 ) % product.images.length );
     }
 
     function openLightBox () {
@@ -82,17 +82,17 @@ function GalleryDefault ( props ) {
                         }
 
                         {/* <Magnifier
-                            imageSrc={ process.env.NEXT_PUBLIC_ASSET_URI + product.pictures[ 0 ].url }
+                            imageSrc={ process.env.NEXT_PUBLIC_ASSET_URI + product.images[ 0 ] }
                             imageAlt="product"
-                            largeImageSrc={ process.env.NEXT_PUBLIC_ASSET_URI + product.pictures[ 0 ].url } // Optional
+                            largeImageSrc={ process.env.NEXT_PUBLIC_ASSET_URI + product.images[ 0 ] } // Optional
                             dragToMove={ false }
                             mouseActivation="hover"
                             cursorStyleActive="crosshair"
                             id="product-zoom"
                             className="zoom-image position-relative overflow-hidden"
-                            width={ product.pictures[ 0 ].width }
-                            height={ product.pictures[ 0 ].height }
-                            style={ { paddingTop: `${product.pictures[ 0 ].height / product.pictures[ 0 ].width * 100}%` } }
+                            width={ product.images[ 0 ].width }
+                            height={ product.images[ 0 ].height }
+                            style={ { paddingTop: `${product.images[ 0 ].height / product.images[ 0 ].width * 100}%` } }
                         /> */}
 
                         <button id="btn-product-gallery" className="btn-product-gallery" onClick={ openLightBox }>
@@ -105,7 +105,7 @@ function GalleryDefault ( props ) {
                             product?.pictures?.map( ( item, index ) =>
                                 <button className={ `product-gallery-item ${0 === index ? 'active' : ''}` } key={ product.id + '-' + index } onClick={ e => changeBgImage( e, `${process.env.NEXT_PUBLIC_ASSET_URI + item.url}`, index ) }>
                                     <div className="img-wrapper h-100">
-                                        <img src={ process.env.NEXT_PUBLIC_ASSET_URI + product.sm_pictures[ index ].url } alt="product back" />
+                                        <img src={ product?.images[ index ] } alt="product back" />
                                     </div>
                                 </button>
                             )
@@ -117,9 +117,9 @@ function GalleryDefault ( props ) {
             {
                 isOpen ?
                     <LightBox
-                        mainSrc={ process.env.NEXT_PUBLIC_ASSET_URI + product.pictures[ photoIndex ].url }
-                        nextSrc={ process.env.NEXT_PUBLIC_ASSET_URI + product.pictures[ ( photoIndex + 1 ) % product.pictures.length ].url }
-                        prevSrc={ process.env.NEXT_PUBLIC_ASSET_URI + product.pictures[ ( photoIndex + product.pictures.length - 1 ) % product.pictures.length ].url }
+                        mainSrc={ product?.images?.[ photoIndex ] }
+                        nextSrc={ product?.images?.[ ( photoIndex + 1 ) % product.images.length ] }
+                        prevSrc={ product?.images?.[ ( photoIndex + product.images.length - 1 ) % product.images.length ] }
                         onCloseRequest={ closeLightBox }
                         onMovePrevRequest={ moveNextPhoto }
                         onMoveNextRequest={ movePrevPhoto }

@@ -31,7 +31,7 @@ function Breadcrumb ( props ) {
                                 <div className="product-detail">
                                     <figure>
                                         {/* <img
-                                            src={ process.env.NEXT_PUBLIC_ASSET_URI + prev.sm_pictures[ 0 ].url }
+                                            src={ process.env.NEXT_PUBLIC_ASSET_URI + prev.sm_pictures[ 0 ] }
                                             alt="product"
                                             width={ prev.sm_pictures[ 0 ].width }
                                             height={ prev.sm_pictures[ 0 ].height }
@@ -54,7 +54,7 @@ function Breadcrumb ( props ) {
                                 <div className="product-detail">
                                     <figure>
                                         {/* <img
-                                            src={ process.env.NEXT_PUBLIC_ASSET_URI + next.sm_pictures[ 0 ].url }
+                                            src={ process.env.NEXT_PUBLIC_ASSET_URI + next.sm_pictures[ 0 ] }
                                             alt="product"
                                             width={ next.sm_pictures[ 0 ].width }
                                             height={ next.sm_pictures[ 0 ].height }

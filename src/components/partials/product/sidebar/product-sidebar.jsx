@@ -3,11 +3,19 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import ALink from '~/src/components/features/alink';
 import RelatedProductsTwo from '~/src/components/partials/product/related/related-two';
+import axiosInstance from '~/src/utils/axios/axiosInstance';
 
 function ProductSidebar ( props ) {
     const [ toggle, setToggle ] = useState( 0 );
-    const { products, loading = false } = props;
-
+    const {  loading = false } = props;
+    const [products,setProducts]=useState([])
+    useEffect(() => {
+        getProduct()
+    }, [])
+    const getProduct = async () => {
+        const rsponse = await axiosInstance.get('https://dummyjson.com/products/1')
+        setProducts([rsponse.data])
+    }
     useEffect( () => {
         resizeHandle();
         window.addEventListener( "resize", resizeHandle );
@@ -64,7 +72,7 @@ function ProductSidebar ( props ) {
                                     <h4 className="widget-title mb-1">Related Product</h4>
 
                                     <div className="products">
-                                        <RelatedProductsTwo products={ products.slice( 0, 4 ) } />
+                                        <RelatedProductsTwo products={ products?.slice( 0, 4 ) } />
                                     </div>
 
                                     <ALink href="/shop/sidebar/list" className="btn btn-outline-dark-3 text-truncate"><span>View More Products</span><i className="icon-long-arrow-right"></i></ALink>

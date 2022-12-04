@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect, useLayoutEffect } from 'react';
-import { useLazyQuery } from '@apollo/react-hooks';
 
 import ALink from '~/src/components/features/alink';
 import PageHeader from '~/src/components/features/page-header';

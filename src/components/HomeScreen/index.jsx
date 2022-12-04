@@ -6,7 +6,6 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 // Import Custom Component
 import ALink from "~/src/components/features/alink";
 import OwlCarousel from "~/src/components/features/owl-carousel";
-import SpecialCollection from "~/src/components/partials/home/special-collection";
 import NewsletterModal from "~/src/components/features/modals/newsletter-modal";
 import { useTranslation } from "next-i18next";
 
@@ -22,8 +21,7 @@ import ImageBanner from "./components/ImageSlider";
 
 function HomeScreen() {
   // const { data, loading, error } = useQuery( GET_HOME_DATA );
-  const products = [];
-  const posts = [];
+
   const loading = false;
   const { t } = useTranslation("home");
 
@@ -35,7 +33,6 @@ function HomeScreen() {
     >
       <ImageBanner />
 
-      {t("HELLO")}
 
       <div className="container banners">
         <div className="row">

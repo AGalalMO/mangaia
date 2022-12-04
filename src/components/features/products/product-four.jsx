@@ -22,12 +22,12 @@ function ProductFour ( props ) {
     useEffect( () => {
         let min = minPrice;
         let max = maxPrice;
-        product.variants.map( item => {
+        product?.variants?.map( item => {
             if ( min > item.price ) min = item.price;
             if ( max < item.price ) max = item.price;
         }, [] );
 
-        if ( product.variants.length == 0 ) {
+        if ( product?.variants?.length == 0 ) {
             min = product.sale_price
                 ? product.sale_price
                 : product.price;
@@ -135,7 +135,7 @@ function ProductFour ( props ) {
                 <ALink href={ `/product/default/${product.slug}` }>
                     <LazyLoadImage
                         alt="product"
-                        src={ process.env.NEXT_PUBLIC_ASSET_URI + product.sm_pictures[ 0 ].url }
+                        src={ product?.images[ 0 ] }
                         threshold={ 500 }
                         effect="black and white"
                         wrapperClassName="product-image"
@@ -144,7 +144,7 @@ function ProductFour ( props ) {
                         product.sm_pictures.length >= 2 ?
                             <LazyLoadImage
                                 alt="product"
-                                src={ process.env.NEXT_PUBLIC_ASSET_URI + product.sm_pictures[ 1 ].url }
+                                src={ product?.images[ 1 ] }
                                 threshold={ 500 }
                                 effect="black and white"
                                 wrapperClassName="product-image-hover"
@@ -185,7 +185,7 @@ function ProductFour ( props ) {
                     product.stock && product.stock !== 0 ?
                         <div className="product-action">
                             {
-                                product.variants.length > 0 ?
+                                product?.variants?.length > 0 ?
                                     <ALink href={ `/product/default/${product.slug}` } className="btn-product btn-cart btn-select">
                                         <span>select options</span>
                                     </ALink>
@@ -223,7 +223,7 @@ function ProductFour ( props ) {
                         minPrice == maxPrice ?
                             <div className="product-price">${ minPrice.toFixed( 2 ) }</div>
                             :
-                            product.variants.length == 0 ?
+                            product?.variants?.length == 0 ?
                                 <div className="product-price">
                                     <span className="new-price">${ minPrice.toFixed( 2 ) }</span>
                                     <span className="old-price">${ maxPrice.toFixed( 2 ) }</span>
@@ -242,11 +242,11 @@ function ProductFour ( props ) {
                 </div>
 
                 {
-                    product.variants.length > 0 ?
+                    product?.variants?.length > 0 ?
                         <div className="product-nav product-nav-dots">
                             <div className="row no-gutters">
                                 {
-                                    product.variants.map( ( item, index ) => (
+                                    product?.variants?.map( ( item, index ) => (
                                         <ALink href="#" style={ { backgroundColor: item.color } } key={ index }><span className="sr-only">Color Name</span></ALink>
                                     ) )
                                 }
