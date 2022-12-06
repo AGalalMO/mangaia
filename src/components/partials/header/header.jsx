@@ -40,7 +40,7 @@ function Header (props) {
 
                         <div className="header-center">
                             <ALink href="/" className="logo">
-                                <img src="images/home/Logo.png" alt="Molla Logo" width="82" height="25" />
+                                <img src="images/home/logo.png" alt="Molla Logo" width="82" height="25" />
                             </ALink>
                         </div>
 
