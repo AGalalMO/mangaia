@@ -1,7 +1,7 @@
 {
-  "name": "molla-react",
+  "name": "UNEX",
   "version": "2.1.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "dev": "next",
     "build": "next build",
