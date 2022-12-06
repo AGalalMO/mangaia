@@ -65,7 +65,6 @@ function HomeScreen() {
                     <ALink
                       href={{
                         pathname: "/shop/sidebar/list",
-                        query: { category: "accessories" },
                       }}
                     >
                       Tops
@@ -103,7 +102,6 @@ function HomeScreen() {
                     <ALink
                       href={{
                         pathname: "/shop/sidebar/list",
-                        query: { category: "sweatshirts-and-hoodies" },
                       }}
                     >
                       All Men
@@ -144,7 +142,6 @@ function HomeScreen() {
                     <ALink
                       href={{
                         pathname: "/shop/sidebar/list",
-                        query: { category: "accessories" },
                       }}
                     >
                       Bottoms
