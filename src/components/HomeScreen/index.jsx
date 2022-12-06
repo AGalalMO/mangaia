@@ -64,13 +64,13 @@ function HomeScreen() {
                   <h3 className="banner-title text-white">
                     <ALink
                       href={{
-                        pathname: "/shop/sidebar/list",
+                        pathname: "/shop/list",
                       }}
                     >
                       Tops
                     </ALink>
                   </h3>
-                  <ALink href="/shop/sidebar/list" className="banner-link">
+                  <ALink href="/shop/list" className="banner-link">
                     Shop Now <i className="icon-long-arrow-right"></i>
                   </ALink>
                 </div>
@@ -101,13 +101,13 @@ function HomeScreen() {
                   <h3 className="banner-title text-white">
                     <ALink
                       href={{
-                        pathname: "/shop/sidebar/list",
+                        pathname: "/shop/list",
                       }}
                     >
                       All Men
                     </ALink>
                   </h3>
-                  <ALink href="/shop/sidebar/list" className="banner-link">
+                  <ALink href="/shop/list" className="banner-link">
                     Shop Now <i className="icon-long-arrow-right"></i>
                   </ALink>
                 </div>
@@ -141,13 +141,13 @@ function HomeScreen() {
                   <h3 className="banner-title text-white">
                     <ALink
                       href={{
-                        pathname: "/shop/sidebar/list",
+                        pathname: "/shop/list",
                       }}
                     >
                       Bottoms
                     </ALink>
                   </h3>
-                  <ALink href="/shop/sidebar/list" className="banner-link">
+                  <ALink href="/shop/list" className="banner-link">
                     Shop Now <i className="icon-long-arrow-right"></i>
                   </ALink>
                 </div>
