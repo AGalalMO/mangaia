@@ -1,4 +1,4 @@
-const baseUrl = "http://hagarfreetr-001-site1.atempurl.com/api/";
+const baseUrl = "http://imustafaaaa-001-site1.btempurl.com/api/";
 export const APIS = {
   AUTH: {
     SIGNIN: `${baseUrl}account/login`,
@@ -16,5 +16,14 @@ export const APIS = {
   },
   UTILS: {
     LINKS: `${baseUrl}redirections/get`,
+  },
+  CART: {
+    ADD: `${baseUrl}cart/add`,
+    GET: `${baseUrl}cart/getuser`,
+    DELETE: `${baseUrl}cart/delete`,
+    UPDATE: `${baseUrl}cart/update`,
+  },
+  ORDER: {
+    PLACE_ORDER: `${baseUrl}order/makeorder`,
   },
 };
