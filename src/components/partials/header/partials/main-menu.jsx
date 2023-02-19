@@ -5,7 +5,6 @@ import { useTranslation } from "next-i18next";
 import ALink from "~/src/components/features/alink";
 import axiosInstance from "~/src/utils/axios/axiosInstance";
 import { APIS } from "~/src/utils/ServiceUrls";
-import { Typography } from "@mui/material";
 
 function MainMenu() {
   const router = useRouter();
@@ -47,13 +46,23 @@ function MainMenu() {
             <div className='row no-gutters'>
               <div className='col-md-6'>
                 <div className='menu-col'>
-                  {/* className={path.indexOf("product/default") > -1 ? 'active' : ''} */}
                   <ul>
                     {categories.map((item) => {
                       return (
-                        <li key={item?.id}>
-                          <ALink href='/shop/category'>{item?.name}</ALink>
-                        </li>
+                        <>
+                          {item?.subcategories?.map((subCat) => (
+                            <li key={item?.id}>
+                              <ALink
+                                href={{
+                                  pathname: "/shop/3cols",
+                                  query: {   cat: item?.id },
+                                  locale:router?.locale
+                                }}>
+                                {subCat?.name}
+                              </ALink>
+                            </li>
+                          ))}
+                        </>
                       );
                     })}{" "}
                   </ul>
@@ -62,12 +71,12 @@ function MainMenu() {
 
               <div className='col-md-6'>
                 <div className='banner banner-overlay'>
-                  <ALink href='/product/centered/dark-yellow-lace-cut-out-swing-dress'>
+                  <ALink href='/shop/'>
                     <img src='images/menu/banner-2.jpg' alt='Banner' />
 
                     <div className='banner-content banner-content-bottom'>
                       <div className='banner-title text-white'>
-                        New Trends
+                        {t("NEW_TRENDS", { ns: "common" })}
                         <br />
                         <span>
                           <strong> {new Date().getFullYear()}</strong>
@@ -81,9 +90,9 @@ function MainMenu() {
           </div>
         </li>
 
-        <li className={path.indexOf("About/") > -1 ? "active" : ""}>
+        {/* <li className={path.indexOf("About/") > -1 ? "active" : ""}>
           <ALink href='/about'>{t("ABOUT", { ns: "common" })}</ALink>
-        </li>
+        </li> */}
         <li className={path.indexOf("About/") > -1 ? "active" : ""}>
           <ALink href='/contact'>{t("CONTACT", { ns: "common" })}</ALink>
         </li>

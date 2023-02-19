@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import InputRange from "react-input-range";
 import SlideToggle from "react-slide-toggle";
@@ -7,91 +7,101 @@ import "react-input-range/lib/css/index.css";
 import ALink from "~/src/components/features/alink";
 import { shopData } from "~/src/utils/shared/data";
 import { useTranslation } from "next-i18next";
+import { Typography } from "@mui/material";
 
 function ShopSidebarOne(props) {
-  const { toggle = false, categories } = props;
+  const { toggle = false, categories, onChange, colors } = props;
   const { t } = useTranslation(["shop", "common"]);
   const router = useRouter();
   const query = useRouter().query;
-  const [priceRange, setRange] = useState({ min: 0, max: 10000 });
-  useEffect(() => {
-    if (query.minPrice && query.maxPrice) {
-      setRange({
-        min: parseInt(query.minPrice),
-        max: parseInt(query.maxPrice),
-      });
-    } else {
-      setRange({ min: 0, max: 10000 });
-    }
-  }, [query]);
+  const [filter, setFilter] = useState({
+    subcategoryId: null,
+    minprice: null,
+    maxprice: null,
+    size: null,
+    color: null,
+  });
 
   function onChangePriceRange(value) {
-    setRange(value);
+    setFilter({ ...filter, minprice: value?.min, maxprice: value?.max });
+    onChange({
+      ...filter,
+      minprice: value?.min,
+      maxprice: value?.max,
+    });
   }
 
-  function containsAttrInUrl(type, value) {
-    const currentQueries = query[type] ? query[type].split(",") : [];
-    return currentQueries && currentQueries.includes(value);
-  }
-
-  function getUrlForAttrs(type, value) {
-    let currentQueries = query[type] ? query[type].split(",") : [];
-    currentQueries = containsAttrInUrl(type, value)
-      ? currentQueries.filter((item) => item !== value)
-      : [...currentQueries, value];
-
-    return {
-      pathname: router.pathname,
-      query: {
-        ...query,
-        page: 1,
-        [type]: currentQueries.join(","),
-      },
-    };
-  }
-
-  function onAttrClick(e, attr, value) {
-    if (getUrlForAttrs(attr, value)) {
-      let queryObject = getUrlForAttrs(attr, value).query;
-      let url = router.pathname.replace("[type]", query.type) + "?";
-      for (let key in queryObject) {
-        if (key !== "type") {
-          url += key + "=" + queryObject[key] + "&";
-        }
-      }
-      router.push(url);
+  function onSizeChange(e, attr, value) {
+    if (value == filter.size) {
+      setFilter({ ...filter, size: null });
+      onChange({ ...filter, size: null });
+    } else {
+      setFilter({ ...filter, size: value });
+      onChange({ ...filter, size: value });
     }
   }
 
   return (
     <>
       <aside
-        className={`${toggle ? "sidebar-filter" : "sidebar"} sidebar-shop`}
-      >
+        className={`${toggle ? "sidebar-filter" : "sidebar"} sidebar-shop`}>
         <div className={toggle ? "sidebar-filter-wrapper" : ""}>
-          <div className="widget widget-clean">
+          <div className='widget widget-clean'>
             <label>{t("FILTERS")}</label>
-            <ALink
-              href={{ pathname: router.pathname, query: { type: query.type } }}
-              className="sidebar-filter-clear"
+            <Typography
+              onClick={() => {
+                setFilter({
+                  subcategoryId: null,
+                  minprice: null,
+                  maxprice: null,
+                  size: null,
+                  color: null,
+                });
+                onChange({
+                  subcategoryId: null,
+                  minprice: null,
+                  maxprice: null,
+                  size: null,
+                  color: null,
+                });
+              }}
+              className='sidebar-filter-clear'
               style={{
                 marginLeft: "0px !important",
                 marginRight: "0px !important",
                 marginInlineStart: "auto !important",
                 marginInlineEnd: "0px !important",
+                cursor: "pointer",
               }}
-              scroll={false}
-            >
+              scroll={false}>
               {t("CLEAN_ALL")}
-            </ALink>
+            </Typography>
           </div>
-          <CategoryList categories={categories} query={query} router={router} />
+          <CategoryList
+            selected={filter?.subcategoryId}
+            setSelected={(id) => {
+              if (id == filter.subcategoryId) {
+                setFilter({ ...filter, subcategoryId: null });
+                onChange({ ...filter, subcategoryId: null });
+              } else {
+                setFilter({ ...filter, subcategoryId: id });
+                onChange({ ...filter, subcategoryId: id });
+              }
+            }}
+            categories={categories}
+            query={query}
+            router={router}
+          />
           <SlideToggle collapsed={false}>
             {({ onToggle, setCollapsibleElement, toggleState }) => (
-              <div className="widget widget-collapsible">
-                <h3 className="widget-title mb-2">
+              <div className='widget widget-collapsible'>
+                <h3 className='widget-title  mb-2'>
                   <a
-                    href="#Size"
+                    style={{
+                      textAlign: "start",
+                   
+                    }}
+                    href='#Size'
                     className={`${
                       toggleState.toLowerCase() == "collapsed"
                         ? "collapsed"
@@ -100,34 +110,30 @@ function ShopSidebarOne(props) {
                     onClick={(e) => {
                       onToggle(e);
                       e.preventDefault();
-                    }}
-                  >
+                    }}>
                     {t("SIZE")}
                   </a>
                 </h3>
                 <div ref={setCollapsibleElement}>
-                  <div className="widget-body pt-0">
-                    <div className="filter-items">
+                  <div className='widget-body pt-0'>
+                    <div
+                      style={{ textAlign: "start" }}
+                      className='filter-items'>
                       {shopData.sizes.map((item, index) => (
-                        <div className="filter-item" key={index}>
-                          <div className="custom-control custom-checkbox">
+                        <div className='filter-item' key={index}>
+                          <div className='custom-control custom-checkbox'>
                             <input
-                              type="checkbox"
-                              className="custom-control-input"
+                              type='checkbox'
+                              className='custom-control-input'
                               id={`size-${index + 1}`}
                               onChange={(e) =>
-                                onAttrClick(e, "size", item.slug)
+                                onSizeChange(e, "size", item.slug)
                               }
-                              checked={
-                                containsAttrInUrl("size", item.slug)
-                                  ? true
-                                  : false
-                              }
+                              checked={item.slug == filter.size}
                             />
                             <label
-                              className="custom-control-label"
-                              htmlFor={`size-${index + 1}`}
-                            >
+                              className='custom-control-label'
+                              htmlFor={`size-${index + 1}`}>
                               {item.size}
                             </label>
                           </div>
@@ -140,12 +146,12 @@ function ShopSidebarOne(props) {
             )}
           </SlideToggle>
 
-          <SlideToggle collapsed={false}>
+          {/* <SlideToggle collapsed={false}>
             {({ onToggle, setCollapsibleElement, toggleState }) => (
-              <div className="widget widget-collapsible">
-                <h3 className="widget-title mb-2">
+              <div className='widget widget-collapsible'>
+                <h3 className='widget-title mb-2'>
                   <a
-                    href="#colour"
+                    href='#'
                     className={`${
                       toggleState.toLowerCase() == "collapsed"
                         ? "collapsed"
@@ -154,42 +160,44 @@ function ShopSidebarOne(props) {
                     onClick={(e) => {
                       onToggle(e);
                       e.preventDefault();
-                    }}
-                  >
+                    }}>
                     {t("COLOR")}
                   </a>
                 </h3>
                 <div ref={setCollapsibleElement}>
-                  <div className="widget-body pt-0">
-                    <div className="filter-colors">
-                      {shopData.colors.map((item, index) => (
-                        <ALink
-                          href={getUrlForAttrs("color", item.color_name)}
-                          className={
-                            containsAttrInUrl("color", item.color_name)
-                              ? "selected"
-                              : ""
-                          }
-                          style={{ backgroundColor: item.color }}
+                  <div className='widget-body pt-0'>
+                    <div className='filter-colors'>
+                      {colors.map((item, index) => (
+                        <div
+                          onClick={() => {
+                            if (item == filter.color) {
+                              setFilter({ ...filter, color: null });
+                              onChange({ ...filter, color: null });
+                            } else {
+                              setFilter({ ...filter, color: item });
+                              onChange({ ...filter, color: item });
+                            }
+                          }}
+                          className={filter.color == item ? "selected" : ""}
+                          style={{ backgroundColor: item,marginInlineEnd:'5px' }}
                           key={index}
-                          scroll={false}
-                        >
-                          <span className="sr-only">Color Name</span>
-                        </ALink>
+                          scroll={false}>
+                        </div>
                       ))}
                     </div>
                   </div>
                 </div>
               </div>
             )}
-          </SlideToggle>
+          </SlideToggle> */}
 
           <SlideToggle collapsed={false}>
             {({ onToggle, setCollapsibleElement, toggleState }) => (
-              <div className="widget widget-collapsible">
-                <h3 className="widget-title mb-2">
+              <div className='widget widget-collapsible'>
+                <h3 className='widget-title titlertl mb-2'>
                   <a
-                    href="#price"
+                    style={{ textAlign: "start" }}
+                    href='#price'
                     className={`${
                       toggleState.toLowerCase() == "collapsed"
                         ? "collapsed"
@@ -198,47 +206,33 @@ function ShopSidebarOne(props) {
                     onClick={(e) => {
                       onToggle(e);
                       e.preventDefault();
-                    }}
-                  >
+                    }}>
                     {t("PRICE")}
                   </a>
                 </h3>
 
                 <div ref={setCollapsibleElement}>
-                  <div className="widget-body pt-0">
-                    <div className="filter-price">
-                      <div className="filter-price-text d-flex justify-content-between">
+                  <div className='widget-body pt-0'>
+                    <div className='filter-price'>
+                      <div className='filter-price-text d-flex justify-content-between'>
                         <span>
                           {t("PRICE_RANGE")}:&nbsp;
-                          <span className="filter-price-range">
-                            ${priceRange.min} - ${priceRange.max}
+                          <span className='filter-price-range'>
+                            {filter?.minprice} - {filter?.maxprice}
                           </span>
                         </span>
-
-                        <ALink
-                          href={{
-                            pathname: router.pathname,
-                            query: {
-                              ...query,
-                              minPrice: priceRange.min,
-                              maxPrice: priceRange.max,
-                              page: 1,
-                            },
-                          }}
-                          className="pr-2"
-                          scroll={false}
-                        >
-                          {t("FILTER")}
-                        </ALink>
                       </div>
 
-                      <div className="price-slider">
+                      <div className='price-slider'>
                         <InputRange
-                          formatLabel={(value) => `$${value}`}
-                          maxValue={10000}
+                          formatLabel={(value) => `${value}`}
+                          maxValue={5000}
                           minValue={0}
                           step={50}
-                          value={priceRange}
+                          value={{
+                            min: filter.minprice ?? 0,
+                            max: filter?.maxprice ?? 5000,
+                          }}
                           onChange={onChangePriceRange}
                         />
                       </div>
@@ -255,81 +249,75 @@ function ShopSidebarOne(props) {
 }
 
 export default React.memo(ShopSidebarOne);
-const CategoryList = ({ categories, query, router }) => {
+const CategoryList = ({ categories, query, router, selected, setSelected }) => {
   const { t } = useTranslation(["shop", "common"]);
 
   return (
     <SlideToggle collapsed={false}>
       {({ onToggle, setCollapsibleElement, toggleState }) => (
-        <div className="widget widget-collapsible">
-          <h3 className="widget-title mb-2">
-            <a
-              href="#"
+        <div className='widget widget-collapsible'>
+          <h3 className='widget-title titlertl mb-2'>
+            <a 
+              style={{textAlign:'start'}}
+              href='#'
               className={`${
                 toggleState.toLowerCase() == "collapsed" ? "collapsed" : ""
               }`}
               onClick={(e) => {
                 onToggle(e);
                 e.preventDefault();
-              }}
-            >
+              }}>
               {t("CATEGORY")}
             </a>
           </h3>
           <div ref={setCollapsibleElement}>
-            <div className="widget-body pt-0">
-              <div className="filter-items filter-items-count">
+            <div className='widget-body pt-0'>
+              <div
+                style={{
+                  paddingInlineEnd: "4rem",
+                  width: "100%",
+                  textAlign: "start",
+                }}
+                className='filter-items filter-items-count'>
                 {categories.map((item, index) => (
                   <>
                     {item?.subcategories && item?.subcategories?.length > 0 && (
-                      <div className="filter-item" key={`cat_${index}`}>
-                        <ALink
-                          className={`${
-                            query.category == item.name ? "active" : ""
-                          }`}
-                          href="#"
-                          style={{
-                            fontSize: "16px",
-                            fontWeight: "400",
-                          }}
-                          scroll={false}
-                        >
-                          {item.name}
-                        </ALink>
-                        <div
-                          className="mb-2"
-                          style={{ marginInlineStart: "20px" }}
-                        >
-                          {item?.subcategories?.map(
-                            (itemSubCategory, subIndex) => (
-                              <>
-                                <div
-                                  className="filter-items filter-items-count"
-                                  key={`${itemSubCategory.id}${subIndex}`}
-                                >
-                                  <ALink
-                                    className={`${
-                                      query.category == itemSubCategory.name
-                                        ? "active"
-                                        : ""
-                                    }`}
-                                    href={{
-                                      pathname: router.pathname,
-                                      query: {
-                                        type: query.type,
-                                        subCategory: itemSubCategory.name,
-                                      },
+                      <>
+                        <div className='filter-item' key={`cat_${index}`}>
+                          <div>
+                            {item?.subcategories?.map(
+                              (itemSubCategory, subIndex) => (
+                                <>
+                                  <div
+                                    onClick={() => {
+                                      setSelected(itemSubCategory?.id);
                                     }}
-                                    scroll={false}
-                                  >
-                                    {itemSubCategory.name}
-                                  </ALink>
-                                </div>
-                              </>
-                            )
-                          )}
+                                    style={{
+                                      marginBottom: "10px",
+                                      color:
+                                        itemSubCategory?.id == selected
+                                          ? "red"
+                                          : "unset",
+                                    }}
+                                    className='filter-items filter-items-count'
+                                    key={`${itemSubCategory.id}${subIndex}`}>
+                                    <ALink
+                                      className={`${
+                                        query.category == itemSubCategory.name
+                                          ? "active"
+                                          : ""
+                                      }`}
+                                      href={"#"}
+                                      scroll={false}>
+                                      {itemSubCategory.name}
+                                    </ALink>
+                                  </div>
+                                </>
+                              )
+                            )}
+                          </div>
                         </div>
-                      </div>
+                      </>
                     )}
                   </>
                 ))}
