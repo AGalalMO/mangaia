@@ -21,7 +21,6 @@ function ShopGrid({ products, categories }) {
   const totalCount = products?.length;
   const [filtered, setFiltered] = useState(products);
   const [colors, setColors] = useState([]);
-
   useEffect(() => {
     window.addEventListener("resize", resizeHandle);
     resizeHandle();

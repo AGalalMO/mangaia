@@ -1,9 +1,7 @@
 import { useEffect, useMemo } from "react";
 
-import Accordion from "~/src/components/features/accordion/accordion";
-import Card from "~/src/components/features/accordion/card";
 import PageHeader from "~/src/components/features/page-header";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import ALink from "~/src/components/features/alink";
 
@@ -17,12 +15,12 @@ import Layout from "~/src/components/layout";
 
 function Checkout(props) {
   const { t } = useTranslation(["checkout", "common"]);
-  const [submitted,setSubmitted]=useState(false)
+  const [submitted, setSubmitted] = useState(false);
   const router = useRouter();
-  const [fees, setFees] = useState(50)
-  const[required,setRequired]=useState(false)
+  const [fees, setFees] = useState(50);
+  const [required, setRequired] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [cities,setCities]=useState()
+  const [cities, setCities] = useState();
   const cartlist = useSelector((state) => state.cart.cartList);
   const [userData, setUserData] = useState({
     Address: "",
@@ -33,23 +31,21 @@ function Checkout(props) {
   });
 
   const getCities = async () => {
-    const response = await axiosInstance.get(APIS.UTILS.DELIVERY_CITIES)
-    setCities(response.data)
-  }
+    const response = await axiosInstance.get(APIS.UTILS.DELIVERY_CITIES);
+    setCities(response.data);
+  };
   useEffect(() => {
-    getCities()
-  },[])
-  const getCartTotalPrice = (cart,isSub) => {
+    getCities();
+  }, []);
+  const getCartTotalPrice = (cart, isSub) => {
     let total = 0;
     for (let i = 0; i < cart.length; i++) {
       if (cart[i].discountedPrice)
         total += cart[i].discountedPrice * cart[i].count;
       else total += cart[i].price * cart[i].count;
     }
-    if(isSub)
-      return total;
-    else
-      return parseInt(total) + parseInt(cities?.[fees]?.deliveryFees??0);
+    if (isSub) return total;
+    else return parseInt(total) + parseInt(cities?.[fees]?.deliveryFees ?? 0);
   };
 
   const updateUserData = (event) => {
@@ -62,31 +58,27 @@ function Checkout(props) {
     router.push(`/product/${id}`, null, { locale: router.locale });
   };
   const validation = useMemo(() => {
-     if (
-       userData.Address &&
-       userData.City &&
-       userData.Email &&
-       userData.PhoneNumber
-     )
-       return true;
-  
-     else {
-       setRequired(false)
-       return false;
-     }
-  },[userData])
+    if (
+      userData.Address &&
+      userData.City &&
+      userData.Email &&
+      userData.PhoneNumber
+    )
+      return true;
+    else {
+      setRequired(false);
+      return false;
+    }
+  }, [userData]);
 
-
-  const placeOrder = async (e) =>
-  {
+  const placeOrder = async (e) => {
     e.preventDefault();
-    if (!validation)
-    {
-      setRequired(true)
-       return;
-     }
-    
-    setSubmitted(true)
+    if (!validation) {
+      setRequired(true);
+      return;
+    }
+
+    setSubmitted(true);
     await axiosInstance.post(
       APIS.ORDER.PLACE_ORDER,
       { ...userData, PostalCode: "12222", City: cities?.[fees]?.city },
@@ -305,8 +297,6 @@ function Checkout(props) {
                     </div>
                   </aside>
                 </div>
-
-               
               </form>
             </div>
           </div>
