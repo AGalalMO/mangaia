@@ -4,6 +4,9 @@ module.exports = {
   i18n,
   basePath:'',
   trailingSlash: true,
+   output: {
+        hashFunction: "xxhash64"
+    },
   env: {
     PUBLIC_URL: "/public",
    

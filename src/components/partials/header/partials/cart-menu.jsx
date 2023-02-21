@@ -37,7 +37,6 @@ function CartMenu (props) {
     await dispatch(getCart());
     //setCartList(useSelector((state) => state.cart.cartList));
   };
-  console.log({ cartList });
   const router = useRouter();
   const getCartTotalPrice = (cart) => {
     let total = 0;
