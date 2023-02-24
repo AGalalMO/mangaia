@@ -2,8 +2,11 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import useAuth from "~/src/hooks/useAuth";
 import { useRouter } from "next/router";
+import { useState } from "react";
 export const useAuthForms = () => {
   const { login, register } = useAuth();
+    const [loginError, setLoginError] = useState(false);
+
   const router = useRouter();
   const loginForm = useFormik({
     initialValues: {
@@ -24,7 +27,9 @@ export const useAuthForms = () => {
       try {
         await login(values);
         router.replace("/");
-      } catch (error) {}
+      } catch (error) {
+        setLoginError(true)
+      }
     },
   });
   const registerForm = useFormik({
@@ -66,12 +71,15 @@ export const useAuthForms = () => {
       try {
         await register(values);
         router.replace("/");
-      } catch (error) {}
+      } catch (error) {
+        setLoginError(true)
+      }
     },
   });
 
   return {
     loginForm,
     registerForm,
+    loginError
   };
 };

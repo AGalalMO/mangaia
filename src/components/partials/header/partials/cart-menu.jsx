@@ -13,7 +13,7 @@ function CartMenu (props) {
   
   const dispatch = useDispatch();
   const cartList = useSelector((state) => state.cart.cartList)
-  
+    
   const removeFromCart = async (item) =>
   {
      try {

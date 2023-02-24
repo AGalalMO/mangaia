@@ -90,9 +90,7 @@ function MainMenu() {
           </div>
         </li>
 
-        {/* <li className={path.indexOf("About/") > -1 ? "active" : ""}>
-          <ALink href='/about'>{t("ABOUT", { ns: "common" })}</ALink>
-        </li> */}
+       
         <li className={path.indexOf("About/") > -1 ? "active" : ""}>
           <ALink href='/contact'>{t("CONTACT", { ns: "common" })}</ALink>
         </li>

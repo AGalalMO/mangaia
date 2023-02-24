@@ -59,6 +59,7 @@ function ShopGrid({ products, categories }) {
     const response = await axiosInstance.get(APIS.PRODUCTS.filter, {
       params: filters,
     });
+    console.log("response?.dsda",response)
     setFiltered(response.data);
   };
 
@@ -72,9 +73,7 @@ function ShopGrid({ products, categories }) {
             <div className='row skeleton-body'>
               <div className={`col-lg-9 skel-shop-products ${"loaded"}`}>
                 <ToolBox Sort={(type) => Sort(type)} type={type} />
-
                 <ShopListOne products={filtered} perPage={10} loading={false} />
-
                 {totalCount > 10 ? (
                   <Pagination perPage={3} total={totalCount}></Pagination>
                 ) : (
@@ -100,7 +99,6 @@ export default ShopGrid;
 
 export async function getServerSideProps(ctx) {
   const { locale, query } = ctx;
-  console.log("queeerrryyyy", query);
   let products = [];
   if (query.cat) {
     products = await axiosInstance.get(APIS.PRODUCTS.byCat(query?.cat), {

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
-
 import ALink from "~/src/components/features/alink";
-
 import { actions as wishlistAction } from "~/store/wishlist";
 import { actions as cartAction } from "~/store/cart";
 import { actions as compareAction } from "~/store/compare";
@@ -33,7 +31,9 @@ function ProductEleven(props) {
   }
 
   return (
-    <div className='product product-7 text-center w-100'>
+    <div className='product product-7 text-center w-100' style={{cursor:'pointer'}} onClick={() => {
+        router.push(`/product/${product?.productId ?? product?.id}`);
+    }}>
       <figure className='product-media'>
         {product?.discount ? (
           <span className='product-label label-sale'>
@@ -73,7 +73,7 @@ function ProductEleven(props) {
           <div className='product-action'>
             {product?.info?.length > 0 ? (
               <ALink
-                href={`/product/${product?.productId}`}
+                href={`/product/${product?.productId??product?.id}`}
                 className='btn-product btn-cart btn-select'>
                 <span>{t("SELECT_OPTIONS", { ns: "common" })}</span>
               </ALink>
@@ -124,7 +124,7 @@ function ProductEleven(props) {
         </h3>
 
         <div className='product-price'>
-          {product?.discount>0 &&<span style={{color:'black',textDecoration:'line-through',marginInlineEnd:'15pxCartReducer'}}>
+          {product?.discount>0 &&<span style={{color:'black',textDecoration:'line-through',marginInlineEnd:'15px'}}>
             {product?.price?.toFixed(2)} {router?.locale == "ar" ? "جم" : "EGP"}
           </span>}
 

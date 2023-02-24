@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useTranslation } from "react-i18next";
+import { useState } from "react";
 import { TabPanel, Tabs, Tab, TabList } from "react-tabs";
 import Layout from "../layout";
 import Login from "./components/login";
@@ -8,7 +8,7 @@ import { useAuthForms } from "./components/useAuthForms";
 
 function Authentication() {
   const { locale } = useRouter();
-  const { loginForm, registerForm } = useAuthForms();
+  const { loginForm, registerForm ,loginError} = useAuthForms();
   return (
     <Layout>
       <main className='main shop'>
@@ -37,10 +37,13 @@ function Authentication() {
                     </TabList>
                     <div className='tab-content'>
                       <TabPanel style={{ paddingTop: "2rem" }}>
-                        <Login loginForm={loginForm} />
+                        <Login loginError={loginError} loginForm={loginForm} />
                       </TabPanel>
                       <TabPanel style={{ paddingTop: "2rem" }}>
-                        <Register registerForm={registerForm} />
+                        <Register
+                          loginError={loginError}
+                          registerForm={registerForm}
+                        />
                       </TabPanel>
                     </div>
                   </Tabs>

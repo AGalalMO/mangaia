@@ -121,7 +121,10 @@ function ShopSidebarOne(props) {
                       className='filter-items'>
                       {shopData.sizes.map((item, index) => (
                         <div className='filter-item' key={index}>
-                          <div className='custom-control custom-checkbox'>
+                          <div onClick={() => {
+                            onSizeChange('', "size", item.slug);
+
+                          }} className='custom-control custom-checkbox'>
                             <input
                               type='checkbox'
                               className='custom-control-input'
@@ -146,50 +149,7 @@ function ShopSidebarOne(props) {
             )}
           </SlideToggle>
 
-          {/* <SlideToggle collapsed={false}>
-            {({ onToggle, setCollapsibleElement, toggleState }) => (
-              <div className='widget widget-collapsible'>
-                <h3 className='widget-title mb-2'>
-                  <a
-                    href='#'
-                    className={`${
-                      toggleState.toLowerCase() == "collapsed"
-                        ? "collapsed"
-                        : ""
-                    }`}
-                    onClick={(e) => {
-                      onToggle(e);
-                      e.preventDefault();
-                    }}>
-                    {t("COLOR")}
-                  </a>
-                </h3>
-                <div ref={setCollapsibleElement}>
-                  <div className='widget-body pt-0'>
-                    <div className='filter-colors'>
-                      {colors.map((item, index) => (
-                        <div
-                          onClick={() => {
-                            if (item == filter.color) {
-                              setFilter({ ...filter, color: null });
-                              onChange({ ...filter, color: null });
-                            } else {
-                              setFilter({ ...filter, color: item });
-                              onChange({ ...filter, color: item });
-                            }
-                          }}
-                          className={filter.color == item ? "selected" : ""}
-                          style={{ backgroundColor: item,marginInlineEnd:'5px' }}
-                          key={index}
-                          scroll={false}>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </SlideToggle> */}
+         
 
           <SlideToggle collapsed={false}>
             {({ onToggle, setCollapsibleElement, toggleState }) => (
