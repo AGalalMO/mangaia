@@ -122,7 +122,9 @@ function HomeScreen({banners}) {
                       {t("Discount", { ns: "common" })}
                     </ALink>
                   </h3>
-                  <ALink href='/shop/3cols/category?' className='banner-link'>
+                  <ALink
+                    href='/shop/3cols?filter=discount'
+                    className='banner-link'>
                     {t("SHOP", { ns: "common" })}
                     <i className='icon-long-arrow-right'></i>
                   </ALink>

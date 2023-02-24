@@ -19,7 +19,7 @@ function ImageBanner({ banners }) {
             background: "#000",
           }}>
           <img
-            style={{ objectFit: "contain", width: "100%", height: "100vh" }}
+            style={{ objectFit: "fill", width: "100%", height: "100vh" }}
             height={"100%"}
             width='100%'
             src={banner.url}

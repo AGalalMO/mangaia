@@ -2,10 +2,7 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 import { createWrapper } from 'next-redux-wrapper';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './root-saga';
-import { persistStore, persistReducer } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
-
-// Import Reducers
+import { persistStore } from 'redux-persist';
 import cartReducer from "./cart";
 import wishlistReducer from './wishlist';
 import compareReducer from './compare';
@@ -18,12 +15,7 @@ const rootReducers = combineReducers({
     demo: demoReducer,
 });
 
-// const persistConfig = {
-//     key: 'root',
-//     storage: AsyncStorage,
-// }
 
-// const persistedReducer = persistReducer(persistConfig, rootReducers)
 const sagaMiddleware = createSagaMiddleware();
 
 export const makeStore = (context) => {
@@ -33,6 +25,5 @@ export const makeStore = (context) => {
     return store;
 };
 
-// export default makeStore;
 
 export const wrapper = createWrapper(makeStore, { debug: true });

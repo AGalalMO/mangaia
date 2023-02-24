@@ -55,7 +55,9 @@ function ContactUs() {
                         justifyContent: "center",
                       }}>
                       <EmailOutlinedIcon />
-                      <a href='mailto:#'>unex-city@gmail.com</a>
+                      <a href='mailto:unexCityActiveStores@gmail.com'>
+                        unexCityActiveStores@gmail.com
+                      </a>
                     </div>
                     <div
                       style={{
@@ -66,7 +68,7 @@ function ContactUs() {
                         justifyContent: "center",
                       }}>
                       <CallOutlinedIcon />
-                      <a href='tel:#'>+2 0 100 028 8168</a>
+                      <a href='tel:+20100028 8168'>+2 0 100 028 8168</a>
                     </div>
                   </div>
                 </div>

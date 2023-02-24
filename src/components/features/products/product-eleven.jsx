@@ -124,7 +124,13 @@ function ProductEleven(props) {
         </h3>
 
         <div className='product-price'>
-          <span>{product?.price?.toFixed(2)} EGP</span>
+          {product?.discount>0 &&<span style={{color:'black',textDecoration:'line-through',marginInlineEnd:'15pxCartReducer'}}>
+            {product?.price?.toFixed(2)} {router?.locale == "ar" ? "جم" : "EGP"}
+          </span>}
+
+          <span>
+            {(product?.discount>0?product?.discountedPrice:product?.price).toFixed(2)} {router?.locale == "ar" ? "جم" : "EGP"}
+          </span>
         </div>
 
         {product?.variants?.length > 0 ? (

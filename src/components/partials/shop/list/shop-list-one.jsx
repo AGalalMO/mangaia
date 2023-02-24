@@ -26,7 +26,11 @@ function ShopListOne (props) {
   return (
     <div className='products mb-3'>
       {products.length == 0 && !loading ? (
-        <p className='no-results'>No products matching your selection.</p>
+        <p className='no-results'>
+          {router?.locale == "ar"
+            ? "لا توجد منتجات مطابقة لاختيارك."
+            : "No products matching your selection."}
+        </p>
       ) : (
         <>
           {type == "list" ? (

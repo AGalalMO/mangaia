@@ -1,7 +1,6 @@
 import { Stack } from '@mui/material';
 import { useRouter } from 'next/router';
-import { TabPanel } from 'react-tabs';
-import { StyledButton, StyledRegionSelect, StyledTextFiled } from './styles';
+import { StyledButton, StyledTextFiled } from './styles';
 
 function Register ({ registerForm }) {
     const {locale}=useRouter()
@@ -58,24 +57,7 @@ function Register ({ registerForm }) {
             }
           />
 
-          <StyledTextFiled
-            fullWidth
-            id='address'
-            name='address'
-            label={locale == "en" ? "Address" : " العنوان بالتفصيل"}
-            variant='filled'
-            value={registerForm.values.address}
-            onChange={registerForm.handleChange}
-            InputProps={{ disableUnderline: true, style: { fontSize: "14px" } }}
-            InputLabelProps={{ style: { fontSize: "14px" } }} // font size of input label
-            error={
-              registerForm.touched.address &&
-              Boolean(registerForm.errors.address)
-            }
-            helperText={
-              registerForm.touched.address && registerForm.errors.address
-            }
-          />
+       
           <StyledTextFiled
             fullWidth
             id='password'

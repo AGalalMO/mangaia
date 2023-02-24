@@ -135,7 +135,11 @@ function Footer() {
                   }}>
                   {" "}
                   <LocationOnOutlinedIcon />
-                  <p style={{ marginBottom: "0px !important" ,textAlign:'start'}}>
+                  <p
+                    style={{
+                      marginBottom: "0px !important",
+                      textAlign: "start",
+                    }}>
                     {router.locale == "en"
                       ? "56 El Nozha Street, Heliopolis, next to Link Me and Ezz El Din Pharmacy"
                       : " 56 شارع النزهة مصر الجديدة بجوار لينك مي وصيدلية عز الدين "}
@@ -150,7 +154,9 @@ function Footer() {
                     marginBottom: "10px !important",
                   }}>
                   <EmailOutlinedIcon />
-                  <a href='mailto:#'>unex-city@gmail.com</a>
+                  <a href='mailto:unexcityactivestores@gmail.com'>
+                    unexCityActiveStores@gmail.com
+                  </a>
                 </div>
                 <div
                   style={{
@@ -161,7 +167,7 @@ function Footer() {
                     marginBottom: "20px !important",
                   }}>
                   <CallOutlinedIcon />
-                  <a href='tel:#'>+2 0 100 028 8168</a>
+                  <a href='tel:20100028 8168'>+2 0 100 028 8168</a>
                 </div>
                 <div style={{ gap: "10px" }} className='social-icons'>
                   <a
@@ -184,7 +190,9 @@ function Footer() {
             <div
               className='col-sm-6 col-lg-4'
               style={{ display: "flex", justifyContent: "center" }}>
-              <div className='widget' style={{ textAlign: "center !important" }}>
+              <div
+                className='widget'
+                style={{ textAlign: "center !important" }}>
                 <h4
                   className='widget-title'
                   style={{ textAlign: "center !important" }}>
