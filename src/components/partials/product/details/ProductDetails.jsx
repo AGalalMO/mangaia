@@ -27,7 +27,6 @@ function DetailOne(props) {
   );
   const { isAuthenticated } = useAuth();
   const dispatch = useDispatch();
-  console.log("props", product);
   useEffect(() => {
     window.addEventListener("scroll", scrollHandler, {
       passive: true,
@@ -80,7 +79,6 @@ function DetailOne(props) {
       e.preventDefault();
       if (e.currentTarget.classList.contains("btn-disabled")) return;
       else {
-        console.log({ product });
 
         await axiosInstance.post(APIS.CART.ADD, null, {
           params: {
@@ -141,7 +139,6 @@ function DetailOne(props) {
                       }}
                       key={index}
                       onClick={() => {
-                        console.log("item", item);
                         setSelectedInfo(item);
                         setSelectedSizeCount(item.countBySize?.[0]);
                         setSize(item.countBySize?.[0]?.size);

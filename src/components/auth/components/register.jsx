@@ -4,6 +4,7 @@ import { StyledButton, StyledTextFiled } from './styles';
 
 function Register({ registerForm, loginError }) {
   const { locale } = useRouter();
+
   return (
     <form onSubmit={registerForm.handleSubmit}>
       <Stack spacing={4}>
@@ -33,7 +34,7 @@ function Register({ registerForm, loginError }) {
           error={
             registerForm.touched.email && Boolean(registerForm.errors.email)
           }
-          helperText={registerForm.touched.email && registerForm.errors.email}
+          helperText={registerForm.touched.email || registerForm.errors.email}
         />
         <StyledTextFiled
           fullWidth
@@ -50,7 +51,7 @@ function Register({ registerForm, loginError }) {
             Boolean(registerForm.errors.phoneNumber)
           }
           helperText={
-            registerForm.touched.phoneNumber && registerForm.errors.phoneNumber
+            registerForm.touched.phoneNumber || registerForm.errors.phoneNumber
           }
         />
 
@@ -69,7 +70,7 @@ function Register({ registerForm, loginError }) {
             Boolean(registerForm.errors.password)
           }
           helperText={
-            registerForm.touched.password && registerForm.errors.password
+            registerForm.touched.password || registerForm.errors.password
           }
           InputProps={{ disableUnderline: true, style: { fontSize: "14px" } }}
           InputLabelProps={{ style: { fontSize: "14px" } }} // font size of input label

@@ -24,7 +24,6 @@ export const getCart = createAsyncThunk(
       dispatch(cartSlice.actions.setCart(response.data));
       cartSlice.actions.setCart(cart);
     } catch (error) {
-      console.log({ error });
     }
   }
 );

@@ -9,5 +9,6 @@
   "PHONE": "Phone",
   "SUBJECT": "Subject",
   "MESSAGE": "Message",
-  "SUBMIT": "Submit"
+  "SUBMIT": "Submit",
+  "SUBMITTED": "Message Sent"
 }

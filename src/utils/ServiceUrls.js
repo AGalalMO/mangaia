@@ -23,6 +23,7 @@ export const APIS = {
   UTILS: {
     LINKS: `${baseUrl}redirections/get`,
     DELIVERY_CITIES: `${baseUrl}order/Getcities`,
+    CONTACT: `${baseUrl}contact/sendMessage`,
   },
   CART: {
     ADD: `${baseUrl}cart/add`,

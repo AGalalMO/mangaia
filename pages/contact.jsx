@@ -4,11 +4,36 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Layout from "~/src/components/layout";
 import { useRouter } from "next/router";
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
-function ContactUs() {
+import { useState } from "react";
+import axiosInstance from "~/src/utils/axios/axiosInstance";
+import { APIS } from "~/src/utils/ServiceUrls";
+function ContactUs () {
+  const [loading,setLoading]=useState()
+  const [sent, setSend] = useState(false);
   const { t } = useTranslation(["contact", "common"]);
   const { locale, replace } = useRouter();
+  const [details, setDetails] = useState({
+    Name: "",
+    Email: "",
+    Subject: "",
+    Message: "",
+  });
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log("submitting");
+    try {
+      console.log("submitting 2");
+
+      const response = await axiosInstance.post(APIS.UTILS.CONTACT, {
+        ...data,
+      });
+      console.log("sent");
+
+      setSend(true);
+    } catch {}
+  };
   return (
     <Layout>
       <main className='main shop'>
@@ -79,13 +104,13 @@ function ContactUs() {
 
                     <div className='social-icons social-icons-color justify-content-center'>
                       <ALink
-                        href='#'
+                        href='https://www.facebook.com/unex.city.active/?_rdc=2&_rdr'
                         className='social-icon social-facebook'
                         title='Facebook'>
                         <i className='icon-facebook-f'></i>
                       </ALink>
                       <ALink
-                        href='#'
+                        href='https://www.instagram.com/unex_city_active/'
                         className='social-icon social-instagram'
                         title='Instagram'>
                         <i className='icon-instagram'></i>
@@ -103,15 +128,35 @@ function ContactUs() {
                     <p className='lead text-primary'>{t("WE_COLLABORATE")}</p>
                   </div>
 
-                  <form action='#' className='contact-form mb-2'>
+                  <form
+                    action={handleSubmit}
+                    className='contact-form mb-2'>
+                    <label htmlFor='cname' className='sr-only'>
+                      {t("EMAIL")}
+                    </label>
+                    <input
+                      value={details.Email}
+                      onChange={(e) => {
+                        setDetails({ ...details, Email: e.target.value });
+                      }}
+                      style={{ borderRadius: "8px" }}
+                      type='email'
+                      className='form-control'
+                      placeholder={`${t("EMAIL")} *`}
+                      required
+                    />
+
                     <label htmlFor='cname' className='sr-only'>
                       {t("NAME")}
                     </label>
                     <input
+                      value={details.Name}
+                      onChange={(e) => {
+                        setDetails({ ...details, Name: e.target.value });
+                      }}
                       style={{ borderRadius: "8px" }}
                       type='text'
                       className='form-control'
-                      id='cname'
                       placeholder={`${t("NAME")} *`}
                       required
                     />
@@ -120,9 +165,12 @@ function ContactUs() {
                     </label>
                     <input
                       style={{ borderRadius: "8px" }}
+                      value={details.Subject}
+                      onChange={(e) => {
+                        setDetails({ ...details, Subject: e.target.value });
+                      }}
                       type='text'
                       className='form-control'
-                      id='csubject'
                       placeholder={`${t("SUBJECT")} *`}
                     />
 
@@ -130,22 +178,23 @@ function ContactUs() {
                       {t("MESSAGE")}
                     </label>
                     <textarea
+                      value={details.Message}
+                      onChange={(e) => {
+                        setDetails({ ...details, Message: e.target.value });
+                      }}
                       style={{ borderRadius: "8px" }}
                       className='form-control'
                       cols='30'
                       rows='4'
-                      id='cmessage'
                       required
                       placeholder={`${t("MESSAGE")} *`}></textarea>
 
                     <div className='text-center'>
                       <button
-                        onClick={() => {
-                          console.log("hello");
-                          replace("/");
-                        }}
+                        disabled={sent}
+                        type='submit'
                         className='btn btn-outline-primary-2 btn-minwidth-sm'>
-                        <span>{t("SUBMIT")}</span>
+                        <span>{t(sent ? "SUBMITTED" : "SUBMIT")}</span>
                       </button>
                     </div>
                   </form>

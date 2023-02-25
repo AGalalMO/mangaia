@@ -65,8 +65,6 @@ function Header(props) {
                 }}
                 onClick={() => {
                   const newlocale = router?.locale == 'ar' ? 'en' : 'ar'
-                  console.log("newLocale",newlocale)
-                  console.log("newLocale router.asPath", router.asPath);
                   router.push(
                     {
                       route: router.pathname,

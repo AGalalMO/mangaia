@@ -94,7 +94,8 @@ function Orders(props) {
               {true ? (
                 <div className='row'>
                   <div className='col-lg-9'>
-                    {cartList.map((cartItem, index) => {
+                    {cartList.map((cartItem, index) =>
+                    {
                       return (
                         <>
                           <Stack
@@ -107,10 +108,15 @@ function Orders(props) {
                               gap={"20px"}>
                               <h6 style={{ marginBottom: "0px" }}>
                                 {t("ORDER", { ns: "common" })} {index + 1}
+                                <span style={{ color: "#DFDFDF",padding:'20px' }}>{`      ${
+                                  cartItem?.createdDate.split("T")[0]
+                                }`}</span>
                               </h6>
-                              <div>{getStatus(cartItem?.status)}</div>
+                              {cartItem.status == 0 && (
+                                <div>{getStatus(cartItem?.status)}</div>
+                              )}
                             </Stack>
-                            {cartItem?.status == 0 && (
+                            {cartItem?.status == 0 ? (
                               <Button
                                 style={{ fontSize: "13px" }}
                                 onClick={() => cancelOrder(cartItem?.id)}
@@ -118,6 +124,8 @@ function Orders(props) {
                                 color={"error"}>
                                 {t("cancel", { ns: "common" })}
                               </Button>
+                            ) : (
+                              <div>{getStatus(cartItem?.status)}</div>
                             )}
                           </Stack>
                           <table className='table table-cart table-mobile'>
@@ -136,6 +144,9 @@ function Orders(props) {
                                 <th style={{ textAlign: "start" }}>
                                   {t("QUANTITY")}
                                 </th>
+                                <th style={{ textAlign: "start" }}>
+                                  {t("PRICE")}
+                                </th>
                               </tr>
                             </thead>
                             {cartItem?.products?.map((product) => (
@@ -144,12 +155,20 @@ function Orders(props) {
                                   <td
                                     style={{
                                       textAlign: "start",
-                                      marginInlineEnd: "5px",
+                                      width: "40%",
                                     }}
                                     className='product-col'>
                                     <div
                                       className='product'
-                                      style={{ paddingInlineStart: "0px" }}>
+                                      style={{
+                                        paddingInlineStart: "0px",
+                                        gap: "10px",
+                                      }}>
+                                      <img
+                                        width={"70px"}
+                                        height={"70px"}
+                                        src={product?.image}
+                                      />
                                       <h4 className='product-title'>
                                         {locale == "ar"
                                           ? product?.arname
@@ -160,7 +179,6 @@ function Orders(props) {
                                   <td
                                     style={{
                                       textAlign: "start",
-                                      marginInlineEnd: "5px",
                                     }}
                                     className='size-col'>
                                     {product?.size}
@@ -168,7 +186,6 @@ function Orders(props) {
                                   <td
                                     style={{
                                       textAlign: "start",
-                                      marginInlineEnd: "5px",
                                     }}
                                     className='price-col'>
                                     {
@@ -185,15 +202,27 @@ function Orders(props) {
                                   <td
                                     style={{
                                       textAlign: "start",
-                                      marginInlineEnd: "5px",
                                     }}
                                     className='quantity-col'>
                                     {product.count}
+                                  </td>
+                                  <td
+                                    style={{
+                                      textAlign: "start",
+                                    }}
+                                    className='quantity-col'>
+                                    {product?.discountedPrice}
                                   </td>
                                 </tr>
                               </tbody>
                             ))}
                           </table>
+                          <Stack
+                            justifyContent={"center"}
+                            alignItems='center'
+                            mb='50px'>
+                            <h4>Total : {cartItem?.totalAmount}</h4>
+                          </Stack>
                         </>
                       );
                     })}

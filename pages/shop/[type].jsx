@@ -59,7 +59,6 @@ function ShopGrid({ products, categories }) {
     const response = await axiosInstance.get(APIS.PRODUCTS.filter, {
       params: filters,
     });
-    console.log("response?.dsda",response)
     setFiltered(response.data);
   };
 

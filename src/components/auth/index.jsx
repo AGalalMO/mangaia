@@ -8,7 +8,7 @@ import { useAuthForms } from "./components/useAuthForms";
 
 function Authentication() {
   const { locale } = useRouter();
-  const { loginForm, registerForm ,loginError} = useAuthForms();
+  const { loginForm, registerForm, loginError, registerError } = useAuthForms();
   return (
     <Layout>
       <main className='main shop'>
@@ -41,7 +41,7 @@ function Authentication() {
                       </TabPanel>
                       <TabPanel style={{ paddingTop: "2rem" }}>
                         <Register
-                          loginError={loginError}
+                          loginError={registerError}
                           registerForm={registerForm}
                         />
                       </TabPanel>

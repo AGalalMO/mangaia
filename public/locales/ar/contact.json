@@ -9,5 +9,7 @@
   "PHONE": "هاتف",
   "SUBJECT": "موضوع",
   "MESSAGE": "رسالة",
-  "SUBMIT": "إرسال"
+  "SUBMIT": "إرسال",
+  "SUBMITTED":"تم الارسال"
+  
 }

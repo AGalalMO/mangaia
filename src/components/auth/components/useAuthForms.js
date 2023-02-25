@@ -6,6 +6,7 @@ import { useState } from "react";
 export const useAuthForms = () => {
   const { login, register } = useAuth();
     const [loginError, setLoginError] = useState(false);
+    const [registerError, setRegisterError] = useState(false);
 
   const router = useRouter();
   const loginForm = useFormik({
@@ -48,19 +49,11 @@ export const useAuthForms = () => {
       password: yup
         .string("Enter your password")
         .min(8, "Password should be of minimum 8 characters length")
-        .required("Password is required")
-        .matches(
-          "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})",
-          "Password must be Strong"
-        ),
+        .required("Password is required"),
       name: yup
         .string("Enter your Name")
         .min(3, "Name should be of minimum 3 characters length")
         .required("Name is required"),
-      address: yup
-        .string("Enter your Address")
-        .min(10, "Address should be of minimum 1- characters length")
-        .required("Address is required"),
       phoneNumber: yup
         .string("Enter your phoneNumber")
         .min(11, "phoneNumber should be of minimum 11 characters length")
@@ -72,7 +65,8 @@ export const useAuthForms = () => {
         await register(values);
         router.replace("/");
       } catch (error) {
-        setLoginError(true)
+        setRegisterError(true)
+        
       }
     },
   });
@@ -80,6 +74,7 @@ export const useAuthForms = () => {
   return {
     loginForm,
     registerForm,
+    registerError,
     loginError
   };
 };

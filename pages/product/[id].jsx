@@ -48,7 +48,6 @@ export default SingleProduct;
 export async function getServerSideProps(context) {
   const { locale } = context;
   const { id } = context.query;
-  console.log("idd", id);
   let product = await axiosInstance.get(APIS.PRODUCTS.GET(id), {
     headers: {
       common: {

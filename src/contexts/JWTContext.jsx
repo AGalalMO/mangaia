@@ -110,7 +110,6 @@ function AuthProvider ({ children }) {
   };
 
   const register = async (values) => {
-    console.log("valueeees",values)
     const response = await axiosInstance.post(APIS.AUTH.REGISTER, values);
     const { access_token, user } = response.data;
 

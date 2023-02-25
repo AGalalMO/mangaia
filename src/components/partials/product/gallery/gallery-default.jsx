@@ -48,13 +48,10 @@ function GalleryDefault(props) {
   }
 
   function changeBgImage(e, image, index) {
-    console.log("change BG");
     let imgs = document.querySelectorAll(".product-main-image img");
-    console.log("change BG", imgs);
     for (let i = 0; i < imgs.length; i++) {
       imgs[i].src = image;
     }
-    console.log("change BG", imgs);
 
     document
       .querySelector(".product-image-gallery .active")

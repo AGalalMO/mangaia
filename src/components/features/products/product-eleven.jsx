@@ -11,7 +11,6 @@ import { useTranslation } from "next-i18next";
 function ProductEleven(props) {
   const router = useRouter();
   const { product } = props;
-  console.log("product", product);
   const { t, i18n } = useTranslation(["common"]);
 
   const [outOfStock, setOutOfStock] = useState(false);
