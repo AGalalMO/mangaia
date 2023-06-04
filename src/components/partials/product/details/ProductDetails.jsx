@@ -79,7 +79,6 @@ function DetailOne(props) {
       e.preventDefault();
       if (e.currentTarget.classList.contains("btn-disabled")) return;
       else {
-
         await axiosInstance.post(APIS.CART.ADD, null, {
           params: {
             itemId: selectedSizeCount.itemId,
@@ -87,6 +86,8 @@ function DetailOne(props) {
             count: qty,
           },
         });
+        router.replace("/shop/cart");
+
         dispatch(getCart());
         ///router.reload();
       }

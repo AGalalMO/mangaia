@@ -48,8 +48,7 @@ export const useAuthForms = () => {
         .required("Email is required"),
       password: yup
         .string("Enter your password")
-        .min(8, "Password should be of minimum 8 characters length")
-        .required("Password is required"),
+        .min(8, "Password should be of minimum 8 characters length"),
       name: yup
         .string("Enter your Name")
         .min(3, "Name should be of minimum 3 characters length")

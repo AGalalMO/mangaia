@@ -27,12 +27,16 @@ function ProductEleven(props) {
   function onCartClick(e) {
     e.preventDefault();
     props.addToCart(product);
+    router.replace("/shop/cart");
   }
 
   return (
-    <div className='product product-7 text-center w-100' style={{cursor:'pointer'}} onClick={() => {
+    <div
+      className='product product-7 text-center w-100'
+      style={{ cursor: "pointer" }}
+      onClick={() => {
         router.push(`/product/${product?.productId ?? product?.id}`);
-    }}>
+      }}>
       <figure className='product-media'>
         {product?.discount ? (
           <span className='product-label label-sale'>
@@ -72,7 +76,7 @@ function ProductEleven(props) {
           <div className='product-action'>
             {product?.info?.length > 0 ? (
               <ALink
-                href={`/product/${product?.productId??product?.id}`}
+                href={`/product/${product?.productId ?? product?.id}`}
                 className='btn-product btn-cart btn-select'>
                 <span>{t("SELECT_OPTIONS", { ns: "common" })}</span>
               </ALink>
@@ -123,12 +127,24 @@ function ProductEleven(props) {
         </h3>
 
         <div className='product-price'>
-          {product?.discount>0 &&<span style={{color:'black',textDecoration:'line-through',marginInlineEnd:'15px'}}>
-            {product?.price?.toFixed(2)} {router?.locale == "ar" ? "جم" : "EGP"}
-          </span>}
+          {product?.discount > 0 && (
+            <span
+              style={{
+                color: "black",
+                textDecoration: "line-through",
+                marginInlineEnd: "15px",
+              }}>
+              {product?.price?.toFixed(2)}{" "}
+              {router?.locale == "ar" ? "جم" : "EGP"}
+            </span>
+          )}
 
           <span>
-            {(product?.discount>0?product?.discountedPrice:product?.price).toFixed(2)} {router?.locale == "ar" ? "جم" : "EGP"}
+            {(product?.discount > 0
+              ? product?.discountedPrice
+              : product?.price
+            ).toFixed(2)}{" "}
+            {router?.locale == "ar" ? "جم" : "EGP"}
           </span>
         </div>
 

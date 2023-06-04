@@ -42,7 +42,8 @@ function ProductSix (props) {
 
     function onCartClick ( e ) {
         e.preventDefault();
-        props.addToCart( product );
+      props.addToCart(product);
+      router.replace('/shop/cart')
     }
 
     function onWishlistClick ( e ) {
