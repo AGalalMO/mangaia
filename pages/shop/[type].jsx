@@ -12,8 +12,11 @@ import Layout from "~/src/components/layout";
 import { useTranslation } from "next-i18next";
 import SideBar from "~/src/components/partials/shop/sidebar/SideBar";
 
-function ShopGrid({ products, categories }) {
+function ShopGrid ({ products, categories }) {
+  
+
   const router = useRouter();
+  const {locale}=useRouter()
   const { t } = useTranslation(["shop", "common"]);
   const type = router.query.type;
   const query = router.query;
@@ -21,6 +24,57 @@ function ShopGrid({ products, categories }) {
   const totalCount = products?.length;
   const [filtered, setFiltered] = useState(products);
   const [colors, setColors] = useState([]);
+
+  const reFilter = async () => {
+    let filteredProducts=[]
+      if (query.filter) {
+    if (query.filter == "newarrival") {
+      filteredProducts = await axiosInstance.get(APIS.PRODUCTS.newArrival, {
+        headers: {
+          common: {
+            "accept-language": locale ?? "en",
+          },
+        },
+      });
+    } else {
+      filteredProducts = await axiosInstance.get(APIS.PRODUCTS.sale, {
+        headers: {
+          common: {
+            "accept-language": locale ?? "en",
+          },
+        },
+      });
+    }
+  } else {
+     if (query.cat) {
+       filteredProducts = await axiosInstance.get(
+         APIS.PRODUCTS.byCat(query?.cat),
+         {
+           headers: {
+             common: {
+               "accept-language": locale ?? "en",
+             },
+           },
+         }
+       );
+     }
+     else {
+         filteredProducts = await axiosInstance.get(APIS.PRODUCTS.LIST, {
+           headers: {
+             common: {
+               "accept-language": locale ?? "en",
+             },
+           },
+         });
+  }
+    }
+    console.log("FILTERED",filteredProducts)
+    
+    setFiltered(filteredProducts.data);
+  }
+  useEffect(() => {
+    reFilter()
+  },[router.query])
   useEffect(() => {
     window.addEventListener("resize", resizeHandle);
     resizeHandle();
@@ -99,15 +153,7 @@ export default ShopGrid;
 export async function getServerSideProps(ctx) {
   const { locale, query } = ctx;
   let products = [];
-  if (query.cat) {
-    products = await axiosInstance.get(APIS.PRODUCTS.byCat(query?.cat), {
-      headers: {
-        common: {
-          "accept-language": locale ?? "en",
-        },
-      },
-    });
-  }
+ 
   if (query.filter) {
     if (query.filter == "newarrival") {
       products = await axiosInstance.get(APIS.PRODUCTS.newArrival, {
@@ -127,13 +173,24 @@ export async function getServerSideProps(ctx) {
       });
     }
   } else {
-    products = await axiosInstance.get(APIS.PRODUCTS.LIST, {
-      headers: {
-        common: {
-          "accept-language": locale ?? "en",
-        },
-      },
-    });
+     if (query.cat) {
+       products = await axiosInstance.get(APIS.PRODUCTS.byCat(query?.cat), {
+         headers: {
+           common: {
+             "accept-language": locale ?? "en",
+           },
+         },
+       });
+     }
+     else {
+         products = await axiosInstance.get(APIS.PRODUCTS.LIST, {
+           headers: {
+             common: {
+               "accept-language": locale ?? "en",
+             },
+           },
+         });
+  }
   }
 
   let categories = await axiosInstance.get(APIS.CATEGORIES.LIST, {

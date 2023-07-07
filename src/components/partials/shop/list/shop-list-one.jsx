@@ -51,7 +51,7 @@ function ShopListOne (props) {
                       <div className='skel-pro'></div>
                     </div>
                   ))
-                : products.map((product, index) => (
+                : products?.map((product, index) => (
                     <div className={gridClass} key={index}>
                       <ProductEleven product={product} />
                     </div>
