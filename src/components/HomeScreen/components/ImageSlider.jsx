@@ -1,7 +1,16 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/router";
 function ImageBanner({ banners }) {
+  const [isDesktop, setIsDesktop] = useState(true);
+  const router = useRouter();
+  useEffect(() => {
+    if (window) {
+      setIsDesktop(window && window?.innerWidth > 768 ? true : false);
+    }
+  }, [router, router.isReady]);
   const settings = {
     dots: true,
     infinite: true,
@@ -15,11 +24,15 @@ function ImageBanner({ banners }) {
         <div
           style={{
             width: "100%",
-            height: "100vh",
+            height: isDesktop ? "100vh" : "40vh",
             background: "#000",
           }}>
           <img
-            style={{ objectFit: "fill", width: "100%", height: "100vh" }}
+            style={{
+              objectFit: "fill",
+              width: "100%",
+              height: isDesktop ? "100vh" : "40vh",
+            }}
             height={"100%"}
             width='100%'
             src={banner.url}

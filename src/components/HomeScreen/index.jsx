@@ -15,6 +15,7 @@ import ImageBanner from "./components/ImageSlider";
 function HomeScreen({banners}) {
   const loading = false;
   const { t } = useTranslation("common");
+  
   return (
     <div
       className={`main home-page skeleton-body skel-shop-products ${
@@ -41,6 +42,7 @@ function HomeScreen({banners}) {
                     width='100%'
                     height='auto'
                     effect='blur'
+                    
                   />
                 </figure>
 
