@@ -135,11 +135,11 @@ function DetailOne(props) {
                       className={`${item == selectedInfo ? "active " : ""}`}
                       style={{
                         backgroundColor: item.color,
-                        border: "1px solid rgba(1,1,1,0.6)",
+                        border: "1px solid rgba(0,0,0,0.2)",
                         borderColor:
                           selectedInfo?.color == item?.color
                             ? "red"
-                            : " rgba(1,1,1,0.6)",
+                            : " rgba(0,0,0,0.2)",
                         width: 36,
                         height: 36,
                       }}

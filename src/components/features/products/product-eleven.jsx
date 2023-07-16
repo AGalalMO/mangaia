@@ -110,9 +110,13 @@ function ProductEleven(props) {
                         borderRadius: "50%",
                         width: "24px",
                         height: "24px",
-                        marginInlineEnd:'5px'
+                        marginInlineEnd: '5px',
+                         border: "1px solid rgba(0,0,0,0.2)",
+                       
+                        
                       }}
                     />
+                    
                     {/* {index < product?.info?.length - 1 ? ", " : ""} */}
                   </>
                 )}
