@@ -1,12 +1,16 @@
 import { Magnifier } from "react-image-magnifiers";
 import React, { useState, useEffect } from "react";
 import LightBox from "react-image-lightbox";
+import { useTranslation } from "react-i18next";
 
-function GalleryDefault(props) {
+function GalleryDefault (props) {
+  
   const { product, adClass = "product-gallery-vertical" } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [outOfStock, setOutOfStock] = useState(false);
+    const { t } = useTranslation(["shop", "common"]);
+
   const checkStock = () => {
     let count = 0;
     product.info.map((item) => (count = count + item.count));
@@ -71,10 +75,12 @@ function GalleryDefault(props) {
                 {product.discount}% OFF
               </span>
             ) : (
-              <span className='product-label label-new'>New Arrival</span>
+              ""
             )}
-            {outOfStock ? (
-              <span className='product-label label-out'>Out of Stock</span>
+            {!outOfStock ? (
+              <span className='product-label label-sale'>
+                {t("OUT_OF_STOCK")}
+              </span>
             ) : (
               ""
             )}
@@ -107,7 +113,7 @@ function GalleryDefault(props) {
             </button>
           </figure>
 
-          <div id='product-zoom-gallery' className='product-image-gallery'>
+          <div style={{height:'100% !important'}} id='product-zoom-gallery' className='product-image-gallery'>
             {product?.images?.map((item, index) => (
               <button
                 className={`product-gallery-item ${
@@ -115,8 +121,8 @@ function GalleryDefault(props) {
                 }`}
                 key={product.id + "-" + index}
                 onClick={(e) => changeBgImage(e, `${item?.url}`, index)}>
-                <div className='img-wrapper h-100'>
-                  <img src={product?.images[index].url} alt='product back' />
+                <div style={{height:'100%'}} className='img-wrapper h-100'>
+                  <img style={{height:'100%'}} src={product?.images[index].url} alt='product back' />
                 </div>
               </button>
             ))}
@@ -127,7 +133,9 @@ function GalleryDefault(props) {
       {isOpen ? (
         <LightBox
           mainSrc={product?.images?.[photoIndex]?.url}
-          nextSrc={product?.images?.[(photoIndex + 1) % product.images.length]?.url}
+          nextSrc={
+            product?.images?.[(photoIndex + 1) % product.images.length]?.url
+          }
           prevSrc={
             product?.images?.[
               (photoIndex + product.images.length - 1) % product.images.length
