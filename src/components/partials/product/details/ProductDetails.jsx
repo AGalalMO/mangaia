@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import { useRouter } from "next/router";
 import { connect, useDispatch } from "react-redux";
 
@@ -93,7 +93,7 @@ function DetailOne(props) {
       }
     }
   }
-
+  const details = useMemo(() => {
   return (
     <div className='product-details' ref={ref}>
       {Boolean(product) && Boolean(selectedInfo) && (
@@ -135,6 +135,11 @@ function DetailOne(props) {
                       className={`${item == selectedInfo ? "active " : ""}`}
                       style={{
                         backgroundColor: item.color,
+                        border: "1px solid rgba(1,1,1,0.6)",
+                        borderColor:
+                          selectedInfo?.color == item?.color
+                            ? "red"
+                            : " rgba(1,1,1,0.6)",
                         width: 36,
                         height: 36,
                       }}
@@ -235,6 +240,8 @@ function DetailOne(props) {
       )}
     </div>
   );
+},[selectedInfo])
+  return <>{details}</>;
 }
 
 const mapStateToProps = (state) => {
