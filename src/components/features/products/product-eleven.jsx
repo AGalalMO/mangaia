@@ -43,9 +43,7 @@ function ProductEleven(props) {
             {product.discount}% {t("Sale", { ns: "common" })}
           </span>
         ) : (
-          <span className='product-label label-new'>
-            {t("newArrival", { ns: "common" })}
-          </span>
+          ''
         )}
         {outOfStock ? (
           <span className='product-label label-out'>
