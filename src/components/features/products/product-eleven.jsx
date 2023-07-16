@@ -110,9 +110,10 @@ function ProductEleven(props) {
                         borderRadius: "50%",
                         width: "24px",
                         height: "24px",
+                        marginInlineEnd:'5px'
                       }}
                     />
-                    {index < product?.info?.length - 1 ? ", " : ""}
+                    {/* {index < product?.info?.length - 1 ? ", " : ""} */}
                   </>
                 )}
               </>{" "}
