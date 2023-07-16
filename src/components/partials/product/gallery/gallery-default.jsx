@@ -77,7 +77,7 @@ function GalleryDefault (props) {
             ) : (
               ""
             )}
-            {!outOfStock ? (
+            {outOfStock ? (
               <span className='product-label label-sale'>
                 {t("OUT_OF_STOCK")}
               </span>
