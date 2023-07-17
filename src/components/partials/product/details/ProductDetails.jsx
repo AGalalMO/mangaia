@@ -59,8 +59,9 @@ function DetailOne(props) {
     }
   }
 
-  function selectSize(value) {
-    setSize(value.size);
+  function selectSize (value) {
+    console.log("SELECT SIZE",value)
+    setSize(value);
     const filter = selectedInfo?.countBySize.filter(
       (item) => item.size == value
     );
@@ -94,153 +95,154 @@ function DetailOne(props) {
     }
   }
   const details = useMemo(() => {
-  return (
-    <div className='product-details' ref={ref}>
-      {Boolean(product) && Boolean(selectedInfo) && (
-        <>
-          <h1 className='product-title' style={{ display: "flex" }}>
-            {product?.name}
-          </h1>
+    return (
+      <div className='product-details' ref={ref}>
+        {Boolean(product) && Boolean(selectedInfo) && (
+          <>
+            <h1 className='product-title' style={{ display: "flex" }}>
+              {product?.name}
+            </h1>
 
-          <div className='product-price'>
-            {product.discount ? (
-              <span style={{ fontSize: "2rem" }}>
-                <span
-                  style={{ textDecoration: "line-through", color: "black" }}>
-                  {product.price.toFixed(2)}
-                </span>{" "}
-                {product.discountedPrice.toFixed(2)} EGP
-              </span>
-            ) : (
-              <span>{product.price.toFixed(2)} EGP</span>
-            )}
-          </div>
+            <div className='product-price'>
+              {product.discount ? (
+                <span style={{ fontSize: "2rem" }}>
+                  <span
+                    style={{ textDecoration: "line-through", color: "black" }}>
+                    {product.price.toFixed(2)}
+                  </span>{" "}
+                  {product.discountedPrice.toFixed(2)} EGP
+                </span>
+              ) : (
+                <span>{product.price.toFixed(2)} EGP</span>
+              )}
+            </div>
 
-          <div className='product-content'>
-            <p>{product?.short_desc}</p>
-          </div>
+            <div className='product-content'>
+              <p>{product?.short_desc}</p>
+            </div>
 
-          {
-            <>
-              <div className='details-filter-row details-row-size'>
-                <label style={{ display: "flex !important" }}>
-                  {t("COLOR")}:
-                </label>
+            {
+              <>
+                <div className='details-filter-row details-row-size'>
+                  <label style={{ display: "flex !important" }}>
+                    {t("COLOR")}:
+                  </label>
 
-                <div
-                  className='product-nav product-nav-dots'
-                  style={{ marginInlineStart: "0 !important" }}>
-                  {product?.info?.map((item, index) => (
-                    <span
-                      className={`${item == selectedInfo ? "active " : ""}`}
-                      style={{
-                        backgroundColor: item.color,
-                        border: "1px solid rgba(0,0,0,0.2)",
-                        borderColor:
-                          selectedInfo?.color == item?.color
-                            ? "red"
-                            : " rgba(0,0,0,0.2)",
-                        width: 36,
-                        height: 36,
-                      }}
-                      key={index}
-                      onClick={() => {
-                        setSelectedInfo(item);
-                        setSelectedSizeCount(item.countBySize?.[0]);
-                        setSize(item.countBySize?.[0]?.size);
-                        setQty(0);
-                      }}></span>
-                  ))}
-                </div>
-              </div>
-
-              <div className='details-filter-row details-row-size'>
-                <label htmlFor='size' style={{ display: "flex !important" }}>
-                  {t("SIZE")}:
-                </label>
-                <div
-                  className='select-custom'
-                  style={{ marginInlineStart: "0 !important" }}>
-                  <select
-                    name='size'
-                    className='form-control'
-                    value={size}
-                    onChange={(e) => {
-                      selectSize(e.target.value);
-                    }}>
-                    <option value=''>{t("selectSize")}</option>
-                    {selectedInfo.countBySize?.map((item, index) => (
-                      <option value={item.size} key={index}>
-                        {item.size}
-                      </option>
+                  <div
+                    className='product-nav product-nav-dots'
+                    style={{ marginInlineStart: "0 !important" }}>
+                    {product?.info?.map((item, index) => (
+                      <span
+                        className={`${item == selectedInfo ? "active " : ""}`}
+                        style={{
+                          backgroundColor: item.color,
+                          border: "1px solid rgba(0,0,0,0.2)",
+                          borderColor:
+                            selectedInfo?.color == item?.color
+                              ? "red"
+                              : " rgba(0,0,0,0.2)",
+                          width: 36,
+                          height: 36,
+                        }}
+                        key={index}
+                        onClick={() => {
+                          setSelectedInfo(item);
+                          setSelectedSizeCount(item.countBySize?.[0]);
+                          setSize(item.countBySize?.[0]?.size);
+                          console.log("item.countBySize", item.countBySize);
+                          setQty(0);
+                        }}></span>
                     ))}
-                  </select>
+                  </div>
                 </div>
 
-                <ALink href='#' className='size-guide mr-4'>
-                  <i className='icon-th-list'></i>
-                  {t("SIZE_GUIDE")}
-                </ALink>
+                <div className='details-filter-row details-row-size'>
+                  <label htmlFor='size' style={{ display: "flex !important" }}>
+                    {t("SIZE")}:
+                  </label>
+                  <div
+                    className='select-custom'
+                    style={{ marginInlineStart: "0 !important" }}>
+                    <select
+                      name='size'
+                      className='form-control'
+                      value={size}
+                      onChange={(e) => {
+                        selectSize(e.target.value);
+                      }}>
+                      <option value=''>{t("selectSize")}</option>
+                      {selectedInfo.countBySize?.map((item, index) => (
+                        <option value={item.size} key={index}>
+                          {item.size}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <ALink href='#' className='size-guide mr-4'>
+                    <i className='icon-th-list'></i>
+                    {t("SIZE_GUIDE")}
+                  </ALink>
+                </div>
+              </>
+            }
+
+            <div className='details-filter-row details-row-size'>
+              <label htmlFor='qty' style={{ display: "flex !important" }}>
+                {t("QUANTITY")}:
+              </label>
+              {selectSize.count == 0 ? (
+                <span className='product-label label-out'>
+                  {t("OUT_OF_STOCK")}
+                </span>
+              ) : (
+                <Qty
+                  changeQty={onChangeQty}
+                  max={selectedSizeCount?.count}
+                  value={qty}></Qty>
+              )}
+            </div>
+
+            {size !== "" && qty != 0 && (
+              <div className='product-details-action'>
+                <a
+                  href='#'
+                  className={`btn-product btn-cart`}
+                  onClick={(e) => onCartClick(e, 0)}>
+                  <span>{t("ADD_TO_CART")}</span>
+                </a>
               </div>
-            </>
-          }
-
-          <div className='details-filter-row details-row-size'>
-            <label htmlFor='qty' style={{ display: "flex !important" }}>
-              {t("QUANTITY")}:
-            </label>
-            {selectSize.count == 0 ? (
-              <span className='product-label label-out'>
-                {t("OUT_OF_STOCK")}
-              </span>
-            ) : (
-              <Qty
-                changeQty={onChangeQty}
-                max={selectedSizeCount?.count}
-                value={qty}></Qty>
             )}
-          </div>
 
-          {size !== "" && qty != 0 && (
-            <div className='product-details-action'>
-              <a
-                href='#'
-                className={`btn-product btn-cart`}
-                onClick={(e) => onCartClick(e, 0)}>
-                <span>{t("ADD_TO_CART")}</span>
-              </a>
+            <div className='product-details-footer'>
+              <div
+                className='product-cat w-100 text-truncate'
+                style={{ display: "flex", alignItems: "flex-start" }}>
+                <span style={{ fontWeight: "500" }}>{t("CATEGORY")}:</span>
+                <span>
+                  <ALink
+                    href={{
+                      pathname: "/shop/3cols",
+                      query: { category: product?.subCategoryName },
+                    }}>
+                    {product?.subCategoryName}
+                  </ALink>
+                </span>
+              </div>
             </div>
-          )}
-
-          <div className='product-details-footer'>
-            <div
-              className='product-cat w-100 text-truncate'
-              style={{ display: "flex", alignItems: "flex-start" }}>
-              <span style={{ fontWeight: "500" }}>{t("CATEGORY")}:</span>
-              <span>
-                <ALink
-                  href={{
-                    pathname: "/shop/3cols",
-                    query: { category: product?.subCategoryName },
-                  }}>
-                  {product?.subCategoryName}
-                </ALink>
-              </span>
+            <div className='product-details-footer'>
+              <div className='product-des'>
+                <p style={{ fontWeight: "500", display: "flex" }}>
+                  {t("PRODUCT_DESC")}
+                </p>
+                <span>{product?.description} </span>
+              </div>
             </div>
-          </div>
-          <div className='product-details-footer'>
-            <div className='product-des'>
-              <p style={{ fontWeight: "500", display: "flex" }}>
-                {t("PRODUCT_DESC")}
-              </p>
-              <span>{product?.description} </span>
-            </div>
-          </div>
-        </>
-      )}
-    </div>
-  );
-},[selectedInfo])
+          </>
+        )}
+      </div>
+    );
+  }, [selectedInfo, selectedSizeCount, size, qty]);
   return <>{details}</>;
 }
 

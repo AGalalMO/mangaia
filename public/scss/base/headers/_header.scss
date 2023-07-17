@@ -1292,7 +1292,7 @@
 	background-color: black;
 
 	&.position-absolute {
-		background-color: transparent;
+		background-color: rgba(0,0,0,0.15);
 		z-index: 1024;
 	}
 

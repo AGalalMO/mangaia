@@ -49,7 +49,7 @@ function StickyHeader ( props ) {
     }
 
     return (
-        <div ref={ ref } className="sticky-wrapper" style={ { height: height } }>
+        <div ref={ ref } className="sticky-wrapper" style={ { height: '65px' } }>
             { props.children }
         </div>
     );
