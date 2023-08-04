@@ -122,7 +122,7 @@ function ShopSidebarOne(props) {
                       {shopData.sizes.map((item, index) => (
                         <div className='filter-item' key={index}>
                           <div onClick={() => {
-                            onSizeChange('', "size", item.slug);
+                            onSizeChange('', "size", item.size);
 
                           }} className='custom-control custom-checkbox'>
                             <input

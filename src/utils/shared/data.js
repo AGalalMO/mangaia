@@ -349,31 +349,31 @@ export const shopData = {
     },
 
     {
-      size: "size_32",
+      size: "32",
       slug: "32",
     },
     {
-      size: "size_34",
+      size: "34",
       slug: "34",
     },
     {
-      size: "size_36",
+      size: "36",
       slug: "36",
     },
     {
-      size: "size_38",
+      size: "38",
       slug: "38",
     },
     {
-      size: "size_40",
+      size: "40",
       slug: "40",
     },
     {
-      size: "size_42",
+      size: "42",
       slug: "42",
     },
     {
-      size: "size_44",
+      size: "44",
       slug: "44",
     },
     {
