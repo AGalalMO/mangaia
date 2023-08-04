@@ -344,9 +344,43 @@ export const shopData = {
       slug: "XXXL",
     },
     {
-      size: "XXXL",
+      size: "XXXXL",
       slug: "XXXXL",
     },
+
+    {
+      size: 32,
+      slug: "32",
+    },
+    {
+      size: 34,
+      slug: "34",
+    },
+    {
+      size: 36,
+      slug: "36",
+    },
+    {
+      size: 38,
+      slug: "38",
+    },
+    {
+      size: 40,
+      slug: "40",
+    },
+    {
+      size: 42,
+      slug: "42",
+    },
+    {
+      size: 44,
+      slug: "44",
+    },
+    {
+      size: 30,
+      slug: "30",
+    },
+    
   ],
 
   colors: [
