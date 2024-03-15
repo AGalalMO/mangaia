@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import ALink from "~/src/components/features/alink";
 import Qty from "~/src/components/features/qty";
 import PageHeader from "~/src/components/features/page-header";
-
 import Layout from "~/src/components/layout";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { APIS } from "~/src/utils/ServiceUrls";
