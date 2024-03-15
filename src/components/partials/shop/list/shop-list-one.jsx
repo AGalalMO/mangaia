@@ -5,10 +5,11 @@ import ProductEleven from "~/src/components/features/products/product-eleven";
 
 function ShopListOne (props) {
   const { loading, products = [], perPage, bannerData = [] } = props;
+  console.log("products", products)
   const router = useRouter();
   const [fakeArray, setFakeArray] = useState([]);
   const [gridClass, setGridClass] = useState("col-6");
-  const type = router.query.type;
+  const type = router?.query?.type;
 
   useEffect(() => {
     let temp = [];
@@ -40,22 +41,22 @@ function ShopListOne (props) {
               ))
             ) : (
               products.map((product, index) => (
-                <ProductNine images={bannerData?.filter((item) => item?.productId == product?.productId)} product={product} key={index} />
+                <ProductEleven images={product?.productImages ?? []} product={product?.product} info={product?.productInfo} />
               ))
             )
           ) : (
             <div className='row'>
               {loading
                 ? fakeArray.map((item, index) => (
-                    <div className={gridClass} key={index}>
-                      <div className='skel-pro'></div>
-                    </div>
-                  ))
+                  <div className={gridClass} key={index}>
+                    <div className='skel-pro'></div>
+                  </div>
+                ))
                 : products?.map((product, index) => (
-                    <div className={gridClass} key={index}>
-                    <ProductEleven images={bannerData?.filter((item)=>item?.productId==product?.productId)} product={product} />
-                    </div>
-                  ))}
+                  <div className={gridClass} key={index}>
+                    <ProductEleven images={product?.productImages ?? []} product={product?.product} info={product?.productInfo} />
+                  </div>
+                ))}
             </div>
           )}
         </>

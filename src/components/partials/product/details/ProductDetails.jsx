@@ -12,7 +12,7 @@ import { getCart } from "~/src/store/cart";
 import { useTranslation } from "next-i18next";
 import useAuth from "~/src/hooks/useAuth";
 
-function DetailOne(props) {
+function DetailOne (props) {
   const { t } = useTranslation(["shop", "common"]);
   const router = useRouter();
   const { id } = router.query;
@@ -22,6 +22,8 @@ function DetailOne(props) {
   const [size, setSize] = useState("");
   const [color, setColor] = useState(1);
   const [selectedInfo, setSelectedInfo] = useState(product?.info?.[0]);
+  const discountedPrice = product.discount ? Number((product.discount / 100) * product.price) : null
+  console.log("selectedInfo", selectedInfo)
   const [selectedSizeCount, setSelectedSizeCount] = useState(
     product?.info?.[0]?.countBySize?.[0]
   );
@@ -40,7 +42,7 @@ function DetailOne(props) {
     scrollHandler();
   }, [router.pathname]);
 
-  function scrollHandler() {
+  function scrollHandler () {
     if (router.pathname.includes("/product/default")) {
       let stickyBar = ref.current.querySelector(".sticky-bar");
       if (
@@ -60,7 +62,6 @@ function DetailOne(props) {
   }
 
   function selectSize (value) {
-    console.log("SELECT SIZE",value)
     setSize(value);
     const filter = selectedInfo?.countBySize.filter(
       (item) => item.size == value
@@ -69,11 +70,11 @@ function DetailOne(props) {
     setQty(0);
   }
 
-  function onChangeQty(current) {
+  function onChangeQty (current) {
     setQty(current);
   }
 
-  async function onCartClick(e, index = 0) {
+  async function onCartClick (e, index = 0) {
     if (!isAuthenticated) router.push("/auth/signin/");
 
     if (qty && size !== "") {
@@ -100,7 +101,8 @@ function DetailOne(props) {
         {Boolean(product) && Boolean(selectedInfo) && (
           <>
             <h1 className='product-title' style={{ display: "flex" }}>
-              {product?.name}
+
+              {router?.locale == 'ar' ? product?.arName : product?.enName}
             </h1>
 
             <div className='product-price'>
@@ -108,12 +110,12 @@ function DetailOne(props) {
                 <span style={{ fontSize: "2rem" }}>
                   <span
                     style={{ textDecoration: "line-through", color: "black" }}>
-                    {product.price.toFixed(2)}
+                    {Number(product.price).toFixed(2)}
                   </span>{" "}
-                  {product.discountedPrice.toFixed(2)} EGP
+                  {Number(discountedPrice).toFixed(2)} EGP
                 </span>
               ) : (
-                <span>{product.price.toFixed(2)} EGP</span>
+                <span>{Number(product.price).toFixed(2)} EGP</span>
               )}
             </div>
 
@@ -146,10 +148,10 @@ function DetailOne(props) {
                         }}
                         key={index}
                         onClick={() => {
+                          console.log("ITEMM", item)
                           setSelectedInfo(item);
-                          setSelectedSizeCount(item.countBySize?.[0]);
-                          setSize(item.countBySize?.[0]?.size);
-                          console.log("item.countBySize", item.countBySize);
+                          setSelectedSizeCount({ size: item?.size, count: item?.count });
+                          setSize(item.size);
                           setQty(0);
                         }}></span>
                     ))}
@@ -171,11 +173,15 @@ function DetailOne(props) {
                         selectSize(e.target.value);
                       }}>
                       <option value=''>{t("selectSize")}</option>
-                      {selectedInfo.countBySize?.map((item, index) => (
+                      {/* {selectedInfo.countBySize?.map((item, index) => (
                         <option value={item.size} key={index}>
                           {item.size}
                         </option>
-                      ))}
+                      ))} */}
+                      <option value={selectedInfo.size} >
+                        {selectedInfo.size}
+                      </option>
+
                     </select>
                   </div>
 
@@ -214,28 +220,15 @@ function DetailOne(props) {
               </div>
             )}
 
-            <div className='product-details-footer'>
-              <div
-                className='product-cat w-100 text-truncate'
-                style={{ display: "flex", alignItems: "flex-start" }}>
-                <span style={{ fontWeight: "500" }}>{t("CATEGORY")}:</span>
-                <span>
-                  <ALink
-                    href={{
-                      pathname: "/shop/3cols",
-                      query: { category: product?.subCategoryName },
-                    }}>
-                    {product?.subCategoryName}
-                  </ALink>
-                </span>
-              </div>
-            </div>
+
             <div className='product-details-footer'>
               <div className='product-des'>
                 <p style={{ fontWeight: "500", display: "flex" }}>
                   {t("PRODUCT_DESC")}
                 </p>
-                <span>{product?.description} </span>
+                <span>{
+                  router?.locale == 'ar' ? product?.arDescription : product?.enDescription
+                } </span>
               </div>
             </div>
           </>

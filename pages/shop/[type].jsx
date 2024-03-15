@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import PageHeader from "~/src/components/features/page-header";
 import ShopListOne from "~/src/components/partials/shop/list/shop-list-one";
-import Pagination from "~/src/components/features/pagination";
 import axiosInstance from "~/src/utils/axios/axiosInstance";
 import { APIS } from "~/src/utils/ServiceUrls";
 import { BreadCrumb } from "~/src/components/partials/shop/list/components/BreadCrumb";
@@ -13,9 +12,9 @@ import { useTranslation } from "next-i18next";
 import SideBar from "~/src/components/partials/shop/sidebar/SideBar";
 
 function ShopGrid ({ products, categories }) {
-  
+
   const [bannerData, setBannerData] = useState([])
-  const getBanners =async () => {
+  const getBanners = async () => {
     let banners = await axiosInstance.get(APIS.UTILS.LINKS, {
       headers: {
         common: {
@@ -25,9 +24,10 @@ function ShopGrid ({ products, categories }) {
     });
     setBannerData(banners?.data)
   }
-  
+
+
   const router = useRouter();
-  const {locale}=useRouter()
+  const { locale } = useRouter()
   const { t } = useTranslation(["shop", "common"]);
   const type = router.query.type;
   const query = router.query;
@@ -37,55 +37,55 @@ function ShopGrid ({ products, categories }) {
   const [colors, setColors] = useState([]);
 
   const reFilter = async () => {
-    let filteredProducts=[]
-      if (query.filter) {
-    if (query.filter == "newarrival") {
-      filteredProducts = await axiosInstance.get(APIS.PRODUCTS.newArrival, {
-        headers: {
-          common: {
-            "accept-language": locale ?? "en",
+    let filteredProducts = []
+    if (query.filter) {
+      if (query.filter == "newarrival") {
+        filteredProducts = await axiosInstance.get(APIS.PRODUCTS.LIST, {
+          headers: {
+            common: {
+              "accept-language": locale ?? "en",
+            },
           },
-        },
-      });
+        });
+      } else {
+        filteredProducts = await axiosInstance.get(APIS.PRODUCTS.LIST, {
+          headers: {
+            common: {
+              "accept-language": locale ?? "en",
+            },
+          },
+        });
+      }
     } else {
-      filteredProducts = await axiosInstance.get(APIS.PRODUCTS.sale, {
-        headers: {
-          common: {
-            "accept-language": locale ?? "en",
+      if (query.cat) {
+        filteredProducts = await axiosInstance.get(
+          APIS.PRODUCTS.LIST,
+          {
+            headers: {
+              common: {
+                "accept-language": locale ?? "en",
+              },
+            },
+          }
+        );
+      }
+      else {
+        filteredProducts = await axiosInstance.get(APIS.PRODUCTS.LIST, {
+          headers: {
+            common: {
+              "accept-language": locale ?? "en",
+            },
           },
-        },
-      });
+        });
+      }
     }
-  } else {
-     if (query.cat) {
-       filteredProducts = await axiosInstance.get(
-         APIS.PRODUCTS.byCat(query?.cat),
-         {
-           headers: {
-             common: {
-               "accept-language": locale ?? "en",
-             },
-           },
-         }
-       );
-     }
-     else {
-         filteredProducts = await axiosInstance.get(APIS.PRODUCTS.LIST, {
-           headers: {
-             common: {
-               "accept-language": locale ?? "en",
-             },
-           },
-         });
-  }
-    }
-    console.log("FILTERED",filteredProducts)
-    
-    setFiltered(filteredProducts.data);
+
+    setFiltered(filteredProducts.data.data);
   }
   useEffect(() => {
     reFilter()
-  },[router.query])
+  }, [router.query])
+
   useEffect(() => {
     getBanners()
     window.addEventListener("resize", resizeHandle);
@@ -95,7 +95,7 @@ function ShopGrid ({ products, categories }) {
     };
   }, []);
 
-  function resizeHandle() {
+  function resizeHandle () {
     if (document.querySelector("body").offsetWidth < 992) setToggle(true);
     else setToggle(false);
   }
@@ -106,16 +106,16 @@ function ShopGrid ({ products, categories }) {
         p1?.discountedPrice < p2?.discountedPrice
           ? 1
           : p1?.discountedPrice > p2?.discountedPrice
-          ? -1
-          : 0
+            ? -1
+            : 0
       );
     } else if (type == 1) {
       sortedProducts.sort((p1, p2) =>
         p1?.discountedPrice > p2?.discountedPrice
           ? 1
           : p1?.discountedPrice < p2?.discountedPrice
-          ? -1
-          : 0
+            ? -1
+            : 0
       );
     }
 
@@ -139,11 +139,7 @@ function ShopGrid ({ products, categories }) {
               <div className={`col-lg-9 skel-shop-products ${"loaded"}`}>
                 <ToolBox Sort={(type) => Sort(type)} type={type} />
                 <ShopListOne products={filtered} bannerData={bannerData} perPage={10} loading={false} />
-                {totalCount > 10 ? (
-                  <Pagination perPage={3} total={totalCount}></Pagination>
-                ) : (
-                  ""
-                )}
+               
               </div>
 
               <SideBar
@@ -162,10 +158,10 @@ function ShopGrid ({ products, categories }) {
 
 export default ShopGrid;
 
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps (ctx) {
   const { locale, query } = ctx;
   let products = [];
- 
+
   if (query.filter) {
     if (query.filter == "newarrival") {
       products = await axiosInstance.get(APIS.PRODUCTS.newArrival, {
@@ -185,38 +181,38 @@ export async function getServerSideProps(ctx) {
       });
     }
   } else {
-     if (query.cat) {
-       products = await axiosInstance.get(APIS.PRODUCTS.byCat(query?.cat), {
-         headers: {
-           common: {
-             "accept-language": locale ?? "en",
-           },
-         },
-       });
-     }
-     else {
-         products = await axiosInstance.get(APIS.PRODUCTS.LIST, {
-           headers: {
-             common: {
-               "accept-language": locale ?? "en",
-             },
-           },
-         });
+    if (query.cat) {
+      products = await axiosInstance.get(APIS.PRODUCTS.byCat(query?.cat), {
+        headers: {
+          common: {
+            "accept-language": locale ?? "en",
+          },
+        },
+      });
+    }
+    else {
+      products = await axiosInstance.get(APIS.PRODUCTS.LIST, {
+        headers: {
+          common: {
+            "accept-language": locale ?? "en",
+          },
+        },
+      });
+    }
   }
-  }
-  // let categories = await axiosInstance.get(APIS.CATEGORIES.LIST, {
-  //   headers: {
-  //     common: {
-  //       "accept-language": locale ?? "en",
-  //     },
-  //   },
-  // });
+  let categories = await axiosInstance.get(APIS.CATEGORIES.LIST, {
+    headers: {
+      common: {
+        "accept-language": locale ?? "en",
+      },
+    },
+  });
 
 
   return {
     props: {
-      categories: [],
-      products: products.data,
+      categories: categories?.data?.data,
+      products: products.data?.data,
       ...(await serverSideTranslations(locale, ["common", "shop"])),
     },
   };

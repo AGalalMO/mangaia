@@ -5,14 +5,16 @@ import { APIS } from "~/src/utils/ServiceUrls";
 import { BreadCrumb } from "~/src/components/partials/shop/list/components/BreadCrumb";
 import Layout from "~/src/components/layout";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useRouter } from "next/router";
 
-function SingleProduct({ product }) {
+function SingleProduct ({ product }) {
+  console.log("PRODUCTTT", product)
   const loading = false;
-
+  const { locale } = useRouter()
   return (
     <Layout>
       <div className='main'>
-        <BreadCrumb current='Default' pageTitle={product?.name} />
+        <BreadCrumb current='Default' pageTitle={locale == 'ar' ? product?.arName : product?.enName} />
         <div className='page-content'>
           <div className='container skeleton-body'>
             <div className='product-details-top'>
@@ -45,16 +47,17 @@ function SingleProduct({ product }) {
 
 export default SingleProduct;
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps (context) {
   const { locale } = context;
   const { id } = context.query;
   let product = await axiosInstance.get(APIS.PRODUCTS.GET(id), {
-  
+
   });
+  let response = product.data?.data?.[0]
 
   return {
     props: {
-      product: product.data?.[0],
+      product: { ...response.product, info: response.productInfo, images: response.productImages },
       ...(await serverSideTranslations(locale, ["common", "shop"])),
     },
   };

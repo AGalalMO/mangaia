@@ -8,17 +8,17 @@ import { actions as compareAction } from "~/store/compare";
 import { actions as demoAction } from "~/store/demo";
 import { useTranslation } from "next-i18next";
 
-function ProductEleven(props) {
+function ProductEleven (props) {
   const router = useRouter();
-  const { product, images } = props;
+  const { product, images, info } = props;
 
   const { t, i18n } = useTranslation(["common"]);
   const { locale } = useRouter();
-
+  const discountedPrice = product.discount ? Number((product.discount / 100) * product.price) : null
   const [outOfStock, setOutOfStock] = useState(false);
   const checkStock = () => {
     let count = 0;
-    product?.info?.map((item) => (count = count + item.count));
+    info?.map((item) => (count = count + item.count));
     if (count == 0) setOutOfStock(true);
   };
 
@@ -26,7 +26,7 @@ function ProductEleven(props) {
     checkStock();
   }, []);
 
-  function onCartClick(e) {
+  function onCartClick (e) {
     e.preventDefault();
     props.addToCart(product);
     router.replace("/shop/cart");
@@ -74,7 +74,7 @@ function ProductEleven(props) {
 
         {!outOfStock ? (
           <div className='product-action'>
-            {product?.info?.length > 0 ? (
+            {info?.length > 0 ? (
               <ALink
                 href={`/product/${product?.productId ?? product?.id}`}
                 className='btn-product btn-cart btn-select'>
@@ -100,7 +100,7 @@ function ProductEleven(props) {
             alignItems: "center",
             justifyContent: "center",
           }}>
-          {product?.info?.map?.((item, index) => (
+          {info?.map?.((item, index) => (
             <React.Fragment key={item.color + "-" + index}>
               <>
                 {item.count !== 0 && (
@@ -113,12 +113,12 @@ function ProductEleven(props) {
                         width: "24px",
                         height: "24px",
                         marginInlineEnd: '5px',
-                         border: "1px solid rgba(0,0,0,0.2)",
-                       
-                        
+                        border: "1px solid rgba(0,0,0,0.2)",
+
+
                       }}
                     />
-                    
+
                     {/* {index < product?.info?.length - 1 ? ", " : ""} */}
                   </>
                 )}
@@ -145,8 +145,8 @@ function ProductEleven(props) {
           )}
 
           <span>
-            {(product?.discount > 0
-              ? product?.discountedPrice
+            {Number(product?.discount
+              ? discountedPrice
               : product?.price
             ).toFixed(2)}{" "}
             {router?.locale == "ar" ? "جم" : "EGP"}

@@ -23,7 +23,8 @@ function MainMenu() {
         },
       },
     });
-    setCategories(response.data);
+    
+    setCategories(response.data?.data);
   };
 
   return (
@@ -49,20 +50,18 @@ function MainMenu() {
                   <ul>
                     {categories.map((item) => {
                       return (
-                        <>
-                          {item?.subcategories?.map((subCat) => (
-                            <li key={item?.id}>
+                        <li key={item?.categories?.categoryId}>
                               <ALink
                                 href={{
                                   pathname: "/shop/3cols",
-                                  query: {   cat: item?.id },
+                              query: { cat: item?.categories?.categoryId },
                                   locale:router?.locale
                                 }}>
-                                {subCat?.name}
+                                {router.locale == 'ar' ? item?.categories?.arName : item?.categories?.enName}
                               </ALink>
                             </li>
-                          ))}
-                        </>
+                         
+                      
                       );
                     })}{" "}
                   </ul>
@@ -71,8 +70,8 @@ function MainMenu() {
 
               <div className='col-md-6'>
                 <div className='banner banner-overlay'>
-                  <ALink href='/shop/'>
-                    <img src='images/menu/banner-2.jpg' alt='Banner' />
+                  <ALink href='/shop/' style={{height:'100%'}}>
+                    <img src='images/menu/banner-2.jpg' alt='Banner' style={{height:'100%'}} />
 
                     <div className='banner-content banner-content-bottom'>
                       <div className='banner-title text-white'>

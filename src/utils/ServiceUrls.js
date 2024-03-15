@@ -2,17 +2,17 @@ const baseUrl = "http://unexcityactive-001-site1.etempurl.com/Admin/";
 
 export const APIS = {
   AUTH: {
-    SIGNIN: `${baseUrl}account/login`,
-    REGISTER: `${baseUrl}account/register`,
+    SIGNIN: `${baseUrl}Account/Login`,
+    REGISTER: `${baseUrl}Account/Register`,
   },
   PRODUCTS: {
     LIST: `${baseUrl}Products`,
-    GET: (id) => `${baseUrl}product/getbyid?id=${id}`,
-    filter: `${baseUrl}product/filter`,
-    byCat: (id) => `${baseUrl}product/getbycategoryid?categoryid=${id}`,
-    newArrival: `${baseUrl}product/getbydate`,
-    sale: `${baseUrl}product/getonsale`,
-  },
+    GET: (id) => `${baseUrl}Products/${id}`,
+    filter: `${baseUrl}Products/filter`,
+    byCat: (id) => `${baseUrl}Products/getbycategoryid?categoryid=${id}`,
+    newArrival: `${baseUrl}Products/getbydate`,
+    sale: `${baseUrl}Products/getonsale`,
+  }, 
   CATEGORIES: {
     //done
     LIST: `${baseUrl}Categories`,

@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 function GalleryDefault (props) {
   
   const { product, adClass = "product-gallery-vertical" } = props;
+  console.log("PRRRr", product)
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [outOfStock, setOutOfStock] = useState(false);
@@ -13,7 +14,7 @@ function GalleryDefault (props) {
 
   const checkStock = () => {
     let count = 0;
-    product.info.map((item) => (count = count + item.count));
+    product?.info?.map((item) => (count = count + item.count));
     if (count == 0) setOutOfStock(true);
   };
 
