@@ -1,5 +1,4 @@
-const baseUrl = "https://unexcityactive-001-site1.etempurl.com/api/";
-
+const baseUrl = "http://unexcityactive-001-site1.etempurl.com/Admin/";
 
 export const APIS = {
   AUTH: {
@@ -7,7 +6,7 @@ export const APIS = {
     REGISTER: `${baseUrl}account/register`,
   },
   PRODUCTS: {
-    LIST: `${baseUrl}product/getall`,
+    LIST: `${baseUrl}Products`,
     GET: (id) => `${baseUrl}product/getbyid?id=${id}`,
     filter: `${baseUrl}product/filter`,
     byCat: (id) => `${baseUrl}product/getbycategoryid?categoryid=${id}`,
@@ -15,13 +14,14 @@ export const APIS = {
     sale: `${baseUrl}product/getonsale`,
   },
   CATEGORIES: {
-    LIST: `${baseUrl}category/getall`,
+    //done
+    LIST: `${baseUrl}Categories`,
   },
   SUBCATEGORIES: {
-    LIST: `${baseUrl}subcategory/getall`,
+    LIST: `${baseUrl}SubCategories`,
   },
   UTILS: {
-    LINKS: `${baseUrl}redirections/get`,
+    LINKS: `${baseUrl}Banners`,
     DELIVERY_CITIES: `${baseUrl}order/Getcities`,
     CONTACT: `${baseUrl}contact/sendMessage`,
   },

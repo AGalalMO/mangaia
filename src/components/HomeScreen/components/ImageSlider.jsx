@@ -12,14 +12,16 @@ function ImageBanner({ banners }) {
     }
   }, [router, router.isReady]);
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoPlay: true,
+    
   };
   return (
-    <Slider {...settings}>
+    <Slider {...settings} >
       {banners?.map((banner) => (
         <div
           style={{

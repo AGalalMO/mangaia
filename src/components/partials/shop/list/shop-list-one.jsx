@@ -4,7 +4,7 @@ import ProductNine from "~/src/components/features/products/product-nine";
 import ProductEleven from "~/src/components/features/products/product-eleven";
 
 function ShopListOne (props) {
-  const { loading, products = [], perPage } = props;
+  const { loading, products = [], perPage, bannerData = [] } = props;
   const router = useRouter();
   const [fakeArray, setFakeArray] = useState([]);
   const [gridClass, setGridClass] = useState("col-6");
@@ -40,7 +40,7 @@ function ShopListOne (props) {
               ))
             ) : (
               products.map((product, index) => (
-                <ProductNine product={product} key={index} />
+                <ProductNine images={bannerData?.filter((item) => item?.productId == product?.productId)} product={product} key={index} />
               ))
             )
           ) : (
@@ -53,7 +53,7 @@ function ShopListOne (props) {
                   ))
                 : products?.map((product, index) => (
                     <div className={gridClass} key={index}>
-                      <ProductEleven product={product} />
+                    <ProductEleven images={bannerData?.filter((item)=>item?.productId==product?.productId)} product={product} />
                     </div>
                   ))}
             </div>

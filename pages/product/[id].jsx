@@ -49,11 +49,7 @@ export async function getServerSideProps(context) {
   const { locale } = context;
   const { id } = context.query;
   let product = await axiosInstance.get(APIS.PRODUCTS.GET(id), {
-    headers: {
-      common: {
-        "accept-language": locale ?? "en",
-      },
-    },
+  
   });
 
   return {

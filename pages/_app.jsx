@@ -16,7 +16,6 @@ const WrappedApp = ({ Component, pageProps }) => {
   useEffect(() => {
     document.body.dir = i18n?.dir?.() ?? "en";
 
-    axiosInstance.defaults.headers.common["accept-language"] = router.locale;
   }, [i18n]);
 
 

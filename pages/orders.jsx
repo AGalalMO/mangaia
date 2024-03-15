@@ -22,7 +22,6 @@ function Orders(props) {
     let orders = await axiosInstance.get(APIS.ORDER.get, {
       headers: {
         common: {
-          "accept-language": locale ?? "en",
           "access-token": `${localStorage.getItem("accessToken")}`,
         },
       },

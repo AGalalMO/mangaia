@@ -14,7 +14,18 @@ import SideBar from "~/src/components/partials/shop/sidebar/SideBar";
 
 function ShopGrid ({ products, categories }) {
   
-
+  const [bannerData, setBannerData] = useState([])
+  const getBanners =async () => {
+    let banners = await axiosInstance.get(APIS.UTILS.LINKS, {
+      headers: {
+        common: {
+          "accept-language": locale ?? "en",
+        },
+      },
+    });
+    setBannerData(banners?.data)
+  }
+  
   const router = useRouter();
   const {locale}=useRouter()
   const { t } = useTranslation(["shop", "common"]);
@@ -76,6 +87,7 @@ function ShopGrid ({ products, categories }) {
     reFilter()
   },[router.query])
   useEffect(() => {
+    getBanners()
     window.addEventListener("resize", resizeHandle);
     resizeHandle();
     return () => {
@@ -126,7 +138,7 @@ function ShopGrid ({ products, categories }) {
             <div className='row skeleton-body'>
               <div className={`col-lg-9 skel-shop-products ${"loaded"}`}>
                 <ToolBox Sort={(type) => Sort(type)} type={type} />
-                <ShopListOne products={filtered} perPage={10} loading={false} />
+                <ShopListOne products={filtered} bannerData={bannerData} perPage={10} loading={false} />
                 {totalCount > 10 ? (
                   <Pagination perPage={3} total={totalCount}></Pagination>
                 ) : (
@@ -192,17 +204,18 @@ export async function getServerSideProps(ctx) {
          });
   }
   }
+  // let categories = await axiosInstance.get(APIS.CATEGORIES.LIST, {
+  //   headers: {
+  //     common: {
+  //       "accept-language": locale ?? "en",
+  //     },
+  //   },
+  // });
 
-  let categories = await axiosInstance.get(APIS.CATEGORIES.LIST, {
-    headers: {
-      common: {
-        "accept-language": locale ?? "en",
-      },
-    },
-  });
+
   return {
     props: {
-      categories: categories.data,
+      categories: [],
       products: products.data,
       ...(await serverSideTranslations(locale, ["common", "shop"])),
     },

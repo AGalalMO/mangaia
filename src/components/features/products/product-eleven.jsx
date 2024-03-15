@@ -10,13 +10,15 @@ import { useTranslation } from "next-i18next";
 
 function ProductEleven(props) {
   const router = useRouter();
-  const { product } = props;
+  const { product, images } = props;
+
   const { t, i18n } = useTranslation(["common"]);
+  const { locale } = useRouter();
 
   const [outOfStock, setOutOfStock] = useState(false);
   const checkStock = () => {
     let count = 0;
-    product.info.map((item) => (count = count + item.count));
+    product?.info?.map((item) => (count = count + item.count));
     if (count == 0) setOutOfStock(true);
   };
 
@@ -57,13 +59,13 @@ function ProductEleven(props) {
           <img
             height={"100%"}
             style={{ height: "100% !important" }}
-            src={product?.images?.[0]?.url}
+            src={images?.[0]?.url}
           />
-          {product?.images?.length >= 2 ? (
+          {images?.length >= 2 ? (
             <img
               height={"100%"}
               style={{ height: "100% !important" }}
-              src={product?.images[1]?.url}
+              src={images[1]?.url}
             />
           ) : (
             ""
@@ -126,7 +128,7 @@ function ProductEleven(props) {
         </div>
 
         <h3 className='product-title'>
-          <ALink href={`/product/${product?.productId}`}>{product?.name}</ALink>
+          <ALink href={`/product/${product?.productId}`}>{locale == 'en' ? product?.enName : product?.arName}</ALink>
         </h3>
 
         <div className='product-price'>

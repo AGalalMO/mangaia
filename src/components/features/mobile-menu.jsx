@@ -18,11 +18,7 @@ function MobileMenu () {
 
      const getCategories = async () => {
        let response = await axiosInstance.get(APIS.CATEGORIES.LIST, {
-         headers: {
-           common: {
-             "accept-language": router.language ?? router.locale,
-           },
-         },
+        
        });
        setCategories(response.data);
      };
