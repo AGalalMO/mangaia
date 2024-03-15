@@ -5,7 +5,6 @@ import ProductEleven from "~/src/components/features/products/product-eleven";
 
 function ShopListOne (props) {
   const { loading, products = [], perPage, bannerData = [] } = props;
-  console.log("products", products)
   const router = useRouter();
   const [fakeArray, setFakeArray] = useState([]);
   const [gridClass, setGridClass] = useState("col-6");
