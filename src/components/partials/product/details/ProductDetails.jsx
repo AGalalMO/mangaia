@@ -23,7 +23,6 @@ function DetailOne (props) {
   const [color, setColor] = useState(1);
   const [selectedInfo, setSelectedInfo] = useState(product?.info?.[0]);
   const discountedPrice = product.discount ? Number((product.discount / 100) * product.price) : null
-  console.log("selectedInfo", selectedInfo)
   const [selectedSizeCount, setSelectedSizeCount] = useState(
     product?.info?.[0]?.countBySize?.[0]
   );
@@ -148,7 +147,6 @@ function DetailOne (props) {
                         }}
                         key={index}
                         onClick={() => {
-                          console.log("ITEMM", item)
                           setSelectedInfo(item);
                           setSelectedSizeCount({ size: item?.size, count: item?.count });
                           setSize(item.size);

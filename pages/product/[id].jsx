@@ -8,7 +8,6 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 
 function SingleProduct ({ product }) {
-  console.log("PRODUCTTT", product)
   const loading = false;
   const { locale } = useRouter()
   return (

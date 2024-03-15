@@ -22,14 +22,11 @@ function ContactUs () {
   });
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log("submitting");
     try {
-      console.log("submitting 2");
 
       const response = await axiosInstance.post(APIS.UTILS.CONTACT, {
         ...data,
       });
-      console.log("sent");
 
       setSend(true);
     } catch {}

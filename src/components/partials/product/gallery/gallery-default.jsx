@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 function GalleryDefault (props) {
   
   const { product, adClass = "product-gallery-vertical" } = props;
-  console.log("PRRRr", product)
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [outOfStock, setOutOfStock] = useState(false);
