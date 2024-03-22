@@ -12,7 +12,7 @@ export const APIS = {
     byCat: (id) => `${baseUrl}Products/getbycategoryid?categoryid=${id}`,
     newArrival: `${baseUrl}Products/getbydate`,
     sale: `${baseUrl}Products/getonsale`,
-  }, 
+  },
   CATEGORIES: {
     //done
     LIST: `${baseUrl}Categories`,
