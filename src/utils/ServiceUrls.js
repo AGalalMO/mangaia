@@ -2,8 +2,8 @@ const baseUrl = "https://unexcityactive-001-site1.etempurl.com/Admin/";
 
 export const APIS = {
   AUTH: {
-    SIGNIN: `${baseUrl}Account/Login`,
-    REGISTER: `${baseUrl}Account/Register`,
+    SIGNIN: `${baseUrl?.replace('Admin', 'Account/Login')}`,
+    REGISTER: `${baseUrl?.replace('Admin', 'Account/Register')}`,
   },
   PRODUCTS: {
     LIST: `${baseUrl}Products`,
