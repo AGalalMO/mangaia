@@ -1,4 +1,4 @@
-const baseUrl = "http://unexcityactive-001-site1.etempurl.com/Admin/";
+const baseUrl = "https://unexcityactive-001-site1.etempurl.com/Admin/";
 
 export const APIS = {
   AUTH: {
