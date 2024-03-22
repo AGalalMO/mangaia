@@ -97,7 +97,7 @@ function AuthProvider ({ children }) {
   }, []);
 
   const login = async (values) => {
-    const response = await axiosInstance.post(APIS.AUTH.SIGNIN, values);
+    const response = await axiosInstance.post(APIS.AUTH.SIGNIN, { ...values, UserName: values?.email });
     const { access_token, user } = response.data;
     setSession(access_token);
     localStorage.setItem('user', JSON.stringify(user));
