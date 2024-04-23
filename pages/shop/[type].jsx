@@ -103,17 +103,17 @@ function ShopGrid ({ products, categories }) {
     let sortedProducts = [...products];
     if (type == 2) {
       sortedProducts.sort((p1, p2) =>
-        p1?.discountedPrice < p2?.discountedPrice
+        p1?.product?.price < p2?.product?.price
           ? 1
-          : p1?.discountedPrice > p2?.discountedPrice
+          : p1?.product?.price > p2?.product?.price
             ? -1
             : 0
       );
     } else if (type == 1) {
       sortedProducts.sort((p1, p2) =>
-        p1?.discountedPrice > p2?.discountedPrice
+        p1?.product?.price > p2?.product?.price
           ? 1
-          : p1?.discountedPrice < p2?.discountedPrice
+          : p1?.product?.price < p2?.product?.price
             ? -1
             : 0
       );
@@ -122,10 +122,14 @@ function ShopGrid ({ products, categories }) {
     setFiltered([...sortedProducts]);
   };
   const onChange = async (filters) => {
-    const response = await axiosInstance.get(APIS.PRODUCTS.filter, {
-      params: filters,
-    });
-    setFiltered(response.data);
+    console.log("fukterrr", filters)
+    
+    const filteredProducts = []
+    products?.map((item))
+    // const response = await axiosInstance.get(APIS.PRODUCTS.filter, {
+    //   params: filters,
+    // });
+    // setFiltered(response.data);
   };
 
   return (
@@ -139,9 +143,7 @@ function ShopGrid ({ products, categories }) {
               <div className={`col-lg-9 skel-shop-products ${"loaded"}`}>
                 <ToolBox Sort={(type) => Sort(type)} type={type} />
                 <ShopListOne products={filtered} bannerData={bannerData} perPage={10} loading={false} />
-               
               </div>
-
               <SideBar
                 onChange={onChange}
                 categories={categories}

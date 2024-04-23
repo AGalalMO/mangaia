@@ -9,10 +9,11 @@ import { shopData } from "~/src/utils/shared/data";
 import { useTranslation } from "next-i18next";
 import { Typography } from "@mui/material";
 
-function ShopSidebarOne(props) {
+function ShopSidebarOne (props) {
   const { toggle = false, categories, onChange, colors } = props;
   const { t } = useTranslation(["shop", "common"]);
   const router = useRouter();
+
   const query = useRouter().query;
   const [filter, setFilter] = useState({
     subcategoryId: null,
@@ -22,7 +23,7 @@ function ShopSidebarOne(props) {
     color: null,
   });
 
-  function onChangePriceRange(value) {
+  function onChangePriceRange (value) {
     setFilter({ ...filter, minprice: value?.min, maxprice: value?.max });
     onChange({
       ...filter,
@@ -31,11 +32,13 @@ function ShopSidebarOne(props) {
     });
   }
 
-  function onSizeChange(e, attr, value) {
-    if (value == filter.size) {
-      setFilter({ ...filter, size: null });
-      onChange({ ...filter, size: null });
-    } else {
+  function onSizeChange (e, attr, value) {
+    if (filter?.size == value) {
+      setFilter({ ...filter, size: null })
+      onChange({ ...filter, size: null })
+
+    }
+    else {
       setFilter({ ...filter, size: value });
       onChange({ ...filter, size: value });
     }
@@ -99,14 +102,13 @@ function ShopSidebarOne(props) {
                   <a
                     style={{
                       textAlign: "start",
-                   
+
                     }}
                     href='#Size'
-                    className={`${
-                      toggleState.toLowerCase() == "collapsed"
-                        ? "collapsed"
-                        : ""
-                    }`}
+                    className={`${toggleState.toLowerCase() == "collapsed"
+                      ? "collapsed"
+                      : ""
+                      }`}
                     onClick={(e) => {
                       onToggle(e);
                       e.preventDefault();
@@ -121,18 +123,15 @@ function ShopSidebarOne(props) {
                       className='filter-items'>
                       {shopData.sizes.map((item, index) => (
                         <div className='filter-item' key={index}>
-                          <div onClick={() => {
-                            onSizeChange('', "size", item.size);
-
-                          }} className='custom-control custom-checkbox'>
+                          <div  className='custom-control custom-checkbox'>
                             <input
                               type='checkbox'
                               className='custom-control-input'
                               id={`size-${index + 1}`}
                               onChange={(e) =>
-                                onSizeChange(e, "size", item.slug)
+                                onSizeChange(e, "size", item.size)
                               }
-                              checked={item.slug == filter.size}
+                              checked={item.size == filter.size}
                             />
                             <label
                               className='custom-control-label'
@@ -149,7 +148,7 @@ function ShopSidebarOne(props) {
             )}
           </SlideToggle>
 
-         
+
 
           <SlideToggle collapsed={false}>
             {({ onToggle, setCollapsibleElement, toggleState }) => (
@@ -158,11 +157,10 @@ function ShopSidebarOne(props) {
                   <a
                     style={{ textAlign: "start" }}
                     href='#price'
-                    className={`${
-                      toggleState.toLowerCase() == "collapsed"
-                        ? "collapsed"
-                        : ""
-                    }`}
+                    className={`${toggleState.toLowerCase() == "collapsed"
+                      ? "collapsed"
+                      : ""
+                      }`}
                     onClick={(e) => {
                       onToggle(e);
                       e.preventDefault();
@@ -217,12 +215,11 @@ const CategoryList = ({ categories, query, router, selected, setSelected }) => {
       {({ onToggle, setCollapsibleElement, toggleState }) => (
         <div className='widget widget-collapsible'>
           <h3 className='widget-title titlertl mb-2'>
-            <a 
-              style={{textAlign:'start'}}
+            <a
+              style={{ textAlign: 'start' }}
               href='#'
-              className={`${
-                toggleState.toLowerCase() == "collapsed" ? "collapsed" : ""
-              }`}
+              className={`${toggleState.toLowerCase() == "collapsed" ? "collapsed" : ""
+                }`}
               onClick={(e) => {
                 onToggle(e);
                 e.preventDefault();
@@ -241,40 +238,33 @@ const CategoryList = ({ categories, query, router, selected, setSelected }) => {
                 className='filter-items filter-items-count'>
                 {categories.map((item, index) => (
                   <>
-                    {item?.subcategories && item?.subcategories?.length > 0 && (
+                    {item?.subCategories != undefined && (
                       <>
                         <div className='filter-item' key={`cat_${index}`}>
                           <div>
-                            {item?.subcategories?.map(
-                              (itemSubCategory, subIndex) => (
-                                <>
-                                  <div
-                                    onClick={() => {
-                                      setSelected(itemSubCategory?.id);
-                                    }}
-                                    style={{
-                                      marginBottom: "10px",
-                                      color:
-                                        itemSubCategory?.id == selected
-                                          ? "red"
-                                          : "unset",
-                                    }}
-                                    className='filter-items filter-items-count'
-                                    key={`${itemSubCategory.id}${subIndex}`}>
-                                    <ALink
-                                      className={`${
-                                        query.category == itemSubCategory.name
-                                          ? "active"
-                                          : ""
-                                      }`}
-                                      href={"#"}
-                                      scroll={false}>
-                                      {itemSubCategory.name}
-                                    </ALink>
-                                  </div>
-                                </>
-                              )
-                            )}
+                            <div
+                              onClick={() => {
+                                setSelected(item?.subCategories?.subCategoryId);
+                              }}
+                              style={{
+                                marginBottom: "10px",
+                                color:
+                                  item?.subCategories?.subCategoryId == selected
+                                    ? "red"
+                                    : "unset",
+                              }}
+                              className='filter-items filter-items-count'
+                              key={`${item?.subCategories?.subCategoryId}${index}`}>
+                              <ALink
+                                className={`${query.category == item?.subCategories?.enName
+                                  ? "active"
+                                  : ""
+                                  }`}
+                                href={"#"}
+                                scroll={false}>
+                                {router.locale == 'ar' ? item?.subCategories?.arName : item?.subCategories?.enName}
+                              </ALink>
+                            </div>
                           </div>
                         </div>
                       </>
