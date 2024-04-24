@@ -7,7 +7,7 @@
 
 	100% {
 		opacity: 1;
-		transform:translateY(0);
+		transform: translateY(0);
 	}
 }
 
@@ -20,19 +20,19 @@
 		z-index: 1000;
 		animation-name: fixedHeader;
 		animation-duration: .4s;
-		background-color: #fff;
-		box-shadow: 0 3px 6px rgba(51, 51, 51, .05);
+		background-color: black;
+		// box-shadow: 0 3px 6px rgba(51, 51, 51, .05);
 
-	 	.logo {
-	 		margin-top: 0;
-	 		margin-bottom: 0;
-	 	}
+		.logo {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
 
-	 	&.header-middle {
-			.menu > li > a {
+		&.header-middle {
+			.menu>li>a {
 				padding-top: 2rem;
 				padding-bottom: 2rem;
 			}
-	 	}
+		}
 	}
 }

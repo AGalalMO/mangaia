@@ -10,11 +10,11 @@ import { Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { getCart } from "~/src/store/cart";
 
-function Header(props) {
+function Header (props) {
   const router = useRouter();
   const [containerClass, setContainerClass] = useState("container");
   const dispatch = useDispatch();
-  function openMobileMenu() {
+  function openMobileMenu () {
     document.querySelector("body").classList.add("mmenu-active");
   }
 
@@ -44,10 +44,16 @@ function Header(props) {
             <div className='header-center'>
               <ALink href='/' className='logo'>
                 <img
-                  src='images/home/logo.png'
+                  src='images/manga1.jpeg'
                   alt='Molla Logo'
-                  width='82'
-                  height='25'
+                  width='65px'
+                  height='65px'
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: '47%',
+
+                  }}
                 />
               </ALink>
             </div>
@@ -71,12 +77,12 @@ function Header(props) {
                       query: router.query,
                     },
                     router.asPath,
-                    { locale:newlocale }
+                    { locale: newlocale }
                   );
-            }}
-                
-                   
-                >
+                }}
+
+
+              >
                 {router.locale == "en" ? "العربية" : "EN"}
               </Typography>
             </div>

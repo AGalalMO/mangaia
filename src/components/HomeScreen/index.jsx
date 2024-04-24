@@ -1,10 +1,8 @@
 import Reveal from "react-awesome-reveal";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-
 import ALink from "~/src/components/features/alink";
 import OwlCarousel from "~/src/components/features/owl-carousel";
 import { useTranslation } from "next-i18next";
-
 import {
   fadeInLeftShorter,
   fadeInRightShorter,
@@ -37,7 +35,7 @@ function HomeScreen({banners}) {
 
                   <LazyLoadImage
                     alt='banner'
-                    src='images/tops.jpeg'
+                    src='images/manga1.jpeg'
                     threshold={200}
                     width='100%'
                     height='auto'
@@ -73,7 +71,7 @@ function HomeScreen({banners}) {
                   <div className='lazy-overlay'></div>
                   <LazyLoadImage
                     alt='banner'
-                    src='images/Banner1.jpeg'
+                    src='images/manga2.jpeg'
                     threshold={200}
                     width='100%'
                     height='auto'
@@ -110,7 +108,7 @@ function HomeScreen({banners}) {
 
                   <LazyLoadImage
                     alt='banner'
-                    src='images/pants.jpeg'
+                    src='images/manga3.jpeg'
                     threshold={200}
                     width='100%'
                     height='auto'
@@ -302,7 +300,7 @@ function HomeScreen({banners}) {
             <a
               href='https://www.instagram.com/unex_city_active/'
               className='btn btn-outline-primary-2 btn-more'>
-              @ UNEX Instagram
+              @ mangaia Instagram
             </a>
           </div>
         </div>

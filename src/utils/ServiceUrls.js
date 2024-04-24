@@ -1,8 +1,8 @@
-const baseUrl = "https://unexcityactive-001-site1.etempurl.com/Admin/";
+const baseUrl = "http://mangaia.free.nf/server.php/";
 
 export const APIS = {
   AUTH: {
-    SIGNIN: `https://unexcityactive-001-site1.etempurl.com/api/Account/Login`,
+    SIGNIN: `${baseUrl}login`,
     REGISTER: `https://unexcityactive-001-site1.etempurl.com/api/Account/Register`,
   },
   PRODUCTS: {

@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
-function ImageBanner({ banners }) {
+function ImageBanner ({ banners }) {
   const [isDesktop, setIsDesktop] = useState(true);
   const router = useRouter();
   useEffect(() => {
@@ -18,7 +18,7 @@ function ImageBanner({ banners }) {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoPlay: true,
-    
+
   };
   return (
     <Slider {...settings} >
@@ -31,13 +31,13 @@ function ImageBanner({ banners }) {
           }}>
           <img
             style={{
-              objectFit: "fill",
+              objectFit: "contain",
               width: "100%",
               height: isDesktop ? "100vh" : "40vh",
             }}
             height={"100%"}
             width='100%'
-            src={banner.url}
+            src={'images/manga4.jpeg'}
           />
         </div>
       ))}
